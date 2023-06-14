@@ -1,5 +1,6 @@
 public class CyberRoach : Enemy
 {
+    static int count;
     public CyberRoach()
     {
         behavior = BehaviorType.Follower;
@@ -8,7 +9,9 @@ public class CyberRoach : Enemy
         attack = 2;
         def = 2;
 
+        count++;
     }
+
 
     public override void GetHit(int amount)
     {
