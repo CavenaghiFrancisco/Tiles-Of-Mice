@@ -1,13 +1,6 @@
 public abstract class Enemy : Entity, ICombatable, IHittable
 {
-    protected int hitPoints;
-    protected int attack;
-    protected int def;
-
     protected BehaviorType behavior;
-    public int HP { get => hitPoints; }
-    public int ATK { get => attack; }
-    public int DEF { get => def; }
 
     public virtual void GetHit(int amount)
     {
