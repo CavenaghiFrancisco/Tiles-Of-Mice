@@ -22,6 +22,11 @@ public class Movement : MonoBehaviour
 
     private Animator animator;
 
+    [Header("Particles Configuration")]
+    [SerializeField] private ParticleSystem dustParticle;
+    [Header("Particles Configuration")]
+    [SerializeField] private GameObject trail;
+
     private void Awake()
     {
         controls = new Controls();
@@ -62,7 +67,33 @@ public class Movement : MonoBehaviour
         camRight.y = 0f;
         rb.MovePosition(transform.position + (camForward * input.y + camRight * input.x).normalized * Time.fixedDeltaTime * speed);
         transform.LookAt(transform.position + (camForward * input.y + camRight * input.x).normalized);
-        return !input.Equals(Vector2.zero);
+        bool isMoving = !input.Equals(Vector2.zero);
+        if (isMoving)
+        {
+            if (!animator.GetCurrentAnimatorStateInfo(0).IsName("Br1e_Run"))
+            {
+                animator.Play("Br1e_Run");
+            }
+            if (!dustParticle.isEmitting)
+            {
+                dustParticle.Play();
+            }
+            //ps.gameObject.SetActive(true);
+        }
+        else
+        {
+            if (!isDashInProgress)//Cuando metamos combate se va a romper jaja
+            {
+                animator.Play("Br1e_Idle");
+            }
+            if (dustParticle.isPlaying)
+            {
+                dustParticle.Stop(true, ParticleSystemStopBehavior.StopEmitting);
+            }
+            //ps.gameObject.SetActive(false);
+        }
+
+        return isMoving;
     }
 
     private void StartDash()
@@ -73,6 +104,8 @@ public class Movement : MonoBehaviour
         dashDirection.Normalize();
         dashTimer = 0f;
         animator.SetBool("isDashing", true);
+        animator.Play("Br1e_Dash");
+        trail.gameObject.SetActive(true);
     }
 
     private void DashMovement()
@@ -89,6 +122,7 @@ public class Movement : MonoBehaviour
             isDashing = false;
             rb.velocity = Vector3.zero;
             animator.SetBool("isDashing", false);
+            trail.gameObject.SetActive(false);
         }
     }
 
