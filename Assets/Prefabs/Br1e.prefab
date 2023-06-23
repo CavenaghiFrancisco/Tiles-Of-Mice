@@ -2046,7 +2046,8 @@ MonoBehaviour:
   dashTimer: 0.15999998
   dashDuration: 0.15
   dustParticle: {fileID: 8111797812930882480}
-  trail: {fileID: 8211716816951946843}
+  trail: {fileID: 2662740831534515169}
+  trail1: {fileID: 5960260318492091232}
 --- !u!1 &3125721613819962249
 GameObject:
   m_ObjectHideFlags: 0
@@ -5784,6 +5785,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Trail
       objectReference: {fileID: 0}
+    - target: {fileID: 1620727027762708784, guid: a86625ce75e144844a2d0f3728c9e465, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2662153441017765624, guid: a86625ce75e144844a2d0f3728c9e465, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -5834,13 +5839,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a86625ce75e144844a2d0f3728c9e465, type: 3}
---- !u!1 &8211716816951946843 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1620727027762708784, guid: a86625ce75e144844a2d0f3728c9e465, type: 3}
-  m_PrefabInstance: {fileID: 7460241691915480939}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &4862133025512419731 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2662153441017765624, guid: a86625ce75e144844a2d0f3728c9e465, type: 3}
+  m_PrefabInstance: {fileID: 7460241691915480939}
+  m_PrefabAsset: {fileID: 0}
+--- !u!96 &2662740831534515169 stripped
+TrailRenderer:
+  m_CorrespondingSourceObject: {fileID: 4862742899682798730, guid: a86625ce75e144844a2d0f3728c9e465, type: 3}
+  m_PrefabInstance: {fileID: 7460241691915480939}
+  m_PrefabAsset: {fileID: 0}
+--- !u!96 &5960260318492091232 stripped
+TrailRenderer:
+  m_CorrespondingSourceObject: {fileID: 3836789138757880843, guid: a86625ce75e144844a2d0f3728c9e465, type: 3}
   m_PrefabInstance: {fileID: 7460241691915480939}
   m_PrefabAsset: {fileID: 0}
