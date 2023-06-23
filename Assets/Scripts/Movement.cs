@@ -20,12 +20,16 @@ public class Movement : MonoBehaviour
     private Vector3 dashDirection;
     private Rigidbody rb;
 
+    private Animator animator;
+
     private void Awake()
     {
         controls = new Controls();
         rb = GetComponent<Rigidbody>();
         moveAction = controls.Movement.Move;
         dashAction = controls.Movement.Dash;
+
+        animator = GetComponent<Animator>();
 
         mainCamera = Camera.main;
 
@@ -40,7 +44,8 @@ public class Movement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        Move();
+        animator.SetBool("isRunning", Move()); //Uso Move() para settear el valor del animator, ya se que no es performante pero para salir del paso
+        //animator.SetBool("isDashing", isDashInProgress); Lo mismo de arriba
 
         if (isDashInProgress)
         {
@@ -48,7 +53,7 @@ public class Movement : MonoBehaviour
         }
     }
 
-    private void Move()
+    private bool Move()
     {
         Vector2 input = moveAction.ReadValue<Vector2>();
         Vector3 camForward = Camera.main.transform.forward;
@@ -57,6 +62,7 @@ public class Movement : MonoBehaviour
         camRight.y = 0f;
         rb.MovePosition(transform.position + (camForward * input.y + camRight * input.x).normalized * Time.fixedDeltaTime * speed);
         transform.LookAt(transform.position + (camForward * input.y + camRight * input.x).normalized);
+        return !input.Equals(Vector2.zero);
     }
 
     private void StartDash()
@@ -66,6 +72,7 @@ public class Movement : MonoBehaviour
         dashDirection = transform.forward;
         dashDirection.Normalize();
         dashTimer = 0f;
+        animator.SetBool("isDashing", true);
     }
 
     private void DashMovement()
@@ -81,6 +88,7 @@ public class Movement : MonoBehaviour
             isDashInProgress = false;
             isDashing = false;
             rb.velocity = Vector3.zero;
+            animator.SetBool("isDashing", false);
         }
     }
 
@@ -90,6 +98,7 @@ public class Movement : MonoBehaviour
         {
             rb.velocity = Vector3.zero;
             isDashing = false;
+            animator.SetBool("isDashing", false);
         }
     }
 
