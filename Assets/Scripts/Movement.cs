@@ -7,20 +7,23 @@ public class Movement : MonoBehaviour
     [SerializeField] float speed = 5f;
 
     [Header("Dash Configuration")]
-    [SerializeField] float dashDistance = 5f;
-    [SerializeField] float dashDuration = 0.2f;
-    [SerializeField] float dashCooldown = 1f;
+    [SerializeField] private float dashSpeed = 20f;
+    [SerializeField] private float dashTimer = 0f;
+    [SerializeField] private float dashDuration = 0.2f;
 
     private InputAction moveAction;
     private InputAction dashAction;
     private Controls controls;
     private Camera mainCamera;
     private bool isDashing = false;
+    private bool isDashInProgress = false;
+    private Vector3 dashDirection;
+    private Rigidbody rb;
 
     private void Awake()
     {
         controls = new Controls();
-
+        rb = GetComponent<Rigidbody>();
         moveAction = controls.Movement.Move;
         dashAction = controls.Movement.Dash;
 
@@ -30,14 +33,19 @@ public class Movement : MonoBehaviour
         {
             if (!isDashing)
             {
-                StartCoroutine(Dash());
+                StartDash();
             }
         };
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         Move();
+
+        if (isDashInProgress)
+        {
+            DashMovement();
+        }
     }
 
     private void Move()
@@ -47,30 +55,42 @@ public class Movement : MonoBehaviour
         Vector3 camRight = Camera.main.transform.right;
         camForward.y = 0f;
         camRight.y = 0f;
-        transform.position += (camForward * input.y + camRight * input.x).normalized * Time.deltaTime * speed;
+        rb.MovePosition(transform.position + (camForward * input.y + camRight * input.x).normalized * Time.fixedDeltaTime * speed);
         transform.LookAt(transform.position + (camForward * input.y + camRight * input.x).normalized);
     }
 
-    private System.Collections.IEnumerator Dash()
+    private void StartDash()
     {
         isDashing = true;
+        isDashInProgress = true;
+        dashDirection = transform.forward;
+        dashDirection.Normalize();
+        dashTimer = 0f;
+    }
 
-        Vector3 dashVector = transform.forward;
-        dashVector.Normalize();
-
-        float dashEndTime = Time.time + dashDuration;
-        Vector3 startPosition = transform.position;
-        Vector3 targetPosition = startPosition + dashVector * dashDistance;
-
-        while (Time.time < dashEndTime)
+    private void DashMovement()
+    {
+        dashTimer += Time.fixedDeltaTime;
+        if (dashTimer <= dashDuration)
         {
-            float t = (dashEndTime - Time.time) / dashDuration;
-            transform.position = Vector3.Lerp(targetPosition, startPosition, t);
-            yield return null;
+            float currentDashSpeed = Mathf.Lerp(dashSpeed, 0f, dashTimer / dashDuration);
+            rb.velocity = dashDirection * currentDashSpeed;
         }
+        else
+        {
+            isDashInProgress = false;
+            isDashing = false;
+            rb.velocity = Vector3.zero;
+        }
+    }
 
-        yield return new WaitForSeconds(dashCooldown);
-        isDashing = false;
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (isDashing)
+        {
+            rb.velocity = Vector3.zero;
+            isDashing = false;
+        }
     }
 
     private void OnEnable()
