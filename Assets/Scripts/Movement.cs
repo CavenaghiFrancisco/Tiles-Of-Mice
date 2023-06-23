@@ -25,7 +25,8 @@ public class Movement : MonoBehaviour
     [Header("Particles Configuration")]
     [SerializeField] private ParticleSystem dustParticle;
     [Header("Particles Configuration")]
-    [SerializeField] private GameObject trail;
+    [SerializeField] private TrailRenderer trail;
+    [SerializeField] private TrailRenderer trail1;
 
     private void Awake()
     {
@@ -35,6 +36,9 @@ public class Movement : MonoBehaviour
         dashAction = controls.Movement.Dash;
 
         animator = GetComponent<Animator>();
+
+        trail.emitting = false;
+        trail1.emitting = false;
 
         mainCamera = Camera.main;
 
@@ -105,7 +109,9 @@ public class Movement : MonoBehaviour
         dashTimer = 0f;
         animator.SetBool("isDashing", true);
         animator.Play("Br1e_Dash");
-        trail.gameObject.SetActive(true);
+        //trail.gameObject.SetActive(true);
+        trail.emitting = true;
+        trail1.emitting = true;
     }
 
     private void DashMovement()
@@ -122,7 +128,8 @@ public class Movement : MonoBehaviour
             isDashing = false;
             rb.velocity = Vector3.zero;
             animator.SetBool("isDashing", false);
-            trail.gameObject.SetActive(false);
+            trail.emitting = false;
+            trail1.emitting = false;
         }
     }
 
