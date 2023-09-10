@@ -1,6 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <WwiseDocument Type="WorkUnit" ID="{815B753F-A382-4D48-99CB-70485E7A9A8F}" SchemaVersion="103">
 	<Events>
-		<WorkUnit Name="Default Work Unit" ID="{815B753F-A382-4D48-99CB-70485E7A9A8F}" PersistMode="Standalone"/>
+		<WorkUnit Name="Default Work Unit" ID="{815B753F-A382-4D48-99CB-70485E7A9A8F}" PersistMode="Standalone">
+			<ChildrenList>
+				<Event Name="Play_Dash" ID="{0C01DFA3-9F84-40C9-8821-B58BD5DFF0DD}">
+					<ChildrenList>
+						<Action Name="" ID="{57482742-401E-4980-BC5D-9926B4424BD1}" ShortID="355977768">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="Dash" ID="{6BBEDCF2-EAF4-411B-AC1C-A80E274E39D3}" WorkUnitID="{0339A905-98BC-47BB-8292-CFDEE1603607}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Play_Steps" ID="{54FBAE46-DDF4-4A58-8AC5-AB7BD0085607}">
+					<ChildrenList>
+						<Action Name="" ID="{F9F9DFD9-6C9C-4949-8520-6D4A2D724C85}" ShortID="882075079">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="Steps" ID="{AF00F9C2-41DC-4A8C-9C75-43D8AD364AD7}" WorkUnitID="{0339A905-98BC-47BB-8292-CFDEE1603607}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+			</ChildrenList>
+		</WorkUnit>
 	</Events>
 </WwiseDocument>
