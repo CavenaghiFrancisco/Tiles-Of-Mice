@@ -9,6 +9,8 @@ public class Movement : MonoBehaviour
     [Header("Dash Configuration")]
     [SerializeField] private float dashSpeed = 20f;
     [SerializeField] private float dashTimer = 0f;
+    [SerializeField] private float dashMaxCooldown = 1f;
+    private float dashCooldown = 1f;
     [SerializeField] private float dashDuration = 0.2f;
 
     private InputAction moveAction;
@@ -44,9 +46,10 @@ public class Movement : MonoBehaviour
 
         controls.Movement.Dash.performed += context =>
         {
-            if (!isDashing)
+            if (!isDashing && dashCooldown >= dashMaxCooldown)
             {
                 StartDash();
+                dashCooldown = 0;
             }
         };
     }
@@ -55,6 +58,14 @@ public class Movement : MonoBehaviour
     {
         animator.SetBool("isRunning", Move()); //Uso Move() para settear el valor del animator, ya se que no es performante pero para salir del paso
         //animator.SetBool("isDashing", isDashInProgress); Lo mismo de arriba
+        if(dashCooldown < 1)
+        {
+            dashCooldown += Time.deltaTime;
+            if(dashCooldown > 1)
+            {
+                dashCooldown = 1;
+            }
+        }
 
         if (isDashInProgress)
         {

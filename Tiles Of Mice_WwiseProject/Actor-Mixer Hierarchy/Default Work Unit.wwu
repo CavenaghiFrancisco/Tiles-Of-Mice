@@ -1,6 +1,133 @@
 <?xml version="1.0" encoding="utf-8"?>
 <WwiseDocument Type="WorkUnit" ID="{0339A905-98BC-47BB-8292-CFDEE1603607}" SchemaVersion="103">
 	<AudioObjects>
-		<WorkUnit Name="Default Work Unit" ID="{0339A905-98BC-47BB-8292-CFDEE1603607}" PersistMode="Standalone"/>
+		<WorkUnit Name="Default Work Unit" ID="{0339A905-98BC-47BB-8292-CFDEE1603607}" PersistMode="Standalone">
+			<ChildrenList>
+				<Sound Name="Dash" ID="{6BBEDCF2-EAF4-411B-AC1C-A80E274E39D3}" ShortID="201442317">
+					<PropertyList>
+						<Property Name="Volume" Type="Real64">
+							<ValueList>
+								<Value>12</Value>
+							</ValueList>
+						</Property>
+					</PropertyList>
+					<ReferenceList>
+						<Reference Name="Conversion">
+							<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{05CC0A8F-9081-4203-A559-B9B6AE3F44D7}"/>
+						</Reference>
+						<Reference Name="OutputBus">
+							<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{F6C4F274-DD12-4578-BF4D-38461F0058EA}"/>
+						</Reference>
+					</ReferenceList>
+					<ChildrenList>
+						<AudioFileSource Name="Dash" ID="{329ED040-620C-4A9D-BB0D-78E6051C5BEA}">
+							<Language>SFX</Language>
+							<AudioFile>Dash.wav</AudioFile>
+							<MediaIDList>
+								<MediaID ID="866177170"/>
+							</MediaIDList>
+						</AudioFileSource>
+					</ChildrenList>
+					<ObjectLists/>
+					<ActiveSourceList>
+						<ActiveSource Name="Dash" ID="{329ED040-620C-4A9D-BB0D-78E6051C5BEA}" Platform="Linked"/>
+					</ActiveSourceList>
+				</Sound>
+				<RandomSequenceContainer Name="Steps" ID="{AF00F9C2-41DC-4A8C-9C75-43D8AD364AD7}" ShortID="1017568831">
+					<PropertyList>
+						<Property Name="Pitch" Type="int32">
+							<ValueList>
+								<Value>2400</Value>
+							</ValueList>
+						</Property>
+						<Property Name="Volume" Type="Real64">
+							<ValueList>
+								<Value>-14</Value>
+							</ValueList>
+						</Property>
+					</PropertyList>
+					<ReferenceList>
+						<Reference Name="Conversion">
+							<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{05CC0A8F-9081-4203-A559-B9B6AE3F44D7}"/>
+						</Reference>
+						<Reference Name="OutputBus">
+							<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{F6C4F274-DD12-4578-BF4D-38461F0058EA}"/>
+						</Reference>
+					</ReferenceList>
+					<ChildrenList>
+						<Sound Name="Step2" ID="{AE779175-7FCE-4810-BD64-46ADD4B9B905}" ShortID="133114701">
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{05CC0A8F-9081-4203-A559-B9B6AE3F44D7}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{F6C4F274-DD12-4578-BF4D-38461F0058EA}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<AudioFileSource Name="Step2" ID="{D507D85C-251C-485F-8CFD-C95FB3FFCA9D}">
+									<Language>SFX</Language>
+									<AudioFile>Step2.wav</AudioFile>
+									<MediaIDList>
+										<MediaID ID="12414406"/>
+									</MediaIDList>
+								</AudioFileSource>
+							</ChildrenList>
+							<ObjectLists/>
+							<ActiveSourceList>
+								<ActiveSource Name="Step2" ID="{D507D85C-251C-485F-8CFD-C95FB3FFCA9D}" Platform="Linked"/>
+							</ActiveSourceList>
+						</Sound>
+						<Sound Name="Step3" ID="{813C1872-849B-464C-8944-A02D5D0F9DB4}" ShortID="166989047">
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{05CC0A8F-9081-4203-A559-B9B6AE3F44D7}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{F6C4F274-DD12-4578-BF4D-38461F0058EA}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<AudioFileSource Name="Step3" ID="{DE9471B6-BA58-4AAD-AECA-5212E2395AF2}">
+									<Language>SFX</Language>
+									<AudioFile>Step3.wav</AudioFile>
+									<MediaIDList>
+										<MediaID ID="344987785"/>
+									</MediaIDList>
+								</AudioFileSource>
+							</ChildrenList>
+							<ObjectLists/>
+							<ActiveSourceList>
+								<ActiveSource Name="Step3" ID="{DE9471B6-BA58-4AAD-AECA-5212E2395AF2}" Platform="Linked"/>
+							</ActiveSourceList>
+						</Sound>
+						<Sound Name="Step4" ID="{BDB61A07-5430-4740-AC92-66E13FBC6C8B}" ShortID="104626952">
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{05CC0A8F-9081-4203-A559-B9B6AE3F44D7}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{F6C4F274-DD12-4578-BF4D-38461F0058EA}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<AudioFileSource Name="Step4" ID="{C049676F-44C5-4890-808A-1BA2C9A6484F}">
+									<Language>SFX</Language>
+									<AudioFile>Step4.wav</AudioFile>
+									<MediaIDList>
+										<MediaID ID="508008122"/>
+									</MediaIDList>
+								</AudioFileSource>
+							</ChildrenList>
+							<ObjectLists/>
+							<ActiveSourceList>
+								<ActiveSource Name="Step4" ID="{C049676F-44C5-4890-808A-1BA2C9A6484F}" Platform="Linked"/>
+							</ActiveSourceList>
+						</Sound>
+					</ChildrenList>
+					<ObjectLists/>
+				</RandomSequenceContainer>
+			</ChildrenList>
+		</WorkUnit>
 	</AudioObjects>
 </WwiseDocument>

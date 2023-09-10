@@ -66,8 +66,22 @@ MonoBehaviour:
     ParentPath: SoundBanks\Default Work Unit
     guid: c2ffc1015ac7774aa039965ab7d3dfb3
     GuidInternal: 
-    m_lastTime: -8585151029109071248
-    List: []
+    m_lastTime: -8585140555604566302
+    List:
+    - name: Game
+      guid: c411fc9733cf684fb9dadccd26796d9f
+      id: 702482391
+      PathAndIcons:
+      - ElementName: SoundBanks
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: c2ffc1015ac7774aa039965ab7d3dfb3
+      - ElementName: Game
+        ObjectType: 7
+        guid: c411fc9733cf684fb9dadccd26796d9f
+      Path: SoundBanks\Default Work Unit\Game
   EventWwu:
   - PhysicalPath: Events\Default Work Unit.wwu
     PathAndIcons:
@@ -80,8 +94,42 @@ MonoBehaviour:
     ParentPath: Events\Default Work Unit
     guid: 3f755b8182a3484d99cb70485e7a9a8f
     GuidInternal: 
-    m_lastTime: -8585151029109071248
-    List: []
+    m_lastTime: -8585140549354131140
+    List:
+    - name: Play_Dash
+      guid: a3df010c849fc9408821b58bd5dff0dd
+      id: 2211787386
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 3f755b8182a3484d99cb70485e7a9a8f
+      - ElementName: Play_Dash
+        ObjectType: 3
+        guid: a3df010c849fc9408821b58bd5dff0dd
+      Path: Events\Default Work Unit\Play_Dash
+      maxAttenuation: 0
+      maxDuration: 2.678571
+      minDuration: 2.678571
+    - name: Play_Steps
+      guid: 46aefb54f4dd584a8ac5ab7bd0085607
+      id: 2600469463
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 3f755b8182a3484d99cb70485e7a9a8f
+      - ElementName: Play_Steps
+        ObjectType: 3
+        guid: 46aefb54f4dd584a8ac5ab7bd0085607
+      Path: Events\Default Work Unit\Play_Steps
+      maxAttenuation: 0
+      maxDuration: 0.079836
+      minDuration: 0.05449
   RtpcWwu:
   - PhysicalPath: Game Parameters\Default Work Unit.wwu
     PathAndIcons:
@@ -138,9 +186,9 @@ MonoBehaviour:
     GuidInternal: 
     m_lastTime: -8585151029109051235
     List: []
-  ExpandedFileSystemItemIds: 
-  ExpandedWaapiItemIds: 
+  ExpandedFileSystemItemIds: 0200000003000000040000000e0000000f000000
+  ExpandedWaapiItemIds: 0200000003000000
   AutoSyncSelection: 0
   autoPopulateEnabled: 1
-  currentDataSource: 0
+  currentDataSource: 1
   CurrentPluginConfig: 
