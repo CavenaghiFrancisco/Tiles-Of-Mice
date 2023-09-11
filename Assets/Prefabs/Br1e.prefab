@@ -1955,7 +1955,7 @@ GameObject:
   - component: {fileID: 5583327470053344164}
   m_Layer: 0
   m_Name: Br1e
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2044,6 +2044,7 @@ MonoBehaviour:
   speed: 1.5
   dashSpeed: 95.4
   dashTimer: 0.15999998
+  dashMaxCooldown: 1
   dashDuration: 0.15
   dustParticle: {fileID: 8111797812930882480}
   trail: {fileID: 2662740831534515169}
