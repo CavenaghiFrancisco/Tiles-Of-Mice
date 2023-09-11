@@ -3,11 +3,13 @@ using IA.FSM;
 
 public abstract class Entity : MonoBehaviour
 {
-    public int HP { private set;  get; }
-    public int Atk { private set;  get; }
-
-    private FSM fsm;
+    protected int hp;
+    protected int atk;
+    protected float hitCD;
+    protected FSM fsm;
+    protected bool isAlive;
     public abstract void GetDamage(int damage);
     public abstract void Die();
-    public abstract void Attack();
+    public abstract void Attack(Entity otherEntity);
+    protected abstract void EntityReset();
 }

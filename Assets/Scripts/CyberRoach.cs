@@ -4,15 +4,30 @@ using UnityEngine;
 
 public class CyberRoach : Enemy
 {
-    // Start is called before the first frame update
-    void Start()
+    public override void Attack(Entity otherEntity)
     {
-        
+        otherEntity.GetDamage(this.atk);
+        //animacion de ataque
+        //sonido de ataque
     }
 
-    // Update is called once per frame
-    void Update()
+    public override void Die()
     {
-        
+        hp = 0;
+        //animacion de muerte
+        //sfx de muerte
+        Debug.Log("Br1e se esta muerto");
+        this.enabled = false;
+    }
+
+    public override void GetDamage(int damage)
+    {
+        hp -= damage;
+        if (hp <= 0) Die();
+    }
+
+    protected override void EntityReset()
+    {
+        throw new System.NotImplementedException();
     }
 }
