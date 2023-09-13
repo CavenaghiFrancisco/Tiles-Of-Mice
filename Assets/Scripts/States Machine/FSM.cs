@@ -41,26 +41,40 @@ namespace IA.FSM
 
         public void SetFlag(int flag)
         {
-            if (relations[currentStateIndex, flag] != -1)
+            /*if (relations[currentStateIndex, flag] != -1)
+            {*/
+            if (currentStateIndex >= 0 &&
+                currentStateIndex < relations.GetLength(0) &&
+                flag >= 0 &&
+                flag < relations.GetLength(1) &&
+                relations[currentStateIndex, flag] != -1)
             {
-                foreach (Action OnExit in states[currentStateIndex].GetOnExitBehaviours(statesOnExitParameters[currentStateIndex]))
-                    OnExit?.Invoke();
 
+                if (statesOnExitParameters.ContainsKey(currentStateIndex) && statesOnExitParameters[currentStateIndex] != null)
+                {
+                    foreach (Action OnExit in states.ContainsKey(currentStateIndex) ? states[currentStateIndex]?.GetOnExitBehaviours(statesOnExitParameters[currentStateIndex]) : null)
+                        OnExit?.Invoke();
+                }
                 currentStateIndex = relations[currentStateIndex, flag];
 
-                foreach (Action OnEnter in states[currentStateIndex].GetOnEnterBehaviours(statesOnEnterParameters[currentStateIndex]))
-                    OnEnter?.Invoke();
+                if (statesOnEnterParameters.ContainsKey(currentStateIndex) && statesOnEnterParameters[currentStateIndex] != null)
+                {
+                    foreach (Action OnEnter in states.ContainsKey(currentStateIndex) ? states[currentStateIndex]?.GetOnEnterBehaviours(statesOnEnterParameters[currentStateIndex]) : null)
+                        OnEnter?.Invoke();
+                }
+
+
             }
         }
 
         public void AddState<T>(int stateIndex, StateParameters stateParams = null,
             StateParameters stateOnEnterParams = null, StateParameters stateOnExitParams = null) where T : State, new()
         {
-            if (!states.ContainsKey(stateIndex)) 
+            if (!states.ContainsKey(stateIndex))
             {
                 State newState = new T();
-                newState.SetFlag += SetFlag;
                 states.Add(stateIndex, newState);
+                newState.SetFlag += SetFlag;
                 statesParameters.Add(stateIndex, stateParams);
                 statesOnEnterParameters.Add(stateIndex, stateOnEnterParams);
                 statesOnExitParameters.Add(stateIndex, stateOnExitParams);

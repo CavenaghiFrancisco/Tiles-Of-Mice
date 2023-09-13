@@ -12,6 +12,7 @@ namespace IA.FSM
         public abstract object[] GetOutputs();
         public abstract void Transition(int flag);
         public abstract void SetParameters(StateParameters parameters);
+
     }
 }
 
