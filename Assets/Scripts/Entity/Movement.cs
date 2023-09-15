@@ -154,6 +154,18 @@ public class Movement : MonoBehaviour
         }
     }
 
+    public void StopAllMovement()
+    {
+        isDashInProgress = false;
+        isDashing = false;
+        rb.velocity = Vector3.zero;
+        animator.SetBool("isDashing", false);
+        animator.SetBool("isRunning", false);
+        trail.emitting = false;
+        trail1.emitting = false;
+        animator.Play("Br1e_Idle");
+    }
+
     private void OnEnable()
     {
         controls.Movement.Enable();
