@@ -53,6 +53,7 @@ namespace TOM.Enemy
                 OnAllEnemiesCreated?.Invoke();
             }
         }
+        /*
         private CyberRoach GetNewCyberRoach(int levelId)
         {
             EnemyParameters cyberRoach;
@@ -62,13 +63,17 @@ namespace TOM.Enemy
 
             CR.Initialize
             (cyberRoach.healthPoints,
-                cyberRoach.basicAttack, cyberRoach.basicAttackCoolDown,
-                cyberRoach.powerAttack, cyberRoach.powerAttackCoolDown,
-                cyberRoach.movementSpeed
+                cyberRoach.basicAttack, cyberRoach.powerAttack,
+                cyberRoach.powerAttackChance,
+                cyberRoach.basicAttackCoolDown, cyberRoach.powerAttackCoolDown,
+                cyberRoach.attackRadius,
+                cyberRoach.stunTimeInms,
+                cyberRoach.movementSpeed,
+                cyberRoach.hurtTime
             );
             return CR;
         }
-
+        */
         private void CreateFolders()
         {
             GameObject auxGo = new GameObject("CyberRoach List");

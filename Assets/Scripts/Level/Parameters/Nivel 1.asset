@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4743c2b71cf434a488d9b6eb97a3aacb, type: 3}
-  m_Name: Demo Level
+  m_Name: Nivel 1
   m_EditorClassIdentifier: 
-  levelID: 1
-  CRParams: {fileID: 11400000, guid: 983fd15c16b69d847aeb6963fa24db65, type: 2}
-  CyberRoackCount: 1
+  levelID: 0
+  CRParams: {fileID: 0}
+  CyberRoackCount: 0
   SVParams: {fileID: 0}
   SV23Count: 0
   GregParams: {fileID: 0}

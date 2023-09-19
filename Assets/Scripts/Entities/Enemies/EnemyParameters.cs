@@ -10,7 +10,10 @@ namespace TOM.Enemy
         public float basicAttackCoolDown;
         public int powerAttack;
         public float powerAttackCoolDown;
+        public int powerAttackChance;
         public int attackRadius;
+        public float stunTimeInms;
         public int movementSpeed;
+        public float hurtTime;
     }
 }

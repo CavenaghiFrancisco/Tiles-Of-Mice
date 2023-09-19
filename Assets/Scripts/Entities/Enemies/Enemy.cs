@@ -11,11 +11,13 @@ namespace TOM.Enemy
 
     public abstract class Enemy : Entity
     {
-        protected float powerHitChance;
+        protected int powerHitChance;
         protected FSM fsm;
         protected EnemyType type;
-        protected int attackRadius;
+        protected float attackRadius;
+        protected float stunTimeInms;
         public FSM GetFSM() => fsm;
-        public int GetAttackRadius() => attackRadius;
+        public float GetAttackRadius() => attackRadius;
+        public float GetStunTime() => stunTimeInms;
     }
 }

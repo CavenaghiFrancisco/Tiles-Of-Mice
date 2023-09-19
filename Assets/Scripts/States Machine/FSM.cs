@@ -41,8 +41,6 @@ namespace IA.FSM
 
         public void SetFlag(int flag)
         {
-            /*if (relations[currentStateIndex, flag] != -1)
-            {*/
             if (currentStateIndex >= 0 &&
                 currentStateIndex < relations.GetLength(0) &&
                 flag >= 0 &&
@@ -62,7 +60,6 @@ namespace IA.FSM
                     foreach (Action OnEnter in states.ContainsKey(currentStateIndex) ? states[currentStateIndex]?.GetOnEnterBehaviours(statesOnEnterParameters[currentStateIndex]) : null)
                         OnEnter?.Invoke();
                 }
-
 
             }
         }
@@ -95,6 +92,11 @@ namespace IA.FSM
         public object[] GetStateOutputs(int stateIndex)
         {
             return states[stateIndex].GetOutputs();
+        }
+
+        public void SetStateParameters(int stateIndex, StateParameters parameters)
+        {
+            states[stateIndex].SetParameters(parameters);
         }
 
     }

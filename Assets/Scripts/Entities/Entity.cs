@@ -10,6 +10,9 @@ namespace TOM
         protected float basicHitCD;
         protected float powerHitCD;
         protected bool isAlive;
+        protected float hurtTime;
+
+        protected System.Action OnDeath;
         public abstract void GetDamage(int damage);
         public abstract void Die();
         public abstract void Attack(Entity otherEntity);
@@ -26,5 +29,8 @@ namespace TOM
             }
         }
         public int GetMovementSpeed() => moveSpeed;
+        public bool IsAlive() => isAlive;
+        public float GetBasicHitCD() => basicHitCD;
+        public float GetPowerHitCD() => powerHitCD;
     }
 }
