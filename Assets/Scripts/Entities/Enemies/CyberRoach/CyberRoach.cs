@@ -125,13 +125,13 @@ namespace TOM.Enemy
             }
             material.color = defaultColor;
         }
-        private void OnCollisionEnter(Collision collision)
-        {
-            if(collision.collider.tag=="Player")
-            {
-                GetDamage(testingGetDamage);
-            }
-        }
+        //private void OnCollisionEnter(Collision collision)
+        //{
+        //    if(collision.collider.tag=="Player")
+        //    {
+        //        GetDamage(testingGetDamage);
+        //    }
+        //}
     }
 
 }

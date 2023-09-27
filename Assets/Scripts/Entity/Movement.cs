@@ -10,11 +10,12 @@ public class Movement : MonoBehaviour
     [SerializeField] private float dashSpeed = 20f;
     [SerializeField] private float dashTimer = 0f;
     [SerializeField] private float dashMaxCooldown = 1f;
-    private float dashCooldown = 1f;
     [SerializeField] private float dashDuration = 0.2f;
+    private float dashCooldown = 1f;
+    public bool IsDashing { get => isDashing; }
+
 
     private InputAction moveAction;
-    private InputAction dashAction;
     private Controls controls;
     private Camera mainCamera;
     private bool isDashing = false;
@@ -35,7 +36,6 @@ public class Movement : MonoBehaviour
         controls = new Controls();
         rb = GetComponent<Rigidbody>();
         moveAction = controls.Movement.Move;
-        dashAction = controls.Movement.Dash;
 
         animator = GetComponent<Animator>();
 

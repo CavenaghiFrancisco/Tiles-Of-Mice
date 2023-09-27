@@ -1,22 +1,50 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
+
+namespace TOM.ATTACK
+{
+    public enum AttackType
+    {
+        Basic,
+        Power
+    }
+}
 
 namespace TOM
 {
     public class Player : Entity
     {
         [SerializeField] private Material playerMat = null;
-        
+        [SerializeField] private Transform attackPosition = null;
+        [SerializeField] private AttackArea attackArea = null;
+
+        private Controls controls;
+        private Movement movement;
+
         Color defaultColor = default;
         private void Awake()
-        { 
+        {
             EntityReset();
             defaultColor = playerMat.color;
+            controls = new Controls();
+            movement = GetComponent<Movement>();
+
+            controls.Attack.BasicAttack.performed += context =>
+            {
+                if (!movement.IsDashing)
+                {
+                    attackArea.GenerateAttackArea(0.2f, attackPosition.position);
+                }
+            };
+            //Intercambiar el 0.2f por la duracion de la animacion
+            attackArea.OnEnemyHit += Attack;
         }
         private void OnDestroy()
         {
             playerMat.color = defaultColor;
+            attackArea.OnEnemyHit -= Attack;
         }
 
         public override void Attack(Entity otherEntity)
@@ -61,7 +89,7 @@ namespace TOM
 
         protected override void EntityReset()
         {
-            hp = 100;
+            hp = 10000;
             basicAtk = 10;
             powerAtk = 25;
             hurtTime = 1f;
@@ -83,6 +111,16 @@ namespace TOM
                 yield return null;
             }
             playerMat.color = defaultColor;
+        }
+
+        private void OnEnable()
+        {
+            controls.Attack.Enable();
+        }
+
+        private void OnDisable()
+        {
+            controls.Attack.Disable();
         }
     }
 }

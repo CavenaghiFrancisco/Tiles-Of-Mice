@@ -13,12 +13,12 @@ MonoBehaviour:
   m_Name: CyberRoachNerfed
   m_EditorClassIdentifier: 
   healthPoints: 50
-  basicAttack: 1
+  basicAttack: 20
   basicAttackCoolDown: 1
   powerAttack: 20
   powerAttackCoolDown: 2
   powerAttackChance: 50
-  attackRadius: 3
+  attackRadius: 2
   stunTimeInms: 10
   movementSpeed: 3
   hurtTime: 1

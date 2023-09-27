@@ -136,6 +136,65 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""Attack"",
+            ""id"": ""6acf6bef-372d-4576-bef6-512a6fd18bea"",
+            ""actions"": [
+                {
+                    ""name"": ""BasicAttack"",
+                    ""type"": ""Button"",
+                    ""id"": ""059a6592-d311-4299-9052-d3e9ba1fde01"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""PowerAttack"",
+                    ""type"": ""Button"",
+                    ""id"": ""b2759189-80b9-4d91-9bec-9f303bbaf5d5"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""01ecb4d3-7cdd-42f5-b2ff-056be48e1eb4"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""PC"",
+                    ""action"": ""BasicAttack"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""45db24be-64bf-44a7-8107-cbdd69ceef6b"",
+                    ""path"": ""<Gamepad>/buttonWest"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Console"",
+                    ""action"": ""BasicAttack"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""55e3cd27-6845-4b65-9c7d-ac9c734d5a9d"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""PC"",
+                    ""action"": ""PowerAttack"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": [
@@ -155,6 +214,10 @@ public partial class @Controls : IInputActionCollection2, IDisposable
         m_Movement = asset.FindActionMap("Movement", throwIfNotFound: true);
         m_Movement_Move = m_Movement.FindAction("Move", throwIfNotFound: true);
         m_Movement_Dash = m_Movement.FindAction("Dash", throwIfNotFound: true);
+        // Attack
+        m_Attack = asset.FindActionMap("Attack", throwIfNotFound: true);
+        m_Attack_BasicAttack = m_Attack.FindAction("BasicAttack", throwIfNotFound: true);
+        m_Attack_PowerAttack = m_Attack.FindAction("PowerAttack", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -251,6 +314,47 @@ public partial class @Controls : IInputActionCollection2, IDisposable
         }
     }
     public MovementActions @Movement => new MovementActions(this);
+
+    // Attack
+    private readonly InputActionMap m_Attack;
+    private IAttackActions m_AttackActionsCallbackInterface;
+    private readonly InputAction m_Attack_BasicAttack;
+    private readonly InputAction m_Attack_PowerAttack;
+    public struct AttackActions
+    {
+        private @Controls m_Wrapper;
+        public AttackActions(@Controls wrapper) { m_Wrapper = wrapper; }
+        public InputAction @BasicAttack => m_Wrapper.m_Attack_BasicAttack;
+        public InputAction @PowerAttack => m_Wrapper.m_Attack_PowerAttack;
+        public InputActionMap Get() { return m_Wrapper.m_Attack; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(AttackActions set) { return set.Get(); }
+        public void SetCallbacks(IAttackActions instance)
+        {
+            if (m_Wrapper.m_AttackActionsCallbackInterface != null)
+            {
+                @BasicAttack.started -= m_Wrapper.m_AttackActionsCallbackInterface.OnBasicAttack;
+                @BasicAttack.performed -= m_Wrapper.m_AttackActionsCallbackInterface.OnBasicAttack;
+                @BasicAttack.canceled -= m_Wrapper.m_AttackActionsCallbackInterface.OnBasicAttack;
+                @PowerAttack.started -= m_Wrapper.m_AttackActionsCallbackInterface.OnPowerAttack;
+                @PowerAttack.performed -= m_Wrapper.m_AttackActionsCallbackInterface.OnPowerAttack;
+                @PowerAttack.canceled -= m_Wrapper.m_AttackActionsCallbackInterface.OnPowerAttack;
+            }
+            m_Wrapper.m_AttackActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @BasicAttack.started += instance.OnBasicAttack;
+                @BasicAttack.performed += instance.OnBasicAttack;
+                @BasicAttack.canceled += instance.OnBasicAttack;
+                @PowerAttack.started += instance.OnPowerAttack;
+                @PowerAttack.performed += instance.OnPowerAttack;
+                @PowerAttack.canceled += instance.OnPowerAttack;
+            }
+        }
+    }
+    public AttackActions @Attack => new AttackActions(this);
     private int m_PCSchemeIndex = -1;
     public InputControlScheme PCScheme
     {
@@ -273,5 +377,10 @@ public partial class @Controls : IInputActionCollection2, IDisposable
     {
         void OnMove(InputAction.CallbackContext context);
         void OnDash(InputAction.CallbackContext context);
+    }
+    public interface IAttackActions
+    {
+        void OnBasicAttack(InputAction.CallbackContext context);
+        void OnPowerAttack(InputAction.CallbackContext context);
     }
 }

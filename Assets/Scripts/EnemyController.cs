@@ -11,8 +11,8 @@ namespace TOM.Enemy
         [SerializeField] private GameObject player = null;
 
         [SerializeField] private GameObject CRPrefab = null;
-        [SerializeField] private GameObject SVPrefab = null;
-        [SerializeField] private GameObject GregPrefab = null;
+        //[SerializeField] private GameObject SVPrefab = null;
+        //[SerializeField] private GameObject GregPrefab = null;
 
         [SerializeField] private List<LevelParameters> levelList = new List<LevelParameters>();
 
@@ -53,27 +53,6 @@ namespace TOM.Enemy
                 OnAllEnemiesCreated?.Invoke();
             }
         }
-        /*
-        private CyberRoach GetNewCyberRoach(int levelId)
-        {
-            EnemyParameters cyberRoach;
-            cyberRoach = levelList[levelId].CRParams;
-            
-            CyberRoach CR = new CyberRoach();
-
-            CR.Initialize
-            (cyberRoach.healthPoints,
-                cyberRoach.basicAttack, cyberRoach.powerAttack,
-                cyberRoach.powerAttackChance,
-                cyberRoach.basicAttackCoolDown, cyberRoach.powerAttackCoolDown,
-                cyberRoach.attackRadius,
-                cyberRoach.stunTimeInms,
-                cyberRoach.movementSpeed,
-                cyberRoach.hurtTime
-            );
-            return CR;
-        }
-        */
         private void CreateFolders()
         {
             GameObject auxGo = new GameObject("CyberRoach List");

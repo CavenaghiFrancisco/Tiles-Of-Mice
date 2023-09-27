@@ -1979,6 +1979,7 @@ Transform:
   - {fileID: 8289489607497174384}
   - {fileID: 2529490466897660456}
   - {fileID: 4684273752571899783}
+  - {fileID: 7609144793232527314}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -4291,6 +4292,36 @@ Transform:
   m_Father: {fileID: 8941039096847914846}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &6584043998989293276
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7609144793232527314}
+  m_Layer: 0
+  m_Name: AttackArea
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7609144793232527314
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6584043998989293276}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 700}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2516270799202076494}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6687756431337384210
 GameObject:
   m_ObjectHideFlags: 0
@@ -5873,13 +5904,13 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2662153441017765624, guid: a86625ce75e144844a2d0f3728c9e465, type: 3}
   m_PrefabInstance: {fileID: 7460241691915480939}
   m_PrefabAsset: {fileID: 0}
---- !u!96 &5960260318492091232 stripped
-TrailRenderer:
-  m_CorrespondingSourceObject: {fileID: 3836789138757880843, guid: a86625ce75e144844a2d0f3728c9e465, type: 3}
-  m_PrefabInstance: {fileID: 7460241691915480939}
-  m_PrefabAsset: {fileID: 0}
 --- !u!96 &2662740831534515169 stripped
 TrailRenderer:
   m_CorrespondingSourceObject: {fileID: 4862742899682798730, guid: a86625ce75e144844a2d0f3728c9e465, type: 3}
+  m_PrefabInstance: {fileID: 7460241691915480939}
+  m_PrefabAsset: {fileID: 0}
+--- !u!96 &5960260318492091232 stripped
+TrailRenderer:
+  m_CorrespondingSourceObject: {fileID: 3836789138757880843, guid: a86625ce75e144844a2d0f3728c9e465, type: 3}
   m_PrefabInstance: {fileID: 7460241691915480939}
   m_PrefabAsset: {fileID: 0}
