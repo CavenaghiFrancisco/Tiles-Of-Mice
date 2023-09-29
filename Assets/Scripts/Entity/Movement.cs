@@ -13,6 +13,7 @@ public class Movement : MonoBehaviour
     [SerializeField] private float dashDuration = 0.2f;
     private float dashCooldown = 1f;
     public bool IsDashing { get => isDashing; }
+    public bool canDash = false;
 
 
     private InputAction moveAction;
@@ -46,7 +47,7 @@ public class Movement : MonoBehaviour
 
         controls.Movement.Dash.performed += context =>
         {
-            if (!isDashing && dashCooldown >= dashMaxCooldown)
+            if (!isDashing && dashCooldown >= dashMaxCooldown && canDash)
             {
                 StartDash();
                 dashCooldown = 0;

@@ -12,6 +12,10 @@ namespace TOM
 
         public System.Action<Entity> OnEnemyHit = null;
 
+        public bool CanAttack => !boxCollider.enabled;
+
+        public System.Action<bool> OnAttack;
+
         List<TOM.Enemy.Enemy> hittedEnemyList = new List<Enemy.Enemy>();
 
         private void Awake()
@@ -22,10 +26,15 @@ namespace TOM
 
         public void GenerateAttackArea(float durationSeconds, Vector3 initialPos)
         {
-            if (!boxCollider.enabled)
+            if (CanAttack)
             {
+                OnAttack(true);
                 StartCoroutine(WaitTime(durationSeconds));
                 transform.position = initialPos;
+            }
+            else
+            {
+                OnAttack(false);
             }
         }
 
@@ -40,6 +49,7 @@ namespace TOM
             }
             boxCollider.enabled = false;
             hittedEnemyList.Clear();
+            OnAttack(false);
         }
 
         private void OnTriggerEnter(Collider other)

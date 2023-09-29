@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TOM;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -14,9 +15,9 @@ public class PlayerUI : MonoBehaviour
         player.OnLifeModified += UpdateLifeUI;
     }
 
-    private void UpdateLifeUI(float life)
+    private void UpdateLifeUI(int life)
     {
-        lifeUI.fillAmount = life / player.GetMaxLife();
+        lifeUI.fillAmount = (float)life / (float)player.GetMaxLife();
     }
 
     private void OnDestroy()
