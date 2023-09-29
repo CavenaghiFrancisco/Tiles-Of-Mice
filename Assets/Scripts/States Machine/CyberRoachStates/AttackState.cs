@@ -51,21 +51,7 @@ namespace TOM.Enemy.CR
             wasPoweredAttack = false;
             target = parameters.Parameters[0] as Player;
             enemyType = parameters.Parameters[2] as Type;
-            switch (enemyType.Name)
-            {
-                case "CyberRoach":
-                    enemy = parameters.Parameters[1] as CyberRoach;
-                    break;
-                case "Gregorio":
-                    //enemy = parameters.Parameters[1] as Gregorio;
-                    break;
-                case "SV23":
-                    //enemy = parameters.Parameters[1] as SV23;
-                    break;
-                default:
-                    Debug.LogError("There is no enemy with that Type.");
-                    break;
-            }
+            enemy = Convert.ChangeType(parameters.Parameters[1], enemyType) as Enemy;
         }
 
         public override void Transition(int flag)

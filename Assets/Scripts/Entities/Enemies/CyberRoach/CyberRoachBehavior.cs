@@ -99,7 +99,7 @@ namespace TOM.Enemy.CR
 
 
             fsm.SetRelation((int)States.Attack, (int)Flags.OnGettingDamage, (int)States.Hurting);
-            hurtParameters.Parameters = new object[2] { gameObject.GetComponent<MeshRenderer>()?.material, cyberRoach.GetStunTime() };
+            hurtParameters.Parameters = new object[1] { /*gameObject.GetComponent<MeshRenderer>()?.material,*/ cyberRoach.GetStunTime() };
             fsm.AddState<HurtingState>((int)States.Hurting, hurtParameters);
 
 

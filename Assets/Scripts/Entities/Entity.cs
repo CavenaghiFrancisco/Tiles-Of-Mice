@@ -4,6 +4,7 @@ namespace TOM
     public abstract class Entity : MonoBehaviour
     {
         protected int hp;
+        protected int maxHP;
         protected int basicAtk;
         protected int powerAtk;
         protected int moveSpeed;//Aplicar a br1e
@@ -29,6 +30,7 @@ namespace TOM
             }
         }
         public int GetMovementSpeed() => moveSpeed;
+        public int GetMaxLife() => maxHP;
         public bool IsAlive() => isAlive;
         public float GetBasicHitCD() => basicHitCD;
         public float GetPowerHitCD() => powerHitCD;

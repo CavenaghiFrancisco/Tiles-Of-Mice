@@ -22,6 +22,7 @@ namespace TOM.Enemy.CR
             behabiours.Add(() =>
             {
                 Vector3 direction = (br1eTransform.position - thisRB.position).normalized;
+                thisRB.transform.LookAt(new Vector3(br1eTransform.position.x, thisRB.transform.position.y, br1eTransform.position.z));
                 thisRB.MovePosition(thisRB.position + direction * Time.fixedDeltaTime * speed);
                 if (Vector3.Distance(br1eTransform.position, thisRB.position) < radius)
                 {

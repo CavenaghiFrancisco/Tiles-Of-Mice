@@ -9,8 +9,8 @@ namespace TOM.Enemy.CR
     public class HurtingState : State
     {
         float timer = 0;
-        Material material = null;
-        Color defaultColor = default;
+        //Material material = null;
+        //Color defaultColor = default;
         float stunTime = 0;
 
         public override List<Action> GetBehaviours(StateParameters parameters)
@@ -24,11 +24,11 @@ namespace TOM.Enemy.CR
                 if(timer<stunTime)
                 {
                     timer += Time.deltaTime;
-                    material.color = Color.magenta;
+                   // material.color = Color.magenta;
                 }
                 else
                 {
-                    material.color = defaultColor;
+                    //material.color = defaultColor;
                     Transition((int)Flags.OnHurtFinish);
                 }
             }
@@ -54,11 +54,11 @@ namespace TOM.Enemy.CR
 
         public override void SetParameters(StateParameters parameters)
         {
-            material = parameters.Parameters[0] as Material;
-            stunTime = (float)parameters.Parameters[1];
+            //material = parameters.Parameters[0] as Material;
+            stunTime = (float)parameters.Parameters[0];
             
             timer = 0;
-            defaultColor = material.color;
+            //defaultColor = material.color;
         }
 
         public override void Transition(int flag)
