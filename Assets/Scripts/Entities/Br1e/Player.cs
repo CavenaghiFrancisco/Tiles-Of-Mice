@@ -25,9 +25,6 @@ namespace TOM
         [SerializeField] private AnimationClip attack1 = null;
         [SerializeField] private AnimationClip attack2 = null;
 
-        private readonly int attack1AnimationHash = Animator.StringToHash("Br1e_Attack1");
-        private readonly int attack2AnimationHash = Animator.StringToHash("Br1e_Attack2");
-
         private Controls controls;
         private Movement movement;
         private Animator animator;
@@ -124,14 +121,15 @@ namespace TOM
 
         protected override void EntityReset()
         {
-            hp = 10000;
-            maxHP = 10000;
+            hp = 100;
+            maxHP = 100;
             basicAtk = 10;
             powerAtk = 25;
             hurtTime = 1f;
             isAlive = true;
             transform.position = originalPosition;
             gameObject.SetActive(true);
+            attackArea.CanAttack = false;
             OnLifeModified?.Invoke(hp);
         }
 

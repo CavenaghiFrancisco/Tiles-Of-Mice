@@ -7,8 +7,8 @@ namespace TOM.Enemy
     public class CyberRoach : Enemy
     {
         [SerializeField] private int testingGetDamage = 20;//Esto hay que sacarlo, es solo con motivos de testeo;
-        Color defaultColor = default;
-        Material material = null;
+        //Color defaultColor = default;
+        //Material material = null;
 
         public void Initialize(int HP, int BasicAtk, int PowerAtk, int powerAttackChance,float basicAtkCD,  float powerAtkCD, float attackRadius, float stunTimeInms, int Speed, float hurtTime)
         {
@@ -40,8 +40,8 @@ namespace TOM.Enemy
         private void Awake()
         {
             EntityReset();
-            material = GetComponent<MeshRenderer>().material;
-            defaultColor = material.color;
+            //material = GetComponent<MeshRenderer>().material;
+            //defaultColor = material.color;
         }
         public override void Attack(Entity otherEntity)
         {
@@ -117,13 +117,13 @@ namespace TOM.Enemy
         IEnumerator RecieveDamage(float hurtTime)
         {
             float t = 0;
-            material.color = Color.green;
+            //material.color = Color.green;
             while (t < hurtTime)
             {
                 t += Time.deltaTime;
                 yield return null;
             }
-            material.color = defaultColor;
+            //material.color = defaultColor;
         }
         //private void OnCollisionEnter(Collision collision)
         //{

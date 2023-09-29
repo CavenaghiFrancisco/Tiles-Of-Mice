@@ -12,11 +12,11 @@ namespace TOM
 
         public System.Action<Entity> OnEnemyHit = null;
 
-        public bool CanAttack => !boxCollider.enabled;
-
         public System.Action<bool> OnAttack;
 
         List<TOM.Enemy.Enemy> hittedEnemyList = new List<Enemy.Enemy>();
+
+        public bool CanAttack { get => !boxCollider.enabled; set => boxCollider.enabled = value; }
 
         private void Awake()
         {
