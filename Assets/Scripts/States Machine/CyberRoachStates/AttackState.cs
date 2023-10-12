@@ -49,7 +49,7 @@ namespace TOM.Enemy.CR
         public override void SetParameters(StateParameters parameters)
         {
             wasPoweredAttack = false;
-            target = parameters.Parameters[0] as Player;
+            target = parameters.Parameters[0] as Player; 
             enemyType = parameters.Parameters[2] as Type;
             enemy = Convert.ChangeType(parameters.Parameters[1], enemyType) as Enemy;
         }

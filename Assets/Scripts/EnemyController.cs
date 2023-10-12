@@ -14,7 +14,7 @@ namespace TOM.Enemy
         //[SerializeField] private GameObject SVPrefab = null;
         //[SerializeField] private GameObject GregPrefab = null;
 
-        [SerializeField] private List<LevelParameters> levelList = new List<LevelParameters>();
+        //[SerializeField] private List<LevelParameters> levelList = new List<LevelParameters>();
 
         private int actualLevelID = 0;
         private int maxCRCount = 0;
@@ -32,17 +32,18 @@ namespace TOM.Enemy
 
         private void Awake()
         {
-            maxCRCount = levelList.OrderByDescending(item => item.CyberRoackCount).First().CyberRoackCount;//Cantidad de CR
-            maxSVCount = levelList.OrderByDescending(item => item.SV23Count).First().SV23Count;//Cantidad de SV
-            levelList = levelList.OrderBy(x => x.levelID).ToList();//Ordeno la lista por IDs
+            //maxCRCount = levelList.OrderByDescending(item => item.CyberRoackCount).First().CyberRoackCount;//Cantidad de CR
+            //maxSVCount = levelList.OrderByDescending(item => item.SV23Count).First().SV23Count;//Cantidad de SV
+            //levelList = levelList.OrderBy(x => x.levelID).ToList();//Ordeno la lista por IDs
 
             CreateFolders();
             CreateEnemies();
             
         }
 
-        public void TurnOnLevel(int levelId)
+        public void TurnOnLevel(WaveParameters actualWave)
         {
+            /*
             if (levelList[levelId].CyberRoackCount>0)
             {
                 for (int i = 0; i < levelList[levelId].CyberRoackCount; i++)
@@ -52,6 +53,7 @@ namespace TOM.Enemy
                 }
                 OnAllEnemiesCreated?.Invoke();
             }
+            */
         }
         private void CreateFolders()
         {

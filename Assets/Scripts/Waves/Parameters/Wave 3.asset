@@ -9,13 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4743c2b71cf434a488d9b6eb97a3aacb, type: 3}
-  m_Name: Nivel 1
+  m_Script: {fileID: 11500000, guid: 99a087455f1f3a94e824e45926d4ff90, type: 3}
+  m_Name: Wave 3
   m_EditorClassIdentifier: 
-  levelID: 0
-  CRParams: {fileID: 0}
-  CyberRoackCount: 0
-  SVParams: {fileID: 0}
-  SV23Count: 0
-  GregParams: {fileID: 0}
-  spawnGregorio: 0
+  waveID: 3
+  waveThreshold: 1
+  waveLevel: 1
+  enemyAmount: 3
+  enemyDelay: 1

@@ -2,8 +2,8 @@ using UnityEngine;
 
 namespace TOM.Enemy
 {
-    [CreateAssetMenu(fileName = "Enemy Template", menuName = "Entities/Enemy")]
-    public class EnemyParameters : ScriptableObject
+    [CreateAssetMenu(fileName = "Enemy Basic Parameters", menuName = "Entities/Enemy Basic Parameters")]
+    public class EnemyBasicParameters : ScriptableObject
     {
         public int healthPoints;
         public int basicAttack;

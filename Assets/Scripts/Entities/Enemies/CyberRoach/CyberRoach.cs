@@ -25,7 +25,7 @@ namespace TOM.Enemy
             this.hurtTime = hurtTime;
             isAlive = true;
         }
-        public void Initialize(EnemyParameters param) => Initialize
+        public void Initialize(EnemyBasicParameters param) => Initialize
         (
             param.healthPoints,
             param.basicAttack, param.powerAttack,
