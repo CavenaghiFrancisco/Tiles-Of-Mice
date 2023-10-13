@@ -27,7 +27,6 @@ namespace TOM
 
         private Controls controls;
         private Movement movement;
-        private Animator animator;
 
         private bool isAttacking;
         private Vector3 originalPosition;

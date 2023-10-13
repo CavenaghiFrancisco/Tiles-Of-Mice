@@ -980,7 +980,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1875234050}
-  CRPrefab: {fileID: 3758536090306417834, guid: b2c4aed84d641de47b19cdedb6962b2a, type: 3}
+  CRPrefab: {fileID: 771391038792114883, guid: 0aec57e8674c01c47a024e5aa4084de4, type: 3}
   levelList:
   - {fileID: 11400000, guid: 361cf354b1e7e3142b6bf1157285fe47, type: 2}
 --- !u!4 &1205624358

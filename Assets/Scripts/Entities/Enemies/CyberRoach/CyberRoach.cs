@@ -24,6 +24,7 @@ namespace TOM.Enemy
             moveSpeed = Speed;
             this.hurtTime = hurtTime;
             isAlive = true;
+            animator = GetComponent<Animator>();
         }
         public void Initialize(EnemyParameters param) => Initialize
         (
@@ -56,8 +57,7 @@ namespace TOM.Enemy
             if (isAlive)
             {
                 hp = 0;
-                //animacion de muerte
-                //sfx de muerte
+                animator.SetTrigger("Death");
                 Debug.Log("Un CyberRoach ha muerto!");
                 OnDeath?.Invoke();
                 gameObject.SetActive(false); //Hacer esto al final de la animacion de muerte
@@ -91,7 +91,7 @@ namespace TOM.Enemy
         private int BasicHit()
         {
             Debug.Log(name + " hace un Basic Hit");
-            //Animación de ataque básico
+            animator.SetTrigger("Attack");
             //Sfx del ataque básico
             return basicAtk;
         }
