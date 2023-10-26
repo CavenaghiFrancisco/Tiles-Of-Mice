@@ -7,14 +7,14 @@ namespace TOM
     {
         //ID interno  Enemy Threshold Enemy Level Enemy Quantity  Enemy Delay
         [Header("Wave ID")]
-        public float waveID;
+        public int waveID;
         [Header("Enemy Threshold")]
-        public float waveThreshold;
+        public int waveThreshold;
         [Header("Enemy Level")]
-        public float waveLevel;
+        public int waveLevel;
         [Header("Enemy Quantity")]
-        public float enemyAmount; // Si agregamos otro enemigo vamos a tener que cambiar esto.
-        [Header("Enemy Delay")]
+        public int enemyAmount; // Si agregamos otro enemigo vamos a tener que cambiar esto.
+        [Header("Enemy Delay (Seconds)")]
         public float enemyDelay;
     }
 }

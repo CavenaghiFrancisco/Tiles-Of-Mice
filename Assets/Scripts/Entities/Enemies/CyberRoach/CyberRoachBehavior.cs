@@ -14,6 +14,7 @@ namespace TOM.Enemy.CR
         Hurting,                    // Is being attacked
         WaitingForBasicAttack,      // Waiting for basic CoolDown
         WaitingForPowerAttack,      // Waiting for power CoolDown
+        Walking,
         Dying,                      // Is starting its death
         Dead                        // Is Death
     }
@@ -21,6 +22,7 @@ namespace TOM.Enemy.CR
     internal enum Flags
     {
         OnEveryEnemySpawned,        // Reach the max number of enemies
+        OnArenaArrived,             // Reach the arena after spawning
         OnReachedTarget,            // Reach the target position
         OnBasicAttack,              // Has attacked
         OnPowerAttack,              // Has attacked
@@ -40,6 +42,8 @@ namespace TOM.Enemy.CR
 
         private Rigidbody rb;
 
+        private static Vector3 arenaCenter;
+
         //private System.Action OnTimerEnd;
 
         private bool isAlreadyWaiting = false;
@@ -51,20 +55,21 @@ namespace TOM.Enemy.CR
         [field: SerializeField] private States state { set; get; } //Esta magia negra no se lo que hace, preguntar a fede
 
         StateParameters pursuitParameters;
+        StateParameters walkingParameters;
         StateParameters attackParameters;
         StateParameters hurtParameters;
         StateParameters waitForBasicParameters;
         StateParameters waitForPowerParameters;
         StateParameters dyingParameters;
 
-        private void Awake()
+        private void SetUp()
         {
             rb = GetComponent<Rigidbody>();
             cyberRoach = gameObject.GetComponent<CyberRoach>();
-            fsm = cyberRoach.GetFSM();
             isTargetAlive = target.GetComponent<Player>().IsAlive();
 
             pursuitParameters = new StateParameters();
+            walkingParameters = new StateParameters();
             attackParameters = new StateParameters();
             hurtParameters = new StateParameters();
             waitForBasicParameters = new StateParameters();
@@ -73,8 +78,13 @@ namespace TOM.Enemy.CR
 
             fsm = new FSM(Enum.GetValues(typeof(States)).Length, Enum.GetValues(typeof(Flags)).Length);
 
+            fsm.SetRelation((int)States.Spawning, (int)Flags.OnArenaArrived, (int)States.Walking);
+            walkingParameters.Parameters = new object[3] { rb, arenaCenter, cyberRoach.GetMovementSpeed()};
+            fsm.AddState<WalkingState>((int)States.Walking, walkingParameters);
 
-            fsm.SetRelation((int)States.Spawning, (int)Flags.OnEveryEnemySpawned, (int)States.Pursuit);
+
+
+            fsm.SetRelation((int)States.Walking, (int)Flags.OnEveryEnemySpawned, (int)States.Pursuit);
             pursuitParameters.Parameters = new object[5] { rb, target.transform, cyberRoach.GetMovementSpeed(), cyberRoach.GetAttackRadius(), isTargetAlive };
             fsm.AddState<PursuitState>((int)States.Pursuit, pursuitParameters);
 
@@ -121,17 +131,21 @@ namespace TOM.Enemy.CR
         private void FixedUpdate()
         {
             fsm.Update();
-            //state = (States)(fsm.currentStateIndex); 
         }
         private void CyberRoachSuccessfulySpawned()
         {
             fsm?.SetFlag((int)Flags.OnEveryEnemySpawned);
         }
 
+        public static void SetArenaCenter(Vector3 newCenter)
+        {
+            arenaCenter = newCenter;
+        }
+
         public void Initialize(GameObject target)
         {
             this.target = target;
-            Awake();
+            SetUp();
             EnemyController.OnAllEnemiesCreated += CyberRoachSuccessfulySpawned;
         }
 

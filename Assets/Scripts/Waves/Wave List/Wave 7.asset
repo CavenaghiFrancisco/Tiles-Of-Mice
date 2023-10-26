@@ -9,10 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5b4cda00f28cd8443a21db40cfffe384, type: 3}
-  m_Name: Enemy Grow Parameters
+  m_Script: {fileID: 11500000, guid: 99a087455f1f3a94e824e45926d4ff90, type: 3}
+  m_Name: Wave 7
   m_EditorClassIdentifier: 
-  growingHealthPoints: 5
-  growingBasicAttack: 2
-  growingPowerAttack: 2
-  growingMovementSpeed: 0.1
+  waveID: 7
+  waveThreshold: 0
+  waveLevel: 2
+  enemyAmount: 8
+  enemyDelay: 1

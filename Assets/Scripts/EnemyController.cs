@@ -10,7 +10,9 @@ namespace TOM.Enemy
     {
         [SerializeField] private GameObject player = null;
 
-        [SerializeField] private GameObject CRPrefab = null;
+        [SerializeField] private EnemySpecs enemySpecifications = null;
+
+        [SerializeField] private Vector3 arenaCenter = Vector3.zero;
         //[SerializeField] private GameObject SVPrefab = null;
         //[SerializeField] private GameObject GregPrefab = null;
 
@@ -19,6 +21,10 @@ namespace TOM.Enemy
         private int actualLevelID = 0;
         private int maxCRCount = 0;
         private int maxSVCount = 0;
+
+        private int enemyThreshold = 0;
+        private int enemySpawnAmount = 0;
+        private int killedEnemies = 0;
 
         private Transform CRFolder;
         private Transform SVFolder;
@@ -29,6 +35,7 @@ namespace TOM.Enemy
         //private List<CyberRoach> CyberRoachList = new List<CyberRoach>();
 
         public static System.Action OnAllEnemiesCreated;
+        public System.Action OnEnemyThreshold;
 
         private void Awake()
         {
@@ -36,24 +43,27 @@ namespace TOM.Enemy
             //maxSVCount = levelList.OrderByDescending(item => item.SV23Count).First().SV23Count;//Cantidad de SV
             //levelList = levelList.OrderBy(x => x.levelID).ToList();//Ordeno la lista por IDs
 
+            CyberRoachBehavior.SetArenaCenter(arenaCenter);//Setteo el centro de la arena al cual las cyberroachs van a ir cuando spawneen.
+
             CreateFolders();
-            CreateEnemies();
-            
+
         }
 
-        public void TurnOnLevel(WaveParameters actualWave)
+        private void OnDestroy()
         {
-            /*
-            if (levelList[levelId].CyberRoackCount>0)
+            foreach (CyberRoach cr in CyberRoachList)
             {
-                for (int i = 0; i < levelList[levelId].CyberRoackCount; i++)
-                {
-                    CyberRoachList[i].Initialize(levelList[levelId].CRParams);
-                    CyberRoachList[i].gameObject.SetActive(true);
-                }
-                OnAllEnemiesCreated?.Invoke();
+                cr.OnDeath -= EnemyKillCounter;
             }
-            */
+        }
+
+
+        public void TurnOnEnemiesOnLevel(int waveLevel, int amount, float delay, int threshold)
+        {
+            enemySpawnAmount = amount;
+            enemyThreshold = threshold;
+            killedEnemies = 0;
+            CreateEnemies(waveLevel, amount, delay);
         }
         private void CreateFolders()
         {
@@ -66,30 +76,73 @@ namespace TOM.Enemy
             SVFolder = auxGo.transform;
         }
 
-        private void CreateEnemies()
+        private void CreateEnemies(int waveLevel, int crAmount, float delayInSeconds)
         {
-            CreateCyberRoachs();
-            CreateSV23();
+            StartCoroutine(CreateCyberRoachs(waveLevel, crAmount, delayInSeconds));
         }
 
-        private void CreateCyberRoachs()
+        private IEnumerator CreateCyberRoachs(int waveLevel, int amount, float delayInSeconds)
         {
-            for (int i = 0; i < maxCRCount; i++)
+            int alreadyCreated = 0; //Guardo la cantidad que se crearon por si necesito crear mas a medida de que se necesitan
+
+            if (CyberRoachList.Count>0)
             {
-                GameObject aux = Instantiate(CRPrefab, CRFolder);
-                aux.SetActive(false);
-                aux.AddComponent<CyberRoach>();
-                aux.AddComponent<CyberRoachBehavior>();
-                
-                CyberRoachList.Add(aux.GetComponent<CyberRoach>());
-                CyberRoachBehaviorList.Add(aux.GetComponent<CyberRoachBehavior>());
-                CyberRoachBehaviorList[i].Initialize(player);
-
+                for (int i = 0; i < CyberRoachList.Count; i++)
+                {
+                    if (!CyberRoachList[i].gameObject.activeInHierarchy)
+                    {
+                        CyberRoachList[i].gameObject.SetActive(true);
+                        CyberRoachList[i].Grow(waveLevel);
+                        CyberRoachList[i].OnDeath += EnemyKillCounter;
+                        alreadyCreated++;
+                        yield return new WaitForSeconds(delayInSeconds);
+                    }
+                }
             }
+
+            for (int i = alreadyCreated; i < amount; i++)
+            {
+                GameObject aux = Instantiate(enemySpecifications.CRPrefab, CRFolder);
+                aux.SetActive(true);
+
+                CyberRoach a = aux.AddComponent<CyberRoach>();
+                CyberRoachBehavior b = aux.AddComponent<CyberRoachBehavior>();
+
+                CyberRoachList.Add(a);
+
+                a.gameObject.SetActive(true);
+                a.Initialize(enemySpecifications.CRBasicParams, enemySpecifications.CRGrowParams);
+                a.Grow(waveLevel);
+                a.OnDeath += EnemyKillCounter;
+
+                CyberRoachBehaviorList.Add(b);
+                b.Initialize(player);
+                alreadyCreated++;
+                yield return new WaitForSeconds(delayInSeconds);
+            }
+
         }
-        private void CreateSV23()
+
+        private void CreateSV23(int wave, int amount)
         {
             /*Si es que hay, lo dejo para despues*/
+        }
+
+        public void KillEnemies()
+        {
+            foreach (CyberRoach enemy in CyberRoachList)
+            {
+                enemy.Die();
+            }
+        }
+
+        private void EnemyKillCounter()
+        {
+            killedEnemies++;
+            if (killedEnemies == enemySpawnAmount - enemyThreshold)
+            {
+                OnEnemyThreshold();
+            }
         }
 
     }

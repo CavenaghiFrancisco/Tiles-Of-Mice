@@ -123,7 +123,7 @@ namespace TOM
         {
             hp = 100;
             maxHP = 100;
-            basicAtk = 10;
+            basicAtk = 100;
             powerAtk = 25;
             hurtTime = 1f;
             isAlive = true;

@@ -13,7 +13,7 @@ namespace TOM
         protected bool isAlive;
         protected float hurtTime;
 
-        protected System.Action OnDeath;
+        public System.Action OnDeath;
         public abstract void GetDamage(int damage);
         public abstract void Die();
         public abstract void Attack(Entity otherEntity);

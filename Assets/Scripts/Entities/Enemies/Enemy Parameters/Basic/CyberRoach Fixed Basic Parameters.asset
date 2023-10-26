@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d3917cd0cc24e5b4296cb788ee06108a, type: 3}
-  m_Name: CyberRoachNerfed
+  m_Name: CyberRoach Fixed Basic Parameters
   m_EditorClassIdentifier: 
   healthPoints: 75
   basicAttack: 15
