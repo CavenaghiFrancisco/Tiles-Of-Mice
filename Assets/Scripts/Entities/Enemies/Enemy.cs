@@ -19,5 +19,7 @@ namespace TOM.Enemy
         public FSM GetFSM() => fsm;
         public float GetAttackRadius() => attackRadius;
         public float GetStunTime() => stunTimeInms;
+
+        public abstract void Grow(int wave);
     }
 }

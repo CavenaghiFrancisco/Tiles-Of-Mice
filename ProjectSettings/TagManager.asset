@@ -16,9 +16,9 @@ TagManager:
   - UI
   - Death Zone
   - Enemies
-  - 
-  - 
-  - 
+  - EnemyInside
+  - EnemyOutside
+  - Door
   - 
   - 
   - 

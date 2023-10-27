@@ -15,7 +15,7 @@ namespace TOM
         protected Animator animator;
 
 
-        protected System.Action OnDeath;
+        public System.Action OnDeath;
         public abstract void GetDamage(int damage);
         public abstract void Die();
         public abstract void Attack(Entity otherEntity);

@@ -54,7 +54,7 @@ namespace TOM
 
         private void OnTriggerEnter(Collider other)
         {
-            if (other.tag == "Enemy")
+            if (other.CompareTag("Enemy"))
             {
 
                 TOM.Enemy.Enemy hittedEnemy = other.gameObject.GetComponent<TOM.Enemy.Enemy>();

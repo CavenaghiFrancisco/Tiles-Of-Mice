@@ -7,42 +7,34 @@ namespace TOM.Enemy
     public class CyberRoach : Enemy
     {
         [SerializeField] private int testingGetDamage = 20;//Esto hay que sacarlo, es solo con motivos de testeo;
-        //Color defaultColor = default;
-        //Material material = null;
 
-        public void Initialize(int HP, int BasicAtk, int PowerAtk, int powerAttackChance,float basicAtkCD,  float powerAtkCD, float attackRadius, float stunTimeInms, int Speed, float hurtTime)
+        private EnemyGrowParameters selfGrowParameters = null;
+        private EnemyBasicParameters selfBasicParameters = null;
+
+        public void Initialize(EnemyBasicParameters basicParameters, EnemyGrowParameters growParameters)
         {
-            hp = HP;
+            hp = basicParameters.healthPoints;
             type = EnemyType.Normal;
-            basicAtk = BasicAtk;
-            powerAtk = PowerAtk;
-            basicHitCD = basicAtkCD;
-            powerHitCD = powerAtkCD;
-            powerHitChance = powerAttackChance;
+            basicAtk = basicParameters.basicAttack;
+            powerAtk = basicParameters.powerAttack;
+            basicHitCD = basicParameters.basicAttackCoolDown;
+            powerHitCD = basicParameters.powerAttackCoolDown;
+            powerHitChance = basicParameters.powerAttackChance;
             this.stunTimeInms = stunTimeInms;
             this.attackRadius = attackRadius;
-            moveSpeed = Speed;
+            moveSpeed = basicParameters.movementSpeed;
             this.hurtTime = hurtTime;
             isAlive = true;
             animator = GetComponent<Animator>();
+
+            selfBasicParameters = basicParameters;
+            selfGrowParameters = growParameters;
+
         }
-        public void Initialize(EnemyParameters param) => Initialize
-        (
-            param.healthPoints,
-            param.basicAttack, param.powerAttack,
-            param.powerAttackChance,
-            param.basicAttackCoolDown, param.powerAttackCoolDown,
-            param.attackRadius,
-            param.stunTimeInms,
-            param.movementSpeed,
-            param.hurtTime
-        );
 
         private void Awake()
         {
             EntityReset();
-            //material = GetComponent<MeshRenderer>().material;
-            //defaultColor = material.color;
         }
         public override void Attack(Entity otherEntity)
         {
@@ -72,7 +64,7 @@ namespace TOM.Enemy
                 if (hp <= 0)
                 {
                     Die();
-                    //Animación de recibir damage
+                    //Animaciï¿½n de recibir damage
                     //sfx de recibir damage
                 }
                 else
@@ -86,19 +78,20 @@ namespace TOM.Enemy
 
         protected override void EntityReset()
         {
+
         }
 
         private int BasicHit()
         {
             Debug.Log(name + " hace un Basic Hit");
             animator.SetTrigger("Attack");
-            //Sfx del ataque básico
+            //Sfx del ataque bï¿½sico
             return basicAtk;
         }
         private int PowerHit()
         {
             Debug.Log(name + " hace un Power Hit");
-            //Animación de ataque pesado
+            //Animaciï¿½n de ataque pesado
             //Sfx del ataque pesado
             return powerAtk;//TBD
         }
@@ -117,21 +110,21 @@ namespace TOM.Enemy
         IEnumerator RecieveDamage(float hurtTime)
         {
             float t = 0;
-            //material.color = Color.green;
             while (t < hurtTime)
             {
                 t += Time.deltaTime;
                 yield return null;
             }
-            //material.color = defaultColor;
         }
-        //private void OnCollisionEnter(Collision collision)
-        //{
-        //    if(collision.collider.tag=="Player")
-        //    {
-        //        GetDamage(testingGetDamage);
-        //    }
-        //}
+
+        public override void Grow(int waveLevel)
+        {   //Agrega los valores necesarios a la vida, ataques y movimiento dependiendo de la wave
+            hp = selfBasicParameters.healthPoints + (int)(waveLevel * selfGrowParameters.growingHealthPoints);
+            moveSpeed = selfBasicParameters.movementSpeed + (int)(waveLevel * selfGrowParameters.growingMovementSpeed);
+            basicAtk = selfBasicParameters.basicAttack + (int)(waveLevel * selfGrowParameters.growingBasicAttack);
+            powerAtk = selfBasicParameters.powerAttack + (int)(waveLevel * selfGrowParameters.growingPowerAttack);
+            isAlive = true;
+        }
     }
 
 }

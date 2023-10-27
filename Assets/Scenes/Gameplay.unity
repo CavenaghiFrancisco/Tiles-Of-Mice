@@ -666,7 +666,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyController: {fileID: 1205624357}
-  levelToPlay: 0
+  parameters: {fileID: 11400000, guid: 361cf354b1e7e3142b6bf1157285fe47, type: 2}
+  startingWave: 0
 --- !u!4 &482898534
 Transform:
   m_ObjectHideFlags: 0
@@ -686,6 +687,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6641364465699262269, guid: 8ec67acc160267c4ca2ce97b7ad0627b, type: 3}
   m_PrefabInstance: {fileID: 798866139}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &797345589 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4822249857582633748, guid: 8ec67acc160267c4ca2ce97b7ad0627b, type: 3}
+  m_PrefabInstance: {fileID: 798866139}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &798866139
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -693,6 +699,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2047440207631709438, guid: 8ec67acc160267c4ca2ce97b7ad0627b, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 5049920242864180268, guid: 8ec67acc160267c4ca2ce97b7ad0627b, type: 3}
       propertyPath: m_Name
       value: Arena
@@ -980,9 +990,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1875234050}
-  CRPrefab: {fileID: 771391038792114883, guid: 0aec57e8674c01c47a024e5aa4084de4, type: 3}
-  levelList:
-  - {fileID: 11400000, guid: 361cf354b1e7e3142b6bf1157285fe47, type: 2}
+  enemySpecifications: {fileID: 11400000, guid: 1e2baf7586ae9a84d8483054314d8a1d, type: 2}
+  arenaCenter: {fileID: 797345589}
+  spawnTransform: {fileID: 1416027297}
 --- !u!4 &1205624358
 Transform:
   m_ObjectHideFlags: 0
@@ -1090,6 +1100,11 @@ Light:
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+--- !u!4 &1416027297 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5973281313350436402, guid: 8ec67acc160267c4ca2ce97b7ad0627b, type: 3}
+  m_PrefabInstance: {fileID: 798866139}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1668113308 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7115950860281570387, guid: 8ec67acc160267c4ca2ce97b7ad0627b, type: 3}
