@@ -15,5 +15,5 @@ MonoBehaviour:
   waveID: 7
   waveThreshold: 0
   waveLevel: 2
-  enemyAmount: 8
+  enemyAmount: 6
   enemyDelay: 1

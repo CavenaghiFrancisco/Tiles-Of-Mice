@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Configuration.Assemblies;
 using UnityEngine;
 using System.Linq;
 using TOM.Enemy.CR;
@@ -12,11 +13,9 @@ namespace TOM.Enemy
 
         [SerializeField] private EnemySpecs enemySpecifications = null;
 
-        [SerializeField] private Vector3 arenaCenter = Vector3.zero;
-        //[SerializeField] private GameObject SVPrefab = null;
-        //[SerializeField] private GameObject GregPrefab = null;
+        [SerializeField] private Transform arenaCenter = null;
 
-        //[SerializeField] private List<LevelParameters> levelList = new List<LevelParameters>();
+        [SerializeField] private Transform spawnTransform = null;
 
         private int actualLevelID = 0;
         private int maxCRCount = 0;
@@ -25,6 +24,8 @@ namespace TOM.Enemy
         private int enemyThreshold = 0;
         private int enemySpawnAmount = 0;
         private int killedEnemies = 0;
+
+        private int createdEnemies = 1;
 
         private Transform CRFolder;
         private Transform SVFolder;
@@ -43,7 +44,7 @@ namespace TOM.Enemy
             //maxSVCount = levelList.OrderByDescending(item => item.SV23Count).First().SV23Count;//Cantidad de SV
             //levelList = levelList.OrderBy(x => x.levelID).ToList();//Ordeno la lista por IDs
 
-            CyberRoachBehavior.SetArenaCenter(arenaCenter);//Setteo el centro de la arena al cual las cyberroachs van a ir cuando spawneen.
+            CyberRoachBehavior.SetArenaCenter(arenaCenter.position);//Setteo el centro de la arena al cual las cyberroachs van a ir cuando spawneen.
 
             CreateFolders();
 
@@ -58,17 +59,18 @@ namespace TOM.Enemy
         }
 
 
-        public void TurnOnEnemiesOnLevel(int waveLevel, int amount, float delay, int threshold)
+        public void TurnOnEnemiesOnLevel(int enemyLevel, int amount, float delay, int threshold)
         {
             enemySpawnAmount = amount;
             enemyThreshold = threshold;
             killedEnemies = 0;
-            CreateEnemies(waveLevel, amount, delay);
+            CreateEnemies(enemyLevel, amount, delay);
         }
         private void CreateFolders()
         {
             GameObject auxGo = new GameObject("CyberRoach List");
             auxGo.transform.SetParent(this.transform);
+            auxGo.transform.position = spawnTransform.position;
             CRFolder = auxGo.transform;
 
             auxGo = new GameObject("SV-23 List");
@@ -85,15 +87,21 @@ namespace TOM.Enemy
         {
             int alreadyCreated = 0; //Guardo la cantidad que se crearon por si necesito crear mas a medida de que se necesitan
 
-            if (CyberRoachList.Count>0)
+            if (CyberRoachList.Count > 0)
             {
                 for (int i = 0; i < CyberRoachList.Count; i++)
                 {
                     if (!CyberRoachList[i].gameObject.activeInHierarchy)
                     {
-                        CyberRoachList[i].gameObject.SetActive(true);
-                        CyberRoachList[i].Grow(waveLevel);
-                        CyberRoachList[i].OnDeath += EnemyKillCounter;
+                        CyberRoach cr = CyberRoachList[i];
+                        CyberRoachBehavior crb = CyberRoachBehaviorList[i];
+
+                        cr.transform.position = GetRandomPosition(spawnTransform.position);
+                        cr.Grow(waveLevel);
+                        cr.gameObject.SetActive(true);
+
+                        crb.ResetBehaviour();
+
                         alreadyCreated++;
                         yield return new WaitForSeconds(delayInSeconds);
                     }
@@ -103,24 +111,40 @@ namespace TOM.Enemy
             for (int i = alreadyCreated; i < amount; i++)
             {
                 GameObject aux = Instantiate(enemySpecifications.CRPrefab, CRFolder);
+                aux.transform.position = GetRandomPosition(spawnTransform.position);
+                aux.GetComponent<Rigidbody>().position = aux.transform.position;
                 aux.SetActive(true);
+                aux.name = "CR - " + createdEnemies.ToString();
 
-                CyberRoach a = aux.AddComponent<CyberRoach>();
-                CyberRoachBehavior b = aux.AddComponent<CyberRoachBehavior>();
+                CyberRoach cr = aux.AddComponent<CyberRoach>();
+                CyberRoachBehavior crb = aux.AddComponent<CyberRoachBehavior>();
 
-                CyberRoachList.Add(a);
+                CyberRoachList.Add(cr);
+                CyberRoachBehaviorList.Add(crb);
 
-                a.gameObject.SetActive(true);
-                a.Initialize(enemySpecifications.CRBasicParams, enemySpecifications.CRGrowParams);
-                a.Grow(waveLevel);
-                a.OnDeath += EnemyKillCounter;
+                cr.gameObject.SetActive(true);
+                cr.Initialize(enemySpecifications.CRBasicParams, enemySpecifications.CRGrowParams);
+                cr.Grow(waveLevel);
+                cr.OnDeath += EnemyKillCounter;
 
-                CyberRoachBehaviorList.Add(b);
-                b.Initialize(player);
+                crb.Initialize(player);
+
                 alreadyCreated++;
+                createdEnemies++;
                 yield return new WaitForSeconds(delayInSeconds);
             }
 
+            OnAllEnemiesCreated?.Invoke();
+
+        }
+
+        private Vector3 GetRandomPosition(Vector3 center)
+        {
+            Bounds bounds = spawnTransform.GetComponent<BoxCollider>().bounds;
+            Vector3 offset = Vector3.zero;
+            offset.x = Random.Range(-bounds.extents.x, bounds.extents.x);
+            offset.z = Random.Range(-bounds.extents.z, bounds.extents.z);
+            return center + offset;
         }
 
         private void CreateSV23(int wave, int amount)
@@ -139,8 +163,10 @@ namespace TOM.Enemy
         private void EnemyKillCounter()
         {
             killedEnemies++;
+            Debug.Log("Kill Counter: " + killedEnemies + "/" + enemySpawnAmount);
             if (killedEnemies == enemySpawnAmount - enemyThreshold)
             {
+                Debug.Log("Suficiente para pasar de nivel...");
                 OnEnemyThreshold();
             }
         }

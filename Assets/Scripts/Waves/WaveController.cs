@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace TOM
 {
-    
+
     public class WaveController : MonoBehaviour
     {
         [SerializeField] private Enemy.EnemyController enemyController = null;
@@ -10,17 +10,17 @@ namespace TOM
 
         [SerializeField] private int startingWave = 0;
 
-        private WaveParameters actualWave;
-        private WaveParameters nextWave;
+        private WaveParameters actualWave;//Muestra la proxima wave
+        private WaveParameters nextWave;//Muestra la que va a remplazar a la proxima wave
 
-        private int actualWaveID = 0;
         private int differentWaveCount = 0;
         private int rotations = 0;
+        private int waveCount = 0;
 
         private void Awake()
         {
-            actualWaveID = startingWave;
-            actualWave = parameters.waveList[actualWaveID];
+            actualWave = parameters.waveList[startingWave];
+            nextWave = parameters.waveList[startingWave + 1];
             enemyController.OnEnemyThreshold += SetNextWave;
         }
 
@@ -36,15 +36,16 @@ namespace TOM
             SetNextWave();
         }
 
-        private void StartWave()
+        private void StartWave(WaveParameters wave)
         {
             enemyController.TurnOnEnemiesOnLevel
             (
-                actualWave.waveLevel + parameters.levelAugmentAmount * rotations,
-                actualWave.enemyAmount, 
-                actualWave.enemyDelay, 
-                actualWave.waveThreshold
+                wave.waveLevel + parameters.levelAugmentAmount * (rotations-1),
+                wave.enemyAmount,
+                wave.enemyDelay,
+                wave.waveThreshold
             );
+            waveCount++;
         }
 
         private void EndWave()
@@ -59,20 +60,19 @@ namespace TOM
         private void ForceWave(int wave)
         {
             enemyController.KillEnemies();
-            actualWaveID = wave;
-            StartWave();
+            StartWave(parameters.waveList[wave % differentWaveCount]);
         }
 
         private void SetNextWave()
         {
             EndWave();
-            actualWaveID++;
-            if (actualWaveID % differentWaveCount == 0)
+            if (actualWave.waveID == 1)
             {
                 rotations++;
             }
-            actualWave = parameters.waveList[actualWaveID % differentWaveCount];
-            StartWave();
+            StartWave(actualWave);
+            actualWave = nextWave;
+            nextWave = parameters.waveList[actualWave.waveID % differentWaveCount];
         }
 
 
