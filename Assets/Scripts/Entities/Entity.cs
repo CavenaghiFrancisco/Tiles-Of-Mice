@@ -12,6 +12,8 @@ namespace TOM
         protected float powerHitCD;
         protected bool isAlive;
         protected float hurtTime;
+        protected Animator animator;
+
 
         public System.Action OnDeath;
         public abstract void GetDamage(int damage);
