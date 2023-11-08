@@ -168,6 +168,7 @@ namespace TOM.Enemy
             {
                 Debug.Log("Suficiente para pasar de nivel...");
                 OnEnemyThreshold();
+                //FameManager
             }
         }
 

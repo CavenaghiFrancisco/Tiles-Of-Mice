@@ -50,7 +50,7 @@ namespace TOM.Enemy
             {
                 hp = 0;
                 animator.SetTrigger("Death");
-                Debug.Log("Un CyberRoach ha muerto!");
+                //Debug.Log("Un CyberRoach ha muerto!");
                 OnDeath?.Invoke();
                 gameObject.SetActive(false); //Hacer esto al final de la animacion de muerte
             }

@@ -137,8 +137,8 @@ namespace TOM.Enemy.CR
         private void FixedUpdate()
         {
             fsm.Update(); 
-            Debug.Log("Estado actual de " + rb.gameObject.name + " es " + ((States)fsm.currentStateIndex).ToString());
-            Debug.Log("Posicion actual de " + rb.gameObject.name + " es " + transform.position);
+            //Debug.Log("Estado actual de " + rb.gameObject.name + " es " + ((States)fsm.currentStateIndex).ToString());
+            //Debug.Log("Posicion actual de " + rb.gameObject.name + " es " + transform.position);
         }
 
         //private void Update()
