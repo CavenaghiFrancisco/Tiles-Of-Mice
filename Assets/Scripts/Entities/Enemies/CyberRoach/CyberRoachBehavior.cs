@@ -64,6 +64,10 @@ namespace TOM.Enemy.CR
         StateParameters waitForPowerParameters;
         StateParameters dyingParameters;
 
+        private void Awake()
+        {
+            fsm = new FSM(Enum.GetValues(typeof(States)).Length, Enum.GetValues(typeof(Flags)).Length);
+        }
         private void SetUp()
         {
             rb = GetComponent<Rigidbody>();
@@ -80,8 +84,7 @@ namespace TOM.Enemy.CR
             waitForPowerParameters = new StateParameters();
             dyingParameters = new StateParameters();
 
-            fsm = new FSM(Enum.GetValues(typeof(States)).Length, Enum.GetValues(typeof(Flags)).Length);
-
+            
             fsm.SetRelation((int)States.Spawning, (int)Flags.OnEveryEnemySpawned, (int)States.Walking);
             walkingParameters.Parameters = new object[3] { rb, arenaCenter, cyberRoach.GetMovementSpeed() };
             walkingEnterParam.Parameters = new object[1] { this.gameObject };

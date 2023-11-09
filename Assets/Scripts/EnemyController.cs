@@ -4,6 +4,7 @@ using System.Configuration.Assemblies;
 using UnityEngine;
 using System.Linq;
 using TOM.Enemy.CR;
+using TOM.Utilities;
 
 namespace TOM.Enemy
 {
@@ -38,6 +39,8 @@ namespace TOM.Enemy
         public static System.Action OnAllEnemiesCreated;
         public System.Action OnEnemyThreshold;
 
+        private ObjectPool<GameObject> crPool;
+
         private void Awake()
         {
             //maxCRCount = levelList.OrderByDescending(item => item.CyberRoackCount).First().CyberRoackCount;//Cantidad de CR
@@ -45,6 +48,8 @@ namespace TOM.Enemy
             //levelList = levelList.OrderBy(x => x.levelID).ToList();//Ordeno la lista por IDs
 
             CyberRoachBehavior.SetArenaCenter(arenaCenter.position);//Setteo el centro de la arena al cual las cyberroachs van a ir cuando spawneen.
+
+            crPool = new ObjectPool<GameObject>(enemySpecifications.CRPrefab);
 
             CreateFolders();
 
@@ -83,59 +88,63 @@ namespace TOM.Enemy
             StartCoroutine(CreateCyberRoachs(waveLevel, crAmount, delayInSeconds));
         }
 
-        private IEnumerator CreateCyberRoachs(int waveLevel, int amount, float delayInSeconds)
+        private void EnableCyberRoach(int waveLevel)
         {
-            int alreadyCreated = 0; //Guardo la cantidad que se crearon por si necesito crear mas a medida de que se necesitan
+            GameObject thisCR = crPool.GetAbleObject();
 
-            if (CyberRoachList.Count > 0)
+            CyberRoach cr;
+            CyberRoachBehavior crb;
+
+            if (thisCR.name.Length == 4)
             {
-                for (int i = 0; i < CyberRoachList.Count; i++)
-                {
-                    if (!CyberRoachList[i].gameObject.activeInHierarchy)
-                    {
-                        CyberRoach cr = CyberRoachList[i];
-                        CyberRoachBehavior crb = CyberRoachBehaviorList[i];
+                thisCR = Instantiate(crPool.GetT(), CRFolder);
+                thisCR.name = "CR - " + createdEnemies.ToString();
+                Debug.Log("Cree a "+thisCR.name);
 
-                        cr.transform.position = GetRandomPosition(spawnTransform.position);
-                        cr.Grow(waveLevel);
-                        cr.gameObject.SetActive(true);
-
-                        crb.ResetBehaviour();
-
-                        alreadyCreated++;
-                        yield return new WaitForSeconds(delayInSeconds);
-                    }
-                }
-            }
-
-            for (int i = alreadyCreated; i < amount; i++)
-            {
-                GameObject aux = Instantiate(enemySpecifications.CRPrefab, CRFolder);
-                aux.transform.position = GetRandomPosition(spawnTransform.position);
-                aux.GetComponent<Rigidbody>().position = aux.transform.position;
-                aux.SetActive(true);
-                aux.name = "CR - " + createdEnemies.ToString();
-
-                CyberRoach cr = aux.AddComponent<CyberRoach>();
-                CyberRoachBehavior crb = aux.AddComponent<CyberRoachBehavior>();
+                cr = thisCR.AddComponent<CyberRoach>();
+                crb = thisCR.AddComponent<CyberRoachBehavior>();
 
                 CyberRoachList.Add(cr);
                 CyberRoachBehaviorList.Add(crb);
 
-                cr.gameObject.SetActive(true);
                 cr.Initialize(enemySpecifications.CRBasicParams, enemySpecifications.CRGrowParams);
-                cr.Grow(waveLevel);
                 cr.OnDeath += EnemyKillCounter;
 
                 crb.Initialize(player);
 
-                alreadyCreated++;
                 createdEnemies++;
+            }
+            else
+            {
+                cr = thisCR.GetComponent<CyberRoach>();
+
+                crb = thisCR.GetComponent<CyberRoachBehavior>();
+                crb.ResetBehaviour();
+
+                cr.gameObject.SetActive(true);
+
+                Debug.Log("Actualice a " + thisCR.name);
+            }
+
+            cr.Grow(waveLevel);
+
+            cr.gameObject.transform.position = GetRandomPosition(spawnTransform.position);
+            cr.gameObject.GetComponent<Rigidbody>().position = thisCR.transform.position;
+
+            crPool.UpdateLastGivenObject(thisCR);
+        }
+
+        private IEnumerator CreateCyberRoachs(int waveLevel, int amount, float delayInSeconds)
+        {
+            int createdAmount = 0;
+            while (createdAmount < amount)
+            {
+                EnableCyberRoach(waveLevel);
+                createdAmount++;
                 yield return new WaitForSeconds(delayInSeconds);
             }
 
             OnAllEnemiesCreated?.Invoke();
-
         }
 
         private Vector3 GetRandomPosition(Vector3 center)

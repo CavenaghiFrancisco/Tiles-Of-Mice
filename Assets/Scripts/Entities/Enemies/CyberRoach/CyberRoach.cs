@@ -24,7 +24,7 @@ namespace TOM.Enemy
             this.attackRadius = attackRadius;
             moveSpeed = basicParameters.movementSpeed;
             this.hurtTime = hurtTime;
-            isAlive = true;
+            isAlive = false;
             animator = GetComponent<Animator>();
 
             selfBasicParameters = basicParameters;
@@ -49,6 +49,7 @@ namespace TOM.Enemy
             if (isAlive)
             {
                 hp = 0;
+                isAlive = false;
                 animator.SetTrigger("Death");
                 //Debug.Log("Un CyberRoach ha muerto!");
                 OnDeath?.Invoke();
@@ -119,11 +120,12 @@ namespace TOM.Enemy
 
         public override void Grow(int waveLevel)
         {   //Agrega los valores necesarios a la vida, ataques y movimiento dependiendo de la wave
+            isAlive = true;
+
             hp = selfBasicParameters.healthPoints + (int)(waveLevel * selfGrowParameters.growingHealthPoints);
             moveSpeed = selfBasicParameters.movementSpeed + (int)(waveLevel * selfGrowParameters.growingMovementSpeed);
             basicAtk = selfBasicParameters.basicAttack + (int)(waveLevel * selfGrowParameters.growingBasicAttack);
             powerAtk = selfBasicParameters.powerAttack + (int)(waveLevel * selfGrowParameters.growingPowerAttack);
-            isAlive = true;
         }
     }
 
