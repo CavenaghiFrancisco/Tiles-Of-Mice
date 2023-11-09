@@ -38,6 +38,9 @@ namespace TOM
 
         private void StartWave(WaveParameters wave)
         {
+            //Animacion de inicio de wave
+            //sfx de inicio de wave
+
             enemyController.TurnOnEnemiesOnLevel
             (
                 wave.waveLevel + parameters.levelAugmentAmount * (rotations-1),
@@ -53,8 +56,8 @@ namespace TOM
             //Dar fama
             //FameController.ReceiveExp(actualWaveID);//Estatica para no referenciarlo aca.
             //Posibles cambios:
-            //  - Agregarlo como serializado y llamar el metodo local.
-            //  - Hacer un Action estatico para llamarlo desde el fame controller.
+            // - Agregarlo como serializado y llamar el metodo local.
+            // - Hacer un Action estatico para llamarlo desde el fame controller.
         }
 
         private void ForceWave(int wave)
