@@ -94,7 +94,7 @@ namespace TOM.Enemy
 
             CyberRoach cr;
             CyberRoachBehavior crb;
-
+            
             if (thisCR.name.Length == 4)
             {
                 thisCR = Instantiate(crPool.GetT(), CRFolder);
@@ -131,7 +131,15 @@ namespace TOM.Enemy
             cr.gameObject.transform.position = GetRandomPosition(spawnTransform.position);
             cr.gameObject.GetComponent<Rigidbody>().position = thisCR.transform.position;
 
+            StartCoroutine(WaitFrame(thisCR));
+
             crPool.UpdateLastGivenObject(thisCR);
+        }
+
+        private IEnumerator WaitFrame(GameObject thisCR)
+        {
+            yield return new WaitForEndOfFrame();
+            thisCR.SetActive(true);
         }
 
         private IEnumerator CreateCyberRoachs(int waveLevel, int amount, float delayInSeconds)

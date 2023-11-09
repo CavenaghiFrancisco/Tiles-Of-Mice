@@ -1,8 +1,5 @@
-
 using System.Collections.Generic;
 using TOM.Enemy;
-using UnityEditor;
-using UnityEngine;
 
 namespace TOM.Utilities
 {
@@ -40,6 +37,7 @@ namespace TOM.Utilities
                 {
                     lastObjectIndex = objectList.IndexOf(obj);
                     return obj;
+                    
                 }
             }
 
