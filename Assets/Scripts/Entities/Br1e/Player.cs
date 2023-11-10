@@ -21,6 +21,7 @@ namespace TOM
         [SerializeField] private Material playerMat = null;
         [SerializeField] private Transform attackPosition = null;
         [SerializeField] private AttackArea attackArea = null;
+        [SerializeField] private GameObject attackVFX = null;
 
         [SerializeField] private AnimationClip attack1 = null;
         [SerializeField] private AnimationClip attack2 = null;
@@ -55,7 +56,9 @@ namespace TOM
                     {
                         int aux = UnityEngine.Random.Range(0, 10);
                         animator.Play(aux >= 5 ? attack1.name : attack2.name);
+                        attackVFX.SetActive(true);
                         attackArea.GenerateAttackArea(aux >= 5 ? attack1.length : attack2.length, attackPosition.position);
+                        StartCoroutine(VFXOff(aux >= 5 ? attack1.length : attack2.length));
                     }
                 };
             //Intercambiar el 0.2f por la duracion de la animacion
@@ -130,6 +133,12 @@ namespace TOM
             gameObject.SetActive(true);
             attackArea.CanAttack = false;
             OnLifeModified?.Invoke(hp);
+        }
+
+        private IEnumerator VFXOff(float seconds)
+        {
+            yield return new WaitForSeconds(seconds-0.2f);
+            attackVFX.SetActive(false);
         }
 
         private void GetHurt(float hurtTime)
