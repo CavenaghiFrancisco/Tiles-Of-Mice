@@ -3,18 +3,22 @@ using System.Collections.Generic;
 using TOM;
 using UnityEngine;
 using UnityEngine.UI;
+using Debug = UnityEngine.Debug;
 
 public class FameManager : MonoBehaviour
 {
     [SerializeField] private FameParameters parameters;
     [SerializeField] private GameObject rankStarFolder;
-    [SerializeField] private Slider fameBar;
+    [SerializeField] private Image fameBar;
     public int Fame { private set; get; }
     public int Rank { private set; get; }
 
     private List<Image> starList = new List<Image>();
 
     private int testingWave = 0;
+
+    private int targetFame = 0;
+    private int actualFame = 0;
     private void Awake()
     {
         FillStarList();
@@ -31,10 +35,10 @@ public class FameManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.I))
         {
             Fame += 50;
-            fameBar.value = Fame;
+            SetSliderValue(Fame);
             if (Rank < 10)
             {
-                if (Fame > fameBar.maxValue)
+                if (Fame > targetFame)
                 {
                     RankUp();
                 }
@@ -49,14 +53,14 @@ public class FameManager : MonoBehaviour
     {
         Fame += waveCounter + parameters.fameRotationMultiplier * (int)(waveCounter / 30);
 
-        fameBar.value = Fame;
+        SetSliderValue(Fame);
 
         //Animacion de recibir fama
         //Sonido de recibir fama
 
         if (Rank < 10)
         {
-            if (Fame > fameBar.maxValue)
+            if (Fame > targetFame)
             {
                 RankUp();
             }
@@ -77,7 +81,6 @@ public class FameManager : MonoBehaviour
         foreach (Image star in starList)
         {
             star.gameObject.SetActive(false);
-            fameBar.value = 0;
         }
 
     }
@@ -96,7 +99,7 @@ public class FameManager : MonoBehaviour
     }
     private void SetFameMaxValue()
     {
-        fameBar.maxValue = parameters.fameNeededBase + parameters.fameNeededMultiplier * (Rank + 1);
+        targetFame = parameters.fameNeededBase + parameters.fameNeededMultiplier * (Rank + 1);
     }
 
     private void ResetSystem()
@@ -106,7 +109,21 @@ public class FameManager : MonoBehaviour
         testingWave = 0;
         TurnOffStars();
         SetFameMaxValue();
+        SetSliderValue(0);
+
+        Debug.Log("Reseteo el sistema de Fama!");
     }
 
+    private float GetNormalizedFame(int amount)
+    {
+        float aux = (float)amount / (float)targetFame;
+        Debug.Log("Paso de " + amount + "/" + targetFame + " a " + aux);
+        return aux;
+    }
 
+    private void SetSliderValue(int amount)
+    {
+        fameBar.fillAmount = GetNormalizedFame(amount);
+
+    }
 }

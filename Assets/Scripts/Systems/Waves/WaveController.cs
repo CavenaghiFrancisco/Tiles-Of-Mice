@@ -8,6 +8,8 @@ namespace TOM
         [SerializeField] private Enemy.EnemyController enemyController = null;
         [SerializeField] private GamePlayParameters parameters = null;
 
+        [SerializeField] private FameManager fameManager = null;
+
         [SerializeField] private int startingWave = 0;
 
         private WaveParameters actualWave;//Muestra la proxima wave
@@ -16,6 +18,8 @@ namespace TOM
         private int differentWaveCount = 0;
         private int rotations = 0;
         private int waveCount = 0;
+
+        private int wavesElapsed = 0;
 
         private void Awake()
         {
@@ -43,21 +47,19 @@ namespace TOM
 
             enemyController.TurnOnEnemiesOnLevel
             (
-                wave.waveLevel + parameters.levelAugmentAmount * (rotations-1),
+                wave.waveLevel + parameters.levelAugmentAmount * (rotations - 1),
                 wave.enemyAmount,
                 wave.enemyDelay,
                 wave.waveThreshold
             );
             waveCount++;
+            wavesElapsed++;
+            Debug.Log("Empezando el nivel " + wavesElapsed + "!");
         }
 
         private void EndWave()
         {
-            //Dar fama
-            //FameController.ReceiveExp(actualWaveID);//Estatica para no referenciarlo aca.
-            //Posibles cambios:
-            // - Agregarlo como serializado y llamar el metodo local.
-            // - Hacer un Action estatico para llamarlo desde el fame controller.
+            fameManager.GetFame(wavesElapsed);
         }
 
         private void ForceWave(int wave)

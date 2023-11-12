@@ -63,7 +63,6 @@ namespace TOM.Enemy
             }
         }
 
-
         public void TurnOnEnemiesOnLevel(int enemyLevel, int amount, float delay, int threshold)
         {
             enemySpawnAmount = amount;
@@ -99,7 +98,7 @@ namespace TOM.Enemy
             {
                 thisCR = Instantiate(crPool.GetT(), CRFolder);
                 thisCR.name = "CR - " + createdEnemies.ToString();
-                Debug.Log("Cree a "+thisCR.name);
+                //Debug.Log("Cree a "+thisCR.name);
 
                 cr = thisCR.AddComponent<CyberRoach>();
                 crb = thisCR.AddComponent<CyberRoachBehavior>();
@@ -123,7 +122,7 @@ namespace TOM.Enemy
 
                 cr.gameObject.SetActive(true);
 
-                Debug.Log("Actualice a " + thisCR.name);
+                //Debug.Log("Actualice a " + thisCR.name);
             }
 
             cr.Grow(waveLevel);
@@ -180,12 +179,12 @@ namespace TOM.Enemy
         private void EnemyKillCounter()
         {
             killedEnemies++;
-            Debug.Log("Kill Counter: " + killedEnemies + "/" + enemySpawnAmount);
+            //Debug.Log("Kill Counter: " + killedEnemies + "/" + enemySpawnAmount);
             if (killedEnemies == enemySpawnAmount - enemyThreshold)
             {
                 Debug.Log("Suficiente para pasar de nivel...");
                 OnEnemyThreshold();
-                //FameManager
+                //fameManager.GetFame();
             }
         }
 
