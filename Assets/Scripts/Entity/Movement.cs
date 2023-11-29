@@ -121,7 +121,8 @@ public class Movement : MonoBehaviour
         dashTimer = 0f;
         animator.SetBool("isDashing", true);
         animator.Play("Br1e_Dash");
-        //trail.gameObject.SetActive(true);
+        trail1.time = 1;
+        trail.time = 1;
         trail.emitting = true;
         trail1.emitting = true;
     }
@@ -140,8 +141,8 @@ public class Movement : MonoBehaviour
             isDashing = false;
             rb.velocity = Vector3.zero;
             animator.SetBool("isDashing", false);
-            trail.emitting = false;
-            trail1.emitting = false;
+            trail1.time = 0.1f;
+            trail.time = 0.1f;
         }
     }
 
