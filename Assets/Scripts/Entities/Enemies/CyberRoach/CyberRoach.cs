@@ -20,10 +20,10 @@ namespace TOM.Enemy
             basicHitCD = basicParameters.basicAttackCoolDown;
             powerHitCD = basicParameters.powerAttackCoolDown;
             powerHitChance = basicParameters.powerAttackChance;
-            this.stunTimeInms = stunTimeInms;
-            this.attackRadius = attackRadius;
+            stunTimeInms = basicParameters.stunTimeInms;
+            attackRadius = basicParameters.attackRadius;
             moveSpeed = basicParameters.movementSpeed;
-            this.hurtTime = hurtTime;
+            hurtTime = basicParameters.hurtTime;
             isAlive = false;
             animator = GetComponent<Animator>();
 

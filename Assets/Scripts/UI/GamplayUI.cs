@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
@@ -8,14 +9,20 @@ namespace TOM
     {
         [SerializeField] private CanvasGroup panelGameplay = null;
         [SerializeField] private CanvasGroup panelInitial = null;
+        [SerializeField] private Image healthBar = null;
 
         private void Awake()
         {
             TurnOffPanel(panelGameplay);
+            Player.OnLifeModified += ChangeHPValue;
         }
         private void Start()
         {
             StartCoroutine(GameInitTimer());
+        }
+        private void OnDestroy()
+        {
+            Player.OnLifeModified -= ChangeHPValue;
         }
 
         private IEnumerator GameInitTimer()
@@ -45,5 +52,11 @@ namespace TOM
             panel.blocksRaycasts = false;
             panel.interactable = false;
         }
+
+        private void ChangeHPValue(int maxValue, int actualValue)
+        {
+            healthBar.fillAmount = (float)actualValue / (float)maxValue;
+        }
+
     }
 }

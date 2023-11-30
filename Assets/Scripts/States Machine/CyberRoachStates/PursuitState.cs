@@ -24,6 +24,10 @@ namespace TOM.Enemy.CR
                 Vector3 direction = (br1eTransform.position - thisRB.position).normalized;
                 thisRB.transform.LookAt(new Vector3(br1eTransform.position.x, thisRB.transform.position.y, br1eTransform.position.z));
                 thisRB.MovePosition(thisRB.position + direction * Time.fixedDeltaTime * speed);
+
+                //Debug.Log("Mi pos: " + thisRB.position.ToString() + "/ Br1e: " + br1eTransform.position.ToString());
+                //Debug.Log("Dist entre Br1e y yo: "+ Vector3.Distance(br1eTransform.position, thisRB.position).ToString());
+
                 if (Vector3.Distance(br1eTransform.position, thisRB.position) < radius)
                 {
                     Transition((int)Flags.OnReachedTarget);
@@ -36,10 +40,11 @@ namespace TOM.Enemy.CR
 
         public override List<Action> GetOnEnterBehaviours(StateParameters parameters)
         {
+            string name = parameters.Parameters[0].ToString();
             List<Action> behabiours = new List<Action>();
             behabiours.Add(() =>
             {
-                Debug.Log(thisRB.name + " esta persiguiendo a Br1e!");
+                Debug.Log(name + " esta persiguiendo a Br1e!");
             }
             );
 
@@ -48,10 +53,11 @@ namespace TOM.Enemy.CR
 
         public override List<Action> GetOnExitBehaviours(StateParameters parameters)
         {
+            string name = parameters.Parameters[0].ToString();
             List<Action> behabiours = new List<Action>();
             behabiours.Add(() =>
             {
-                Debug.Log(thisRB.name + " alcanzo a Br1e!");
+                Debug.Log(name + " alcanzo a Br1e!");
             }
             );
 

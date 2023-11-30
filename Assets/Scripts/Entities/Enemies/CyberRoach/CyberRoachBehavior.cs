@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace TOM.Enemy.CR
 {
-    internal enum States
+    enum States
     {
         Spawning,                   // Unitl every enemy is spawned will be idle (on development)
         Walking,
@@ -19,7 +19,7 @@ namespace TOM.Enemy.CR
         Dead                        // Is Death
     }
 
-    internal enum Flags
+    enum Flags
     {
         OnEveryEnemySpawned,        // Reach the max number of enemies
         OnArenaArrived,             // Reach the arena after spawning
@@ -54,15 +54,16 @@ namespace TOM.Enemy.CR
 
         [field: SerializeField] private States state { set; get; } //Esta magia negra no se lo que hace, preguntar a fede
 
-        StateParameters pursuitParameters;
-        StateParameters walkingParameters;
-        StateParameters walkingEnterParam;
-        StateParameters walkingExitParam;
-        StateParameters attackParameters;
-        StateParameters hurtParameters;
-        StateParameters waitForBasicParameters;
-        StateParameters waitForPowerParameters;
-        StateParameters dyingParameters;
+        private StateParameters pursuitParameters;
+        private StateParameters walkingParameters;
+        private StateParameters attackParameters;
+        private StateParameters hurtParameters;
+        private StateParameters waitForBasicParameters;
+        private StateParameters waitForPowerParameters;
+        private StateParameters dyingParameters;
+
+        private StateParameters thisGO;
+        private StateParameters thisName;
 
         private void Awake()
         {
@@ -76,20 +77,21 @@ namespace TOM.Enemy.CR
 
             pursuitParameters = new StateParameters();
             walkingParameters = new StateParameters();
-            walkingEnterParam = new StateParameters();
-            walkingExitParam = new StateParameters();
             attackParameters = new StateParameters();
             hurtParameters = new StateParameters();
             waitForBasicParameters = new StateParameters();
             waitForPowerParameters = new StateParameters();
             dyingParameters = new StateParameters();
-
             
+            thisGO = new StateParameters();
+            thisGO.Parameters = new object[1] { gameObject };
+            thisName = new StateParameters();
+            thisName.Parameters = new object[1] { gameObject.name };
+
+
             fsm.SetRelation((int)States.Spawning, (int)Flags.OnEveryEnemySpawned, (int)States.Walking);
             walkingParameters.Parameters = new object[3] { rb, arenaCenter, cyberRoach.GetMovementSpeed() };
-            walkingEnterParam.Parameters = new object[1] { this.gameObject };
-            walkingExitParam.Parameters = new object[1] { this.gameObject };
-            fsm.AddState<WalkingState>((int)States.Walking, walkingParameters, walkingEnterParam, walkingExitParam);
+            fsm.AddState<WalkingState>((int)States.Walking, walkingParameters, thisGO, thisGO);
 
 
 
@@ -118,7 +120,7 @@ namespace TOM.Enemy.CR
 
 
             fsm.SetRelation((int)States.Attack, (int)Flags.OnGettingDamage, (int)States.Hurting);
-            hurtParameters.Parameters = new object[1] { /*gameObject.GetComponent<MeshRenderer>()?.material,*/ cyberRoach.GetStunTime() };
+            hurtParameters.Parameters = new object[1] { cyberRoach.GetStunTime() };
             fsm.AddState<HurtingState>((int)States.Hurting, hurtParameters);
 
 

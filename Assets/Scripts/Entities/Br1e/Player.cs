@@ -34,7 +34,8 @@ namespace TOM
 
         Color defaultColor = default;
 
-        public Action<int> OnLifeModified;
+        public static Action<int,int> OnLifeModified;
+        //Sends max value of HP and its actual value
 
         public bool IsAttacking { get => isAttacking; }
 
@@ -92,7 +93,7 @@ namespace TOM
             if (isAlive)
             {
                 hp = 0;
-                OnLifeModified?.Invoke(hp);
+                OnLifeModified?.Invoke(maxHP, hp);
                 //animacion de muerte
                 //sfx de muerte
                 Debug.Log("Br1e ha muerto");
@@ -117,22 +118,22 @@ namespace TOM
                     //animacion de recibir damage
                     //sfx de recibir damage
                 }
-                OnLifeModified?.Invoke(hp);
+                OnLifeModified?.Invoke(maxHP, hp);
             }
         }
 
         protected override void EntityReset()
         {
-            hp = 100;
             maxHP = 100;
-            basicAtk = 100;
-            powerAtk = 25;
-            hurtTime = 1f;
+            hp = maxHP;
+            basicAtk = 10;
+            powerAtk = 35;
+            hurtTime = 0.5f;
             isAlive = true;
             transform.position = originalPosition;
             gameObject.SetActive(true);
             attackArea.CanAttack = false;
-            OnLifeModified?.Invoke(hp);
+            OnLifeModified?.Invoke(maxHP, hp);
         }
 
         private IEnumerator VFXOff(float seconds)
