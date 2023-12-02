@@ -87,7 +87,7 @@ namespace TOM
             {
                 if (actualWave.waveID == 9)
                 {
-                    Time.timeScale = 0;
+                    GameManager.PauseGame();
                     OnTestWaveLimitArrive?.Invoke();
                 }
             }
