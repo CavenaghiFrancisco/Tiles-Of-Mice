@@ -12,6 +12,8 @@ namespace TOM
 
         [SerializeField] private int startingWave = 0;
 
+        [SerializeField] private bool isTestingBuild = false;
+
         private WaveParameters actualWave;//Muestra la proxima wave
         private WaveParameters nextWave;//Muestra la que va a remplazar a la proxima wave
 
@@ -20,6 +22,8 @@ namespace TOM
         private int waveCount = 0;
 
         private int wavesElapsed = 0;
+
+        public static System.Action OnTestWaveLimitArrive;
 
         private void Awake()
         {
@@ -55,6 +59,7 @@ namespace TOM
             waveCount++;
             wavesElapsed++;
             Debug.Log("Empezando el nivel " + wavesElapsed + "!");
+            Debug.Log("CR Spawneadas: " + wave.enemyAmount);
         }
 
         private void EndWave()
@@ -75,8 +80,18 @@ namespace TOM
             {
                 rotations++;
             }
+
             StartWave(actualWave);
             actualWave = nextWave;
+            if (isTestingBuild)
+            {
+                if (actualWave.waveID == 9)
+                {
+                    Time.timeScale = 0;
+                    OnTestWaveLimitArrive?.Invoke();
+                }
+            }
+
             nextWave = parameters.waveList[actualWave.waveID % differentWaveCount];
         }
 

@@ -21,7 +21,7 @@ namespace TOM
         [SerializeField] private Material playerMat = null;
         [SerializeField] private Transform attackPosition = null;
         [SerializeField] private AttackArea attackArea = null;
-        [SerializeField] private GameObject attackVFX = null;
+        [SerializeField] private TrailRenderer attackVFX = null;
 
         [SerializeField] private AnimationClip attack1 = null;
         [SerializeField] private AnimationClip attack2 = null;
@@ -34,7 +34,7 @@ namespace TOM
 
         Color defaultColor = default;
 
-        public static Action<int,int> OnLifeModified;
+        public static Action<int, int> OnLifeModified;
         //Sends max value of HP and its actual value
 
         public bool IsAttacking { get => isAttacking; }
@@ -53,13 +53,16 @@ namespace TOM
 
             controls.Attack.BasicAttack.performed += context =>
                 {
-                    if (!movement.IsDashing && attackArea.CanAttack)
+                    if (!GameManager.IsPaused)
                     {
-                        int aux = UnityEngine.Random.Range(0, 10);
-                        animator.Play(aux >= 5 ? attack1.name : attack2.name);
-                        attackVFX.SetActive(true);
-                        attackArea.GenerateAttackArea(aux >= 5 ? attack1.length : attack2.length, attackPosition.position);
-                        StartCoroutine(VFXOff(aux >= 5 ? attack1.length : attack2.length));
+                        if (!movement.IsDashing && attackArea.CanAttack)
+                        {
+                            int aux = UnityEngine.Random.Range(0, 10);
+                            animator.Play(aux >= 5 ? attack1.name : attack2.name);
+                            float attackTime = aux >= 5 ? attack1.length : attack2.length;
+                            attackArea.GenerateAttackArea(attackTime, attackPosition.position);
+                            StartCoroutine(RunVFX(attackTime));
+                        }
                     }
                 };
             //Intercambiar el 0.2f por la duracion de la animacion
@@ -126,7 +129,7 @@ namespace TOM
         {
             maxHP = 100;
             hp = maxHP;
-            basicAtk = 10;
+            basicAtk = 100;
             powerAtk = 35;
             hurtTime = 0.5f;
             isAlive = true;
@@ -136,10 +139,13 @@ namespace TOM
             OnLifeModified?.Invoke(maxHP, hp);
         }
 
-        private IEnumerator VFXOff(float seconds)
+        private IEnumerator RunVFX(float seconds)
         {
-            yield return new WaitForSeconds(seconds-0.2f);
-            attackVFX.SetActive(false);
+            attackVFX.Clear();
+            attackVFX.enabled = true;
+            yield return new WaitForSeconds(seconds - 0.2f);
+            attackVFX.enabled = false;
+            yield return null;
         }
 
         private void GetHurt(float hurtTime)

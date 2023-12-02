@@ -179,7 +179,7 @@ namespace TOM.Enemy
         private void EnemyKillCounter()
         {
             killedEnemies++;
-            //Debug.Log("Kill Counter: " + killedEnemies + "/" + enemySpawnAmount);
+            Debug.Log("Kill Counter: " + killedEnemies + "/" + enemySpawnAmount);
             if (killedEnemies == enemySpawnAmount - enemyThreshold)
             {
                 Debug.Log("Suficiente para pasar de nivel...");

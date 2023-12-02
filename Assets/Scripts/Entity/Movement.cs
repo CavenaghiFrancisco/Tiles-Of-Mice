@@ -1,3 +1,6 @@
+using System.Collections;
+using System.Collections.Generic;
+using TOM;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -14,7 +17,6 @@ public class Movement : MonoBehaviour
     private float dashCooldown = 1f;
     public bool IsDashing { get => isDashing; }
     public bool canDash = false;
-
 
     private InputAction moveAction;
     private Controls controls;
@@ -40,9 +42,6 @@ public class Movement : MonoBehaviour
 
         animator = GetComponent<Animator>();
 
-        trail.emitting = false;
-        trail1.emitting = false;
-
         mainCamera = Camera.main;
 
         controls.Movement.Dash.performed += context =>
@@ -57,20 +56,23 @@ public class Movement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        animator.SetBool("isRunning", Move()); //Uso Move() para settear el valor del animator, ya se que no es performante pero para salir del paso
-        //animator.SetBool("isDashing", isDashInProgress); Lo mismo de arriba
-        if(dashCooldown < 1)
+        if (!GameManager.IsPaused)
         {
-            dashCooldown += Time.deltaTime;
-            if(dashCooldown > 1)
+            animator.SetBool("isRunning", Move()); //Uso Move() para settear el valor del animator, ya se que no es performante pero para salir del paso
+                                                   //animator.SetBool("isDashing", isDashInProgress); Lo mismo de arriba
+            if (dashCooldown < 1)
             {
-                dashCooldown = 1;
+                dashCooldown += Time.deltaTime;
+                if (dashCooldown > 1)
+                {
+                    dashCooldown = 1;
+                }
             }
-        }
 
-        if (isDashInProgress)
-        {
-            DashMovement();
+            if (isDashInProgress)
+            {
+                DashMovement();
+            }
         }
     }
 
@@ -121,10 +123,8 @@ public class Movement : MonoBehaviour
         dashTimer = 0f;
         animator.SetBool("isDashing", true);
         animator.Play("Br1e_Dash");
-        trail1.time = 1;
-        trail.time = 1;
-        trail.emitting = true;
-        trail1.emitting = true;
+        StartCoroutine(RunVFX(trail, 1));
+        StartCoroutine(RunVFX(trail1, 1));
     }
 
     private void DashMovement()
@@ -141,9 +141,16 @@ public class Movement : MonoBehaviour
             isDashing = false;
             rb.velocity = Vector3.zero;
             animator.SetBool("isDashing", false);
-            trail1.time = 0.1f;
-            trail.time = 0.1f;
         }
+    }
+
+    private IEnumerator RunVFX(TrailRenderer vfx, float seconds)
+    {
+        vfx.Clear();
+        vfx.enabled = true;
+        yield return new WaitForSeconds(seconds - 0.2f);
+        vfx.enabled = false;
+        yield return null;
     }
 
     private void OnCollisionEnter(Collision collision)

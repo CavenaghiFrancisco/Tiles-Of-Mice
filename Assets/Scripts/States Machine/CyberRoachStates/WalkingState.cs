@@ -41,12 +41,16 @@ namespace TOM.Enemy.CR
         {
             List<Action> behabiours = new List<Action>();
 
+            GameObject go = parameters.Parameters[0] as GameObject;
+            BoxCollider box = go.GetComponent<BoxCollider>();
+
             behabiours.Add(() =>
                 {
-                    (parameters.Parameters[0] as GameObject).layer = 9;//Esta fuera
+                    (go).layer = 9;//Esta fuera
+                    box.size = new Vector3(box.size.x, 0.2f, box.size.z);
+                    box.center = new Vector3(box.center.x, 0.09f, box.center.z);
                 }
             );
-
             return behabiours;
         }
 
@@ -54,9 +58,14 @@ namespace TOM.Enemy.CR
         {
             List<Action> behabiours = new List<Action>();
 
+            GameObject go = parameters.Parameters[0] as GameObject;
+            BoxCollider box = go.GetComponent<BoxCollider>();
+
             behabiours.Add(() =>
                 {
-                    (parameters.Parameters[0] as GameObject).layer = 8;//Esta dentro
+                    (go).layer = 8;//Esta dentro
+                    box.size = new Vector3(box.size.x,1,box.size.z);
+                    box.center = new Vector3(box.center.x, 0.48f, box.center.z);
                 }
             );
 

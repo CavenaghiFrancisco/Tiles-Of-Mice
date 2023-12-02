@@ -63,7 +63,6 @@ namespace TOM.Enemy.CR
         private StateParameters dyingParameters;
 
         private StateParameters thisGO;
-        private StateParameters thisName;
 
         private void Awake()
         {
@@ -82,11 +81,9 @@ namespace TOM.Enemy.CR
             waitForBasicParameters = new StateParameters();
             waitForPowerParameters = new StateParameters();
             dyingParameters = new StateParameters();
-            
+
             thisGO = new StateParameters();
             thisGO.Parameters = new object[1] { gameObject };
-            thisName = new StateParameters();
-            thisName.Parameters = new object[1] { gameObject.name };
 
 
             fsm.SetRelation((int)States.Spawning, (int)Flags.OnEveryEnemySpawned, (int)States.Walking);
@@ -141,14 +138,17 @@ namespace TOM.Enemy.CR
         }
         private void FixedUpdate()
         {
-            fsm.Update(); 
+            if (!GameManager.IsPaused)
+            {
+                fsm.Update();
+            }
             //Debug.Log("Estado actual de " + rb.gameObject.name + " es " + ((States)fsm.currentStateIndex).ToString());
             //Debug.Log("Posicion actual de " + rb.gameObject.name + " es " + transform.position);
         }
 
         //private void Update()
         //{
-            
+
         //}
 
         private void CyberRoachSuccessfulySpawned()
