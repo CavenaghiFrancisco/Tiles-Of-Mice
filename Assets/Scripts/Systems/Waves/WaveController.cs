@@ -29,12 +29,12 @@ namespace TOM
         {
             actualWave = parameters.waveList[startingWave];
             nextWave = parameters.waveList[startingWave + 1];
-            enemyController.OnEnemyThreshold += SetNextWave;
+            enemyController.OnAllEnemiesKilled += SetNextWave;
         }
 
         private void OnDestroy()
         {
-            enemyController.OnEnemyThreshold -= SetNextWave;
+            enemyController.OnAllEnemiesKilled -= SetNextWave;
         }
 
         private void Start()
@@ -53,8 +53,7 @@ namespace TOM
             (
                 wave.waveLevel + parameters.levelAugmentAmount * (rotations - 1),
                 wave.enemyAmount,
-                wave.enemyDelay,
-                wave.waveThreshold
+                wave.enemyDelay
             );
             waveCount++;
             wavesElapsed++;

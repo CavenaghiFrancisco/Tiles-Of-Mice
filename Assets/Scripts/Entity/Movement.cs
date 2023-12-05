@@ -16,7 +16,7 @@ public class Movement : MonoBehaviour
     [SerializeField] private float dashDuration = 0.2f;
     private float dashCooldown = 1f;
     public bool IsDashing { get => isDashing; }
-    public bool canDash = false;
+    public bool canDash = true;
 
     private InputAction moveAction;
     private Controls controls;
@@ -37,12 +37,13 @@ public class Movement : MonoBehaviour
     private void Awake()
     {
         controls = new Controls();
-        rb = GetComponent<Rigidbody>();
-        moveAction = controls.Movement.Move;
 
+        rb = GetComponent<Rigidbody>();
         animator = GetComponent<Animator>();
 
+        moveAction = controls.Movement.Move;
         mainCamera = Camera.main;
+        canDash = true;
 
         controls.Movement.Dash.performed += context =>
         {

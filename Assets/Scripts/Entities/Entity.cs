@@ -20,7 +20,7 @@ namespace TOM
         public abstract void Die();
         public abstract void Attack(Entity otherEntity);
         protected abstract void EntityReset();
-        protected void OnTriggerEnter(Collider other)
+        protected void OnTriggerExit(Collider other)
         {
             if (isAlive)
             {
