@@ -12,6 +12,8 @@ namespace TOM
 
         [SerializeField] private int startingWave = 0;
 
+        [SerializeField] private bool isTestingBuild = false;
+
         private WaveParameters actualWave;//Muestra la proxima wave
         private WaveParameters nextWave;//Muestra la que va a remplazar a la proxima wave
 
@@ -21,16 +23,18 @@ namespace TOM
 
         private int wavesElapsed = 0;
 
+        public static System.Action OnTestWaveLimitArrive;
+
         private void Awake()
         {
             actualWave = parameters.waveList[startingWave];
             nextWave = parameters.waveList[startingWave + 1];
-            enemyController.OnEnemyThreshold += SetNextWave;
+            enemyController.OnAllEnemiesKilled += SetNextWave;
         }
 
         private void OnDestroy()
         {
-            enemyController.OnEnemyThreshold -= SetNextWave;
+            enemyController.OnAllEnemiesKilled -= SetNextWave;
         }
 
         private void Start()
@@ -49,12 +53,12 @@ namespace TOM
             (
                 wave.waveLevel + parameters.levelAugmentAmount * (rotations - 1),
                 wave.enemyAmount,
-                wave.enemyDelay,
-                wave.waveThreshold
+                wave.enemyDelay
             );
             waveCount++;
             wavesElapsed++;
             Debug.Log("Empezando el nivel " + wavesElapsed + "!");
+            Debug.Log("CR Spawneadas: " + wave.enemyAmount);
         }
 
         private void EndWave()
@@ -75,8 +79,18 @@ namespace TOM
             {
                 rotations++;
             }
+
             StartWave(actualWave);
             actualWave = nextWave;
+            if (isTestingBuild)
+            {
+                if (actualWave.waveID == 9)
+                {
+                    GameManager.PauseGame();
+                    OnTestWaveLimitArrive?.Invoke();
+                }
+            }
+
             nextWave = parameters.waveList[actualWave.waveID % differentWaveCount];
         }
 

@@ -18,7 +18,7 @@ MonoBehaviour:
   powerAttack: 30
   powerAttackCoolDown: 2
   powerAttackChance: 50
-  attackRadius: 2
-  stunTimeInms: 10
+  attackRadius: 1.5
+  stunTimeInms: 250
   movementSpeed: 5
   hurtTime: 1

@@ -22,7 +22,6 @@ namespace TOM.Enemy
         private int maxCRCount = 0;
         private int maxSVCount = 0;
 
-        private int enemyThreshold = 0;
         private int enemySpawnAmount = 0;
         private int killedEnemies = 0;
 
@@ -37,7 +36,7 @@ namespace TOM.Enemy
         //private List<CyberRoach> CyberRoachList = new List<CyberRoach>();
 
         public static System.Action OnAllEnemiesCreated;
-        public System.Action OnEnemyThreshold;
+        public System.Action OnAllEnemiesKilled;
 
         private ObjectPool<GameObject> crPool;
 
@@ -63,10 +62,9 @@ namespace TOM.Enemy
             }
         }
 
-        public void TurnOnEnemiesOnLevel(int enemyLevel, int amount, float delay, int threshold)
+        public void TurnOnEnemiesOnLevel(int enemyLevel, int amount, float delay)
         {
             enemySpawnAmount = amount;
-            enemyThreshold = threshold;
             killedEnemies = 0;
             CreateEnemies(enemyLevel, amount, delay);
         }
@@ -179,11 +177,11 @@ namespace TOM.Enemy
         private void EnemyKillCounter()
         {
             killedEnemies++;
-            //Debug.Log("Kill Counter: " + killedEnemies + "/" + enemySpawnAmount);
-            if (killedEnemies == enemySpawnAmount - enemyThreshold)
+            Debug.Log("Kill Counter: " + killedEnemies + "/" + enemySpawnAmount);
+            if (killedEnemies == enemySpawnAmount)
             {
                 Debug.Log("Suficiente para pasar de nivel...");
-                OnEnemyThreshold();
+                OnAllEnemiesKilled?.Invoke();
                 //fameManager.GetFame();
             }
         }

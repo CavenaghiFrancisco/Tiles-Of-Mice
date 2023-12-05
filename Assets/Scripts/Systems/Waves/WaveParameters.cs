@@ -8,8 +8,6 @@ namespace TOM
         //ID interno  Enemy Threshold Enemy Level Enemy Quantity  Enemy Delay
         [Header("Wave ID")]
         public int waveID;
-        [Header("Enemy Threshold")]
-        public int waveThreshold;
         [Header("Enemy Level")]
         public int waveLevel;
         [Header("Enemy Quantity")]

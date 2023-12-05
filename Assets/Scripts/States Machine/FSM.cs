@@ -1,5 +1,7 @@
 using System;
 using System.Collections.Generic;
+using TOM;
+using UnityEngine;
 
 namespace IA.FSM
 {
@@ -32,6 +34,7 @@ namespace IA.FSM
         public void SetCurrentStateForced(int state)
         {
             currentStateIndex = state;
+            //Debug.Log("Forced to be " + ((TOM.Enemy.CR.States)state).ToString());
         }
 
         public void SetRelation(int sourceState, int flag, int destinationState)
@@ -61,6 +64,7 @@ namespace IA.FSM
                         OnEnter?.Invoke();
                 }
 
+                //Debug.Log("I changed my state to " + ((TOM.Enemy.CR.States)currentStateIndex).ToString());
             }
         }
 
@@ -80,11 +84,14 @@ namespace IA.FSM
 
         public void Update()
         {
-            if (states.ContainsKey(currentStateIndex))
+            if (!GameManager.IsPaused)
             {
-                foreach (Action behaviour in states[currentStateIndex].GetBehaviours(statesParameters[currentStateIndex]))
+                if (states.ContainsKey(currentStateIndex))
                 {
-                    behaviour?.Invoke();
+                    foreach (Action behaviour in states[currentStateIndex].GetBehaviours(statesParameters[currentStateIndex]))
+                    {
+                        behaviour?.Invoke();
+                    }
                 }
             }
         }

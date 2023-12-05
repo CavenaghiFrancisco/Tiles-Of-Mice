@@ -117,7 +117,7 @@ public class FameManager : MonoBehaviour
     private float GetNormalizedFame(int amount)
     {
         float aux = (float)amount / (float)targetFame;
-        Debug.Log("Paso de " + amount + "/" + targetFame + " a " + aux);
+        Debug.Log("Paso de " + amount + "/" + targetFame + " a " + aux + "%");
         return aux;
     }
 
