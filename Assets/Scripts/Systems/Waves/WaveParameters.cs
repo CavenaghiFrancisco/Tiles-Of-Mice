@@ -11,7 +11,8 @@ namespace TOM
         [Header("Enemy Level")]
         public int waveLevel;
         [Header("Enemy Quantity")]
-        public int enemyAmount; // Si agregamos otro enemigo vamos a tener que cambiar esto.
+        public int CRAmount; // Si agregamos otro enemigo vamos a tener que cambiar esto.
+        public int TRAmount; // Si agregamos otro enemigo vamos a tener que cambiar esto.
         [Header("Enemy Delay (Seconds)")]
         public float enemyDelay;
     }

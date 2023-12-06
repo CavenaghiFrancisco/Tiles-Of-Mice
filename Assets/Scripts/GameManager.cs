@@ -1,7 +1,5 @@
-using System;
-using UnityEditor.PackageManager.UI;
 using UnityEngine;
-using UnityEngine.InputSystem;
+using System;
 
 namespace TOM
 {
@@ -33,7 +31,7 @@ namespace TOM
                 else
                 {
                     OnResume?.Invoke();
-                    
+
                 }
             };
         }

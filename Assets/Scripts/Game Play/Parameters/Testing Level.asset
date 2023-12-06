@@ -13,8 +13,7 @@ MonoBehaviour:
   m_Name: Testing Level
   m_EditorClassIdentifier: 
   levelID: 1
-  CRBasicParams: {fileID: 11400000, guid: 983fd15c16b69d847aeb6963fa24db65, type: 2}
-  CRGrowParams: {fileID: 11400000, guid: f23899349e21ed141994dd4a8b3fa441, type: 2}
+  enemySpecs: {fileID: 11400000, guid: 1e2baf7586ae9a84d8483054314d8a1d, type: 2}
   levelAugmentAmount: 8
   waveList:
   - {fileID: 11400000, guid: 1b18dcc0a76d45a44b69b1bbada59cf7, type: 2}

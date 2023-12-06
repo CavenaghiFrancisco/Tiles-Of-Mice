@@ -34,7 +34,7 @@ namespace IA.FSM
         public void SetCurrentStateForced(int state)
         {
             currentStateIndex = state;
-            //Debug.Log("Forced to be " + ((TOM.Enemy.CR.States)state).ToString());
+            //Debug.Log("Forced to be " + ((TOM.Enemy.CR.CRStates)state).ToString());
         }
 
         public void SetRelation(int sourceState, int flag, int destinationState)
@@ -64,7 +64,7 @@ namespace IA.FSM
                         OnEnter?.Invoke();
                 }
 
-                //Debug.Log("I changed my state to " + ((TOM.Enemy.CR.States)currentStateIndex).ToString());
+                //Debug.Log("I changed my state to " + ((TOM.Enemy.CR.CRStates)currentStateIndex).ToString());
             }
         }
 

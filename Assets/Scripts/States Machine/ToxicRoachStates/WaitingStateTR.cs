@@ -1,29 +1,27 @@
 using System.Collections.Generic;
-using System.Collections;
-using UnityEngine;
+using TOM.Enemy.TR;
 using IA.FSM;
 using System;
 
-namespace TOM.Enemy.CR
+namespace TOM.Enemy
 {
-    public class AttackState : State
+    public class WaitingStateTR : State
     {
-        bool wasPoweredAttack = false;
-
-        Player target = null;
-        Enemy enemy = null;
-        Type enemyType = null;
+        bool hasStarted = false;
         public override List<Action> GetBehaviours(StateParameters parameters)
         {
-
-            SetParameters(parameters);
-
+            float timer = (float)parameters.Parameters[0];
+            ToxicRoachBehavior crBehavior = parameters.Parameters[1] as ToxicRoachBehavior;
+            hasStarted = false;
             List<Action> behabiours = new List<Action>();
 
             behabiours.Add(() =>
             {
-                enemy.Attack(target);
-                Transition((int)Flags.OnBasicAttack);
+                if (!hasStarted)
+                {
+                    crBehavior.WaitForTime(timer);
+                    hasStarted = true;
+                }
             }
             );
 
@@ -42,22 +40,18 @@ namespace TOM.Enemy.CR
 
         public override object[] GetOutputs()
         {
-            object[] output = new object[1] { wasPoweredAttack };
-            return output;
+            return null;
         }
 
         public override void SetParameters(StateParameters parameters)
         {
-            wasPoweredAttack = false;
-            target = parameters.Parameters[0] as Player; 
-            enemyType = parameters.Parameters[2] as Type;
-            enemy = Convert.ChangeType(parameters.Parameters[1], enemyType) as Enemy;
         }
 
         public override void Transition(int flag)
         {
             SetFlag?.Invoke(flag);
         }
+
     }
 
 }

@@ -1,10 +1,8 @@
 using System.Collections.Generic;
-using System.Collections;
-using UnityEngine;
 using IA.FSM;
 using System;
 
-namespace TOM.Enemy.CR
+namespace TOM.Enemy
 {
     public class DyingState : State
     {

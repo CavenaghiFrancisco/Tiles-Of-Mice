@@ -4,7 +4,7 @@ using UnityEngine;
 using IA.FSM;
 using System;
 
-namespace TOM.Enemy.CR
+namespace TOM.Enemy
 {
     public class HurtingState : State
     {
@@ -21,10 +21,10 @@ namespace TOM.Enemy.CR
             behabiours.Add(() =>
             {
                 Debug.Log("Recibi daño!");
-                if(timer<stunTime)
+                if (timer < stunTime)
                 {
                     timer += Time.deltaTime;
-                   // material.color = Color.magenta;
+                    // material.color = Color.magenta;
                 }
                 else
                 {
@@ -56,7 +56,7 @@ namespace TOM.Enemy.CR
         {
             //material = parameters.Parameters[0] as Material;
             stunTime = (float)parameters.Parameters[0];
-            
+
             timer = 0;
             //defaultColor = material.color;
         }

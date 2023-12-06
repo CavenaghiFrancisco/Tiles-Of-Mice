@@ -12,10 +12,11 @@ namespace TOM
         public EnemyBasicParameters CRBasicParams;
         public EnemyGrowParameters CRGrowParams;
 
-        //[Header("SV-23")]
-        // public GameObject SVPrefab;
-        //public EnemyBasicParameters SVBasicParams;
-        //public EnemyGrowParameters SVGrowParams;
+        [Header("ToxicRoach")]
+        public GameObject TRPrefab;
+        public GameObject bulletPrefab;
+        public EnemyBasicParameters TRBasicParams;
+        public EnemyGrowParameters  TRGrowParams;
 
         //[Header("Gregorio")]
         // public GameObject GregorioPrefab;

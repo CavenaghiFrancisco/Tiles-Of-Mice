@@ -15,3 +15,7 @@ MonoBehaviour:
   CRPrefab: {fileID: 771391038792114883, guid: 0aec57e8674c01c47a024e5aa4084de4, type: 3}
   CRBasicParams: {fileID: 11400000, guid: 983fd15c16b69d847aeb6963fa24db65, type: 2}
   CRGrowParams: {fileID: 11400000, guid: f23899349e21ed141994dd4a8b3fa441, type: 2}
+  TRPrefab: {fileID: 771391038792114883, guid: 560dea7727409ac4ca6502daae76805e, type: 3}
+  bulletPrefab: {fileID: 3664892745289926177, guid: c774df770d0bfe643bf978a8b4b6bf71, type: 3}
+  TRBasicParams: {fileID: 11400000, guid: 2600b9f116f3b47459ed8b880994753c, type: 2}
+  TRGrowParams: {fileID: 11400000, guid: 462c7d73b9748b34098e1e83328aa76c, type: 2}

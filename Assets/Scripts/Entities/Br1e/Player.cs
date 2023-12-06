@@ -1,9 +1,6 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
-using UnityEngine.InputSystem;
+using System;
 
 namespace TOM.ATTACK
 {
@@ -173,6 +170,16 @@ namespace TOM
         private void OnDisable()
         {
             controls.Attack.Disable();
+        }
+
+        private void OnTriggerEnter(Collider other)
+        {
+            if (other.CompareTag("Bullet"))
+            {
+                Bullet bullet = other.GetComponent<Bullet>();
+                GetDamage(bullet.Damage);
+                bullet.StopFlying();
+            }
         }
     }
 }

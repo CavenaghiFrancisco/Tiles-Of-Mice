@@ -1,13 +1,10 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace TOM.Enemy
 {
     public class CyberRoach : Enemy
     {
-        [SerializeField] private int testingGetDamage = 20;//Esto hay que sacarlo, es solo con motivos de testeo;
-
         private EnemyGrowParameters selfGrowParameters = null;
         private EnemyBasicParameters selfBasicParameters = null;
 
@@ -50,6 +47,8 @@ namespace TOM.Enemy
             {
                 hp = 0;
                 isAlive = false;
+                //Animacion de morir
+                //Vfx de morir
                 animator.SetTrigger("Death");
                 //Debug.Log("Un CyberRoach ha muerto!");
                 OnDeath?.Invoke();
@@ -65,8 +64,6 @@ namespace TOM.Enemy
                 if (hp <= 0)
                 {
                     Die();
-                    //Animaci�n de recibir damage
-                    //sfx de recibir damage
                 }
                 else
                 {

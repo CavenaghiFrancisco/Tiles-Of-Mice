@@ -7,47 +7,7 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: Default_Material
-    second: {fileID: 2100000, guid: d23690213b5deed4c981173906ec4676, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: M_Pierna_Mecanica_Frontal1
-    second: {fileID: 2100000, guid: d23690213b5deed4c981173906ec4676, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: M_Pierna_Mecanica_Medio3
-    second: {fileID: 2100000, guid: d23690213b5deed4c981173906ec4676, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: M_Pierna_Mecanica_Medio4
-    second: {fileID: 2100000, guid: d23690213b5deed4c981173906ec4676, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: M_Pierna_Mecanica_Trasera1
-    second: {fileID: 2100000, guid: d23690213b5deed4c981173906ec4676, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: M_Pierna_Organica_Frontal1
-    second: {fileID: 2100000, guid: d23690213b5deed4c981173906ec4676, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: M_Pierna_Organica_Trasera1
-    second: {fileID: 2100000, guid: d23690213b5deed4c981173906ec4676, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
       name: M_Pieza_mecanica2
-    second: {fileID: 2100000, guid: d23690213b5deed4c981173906ec4676, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: M_cuerpo2
     second: {fileID: 2100000, guid: d23690213b5deed4c981173906ec4676, type: 2}
   materials:
     materialImportMode: 2

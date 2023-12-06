@@ -1,13 +1,12 @@
+using Random = UnityEngine.Random;
 using System.Collections.Generic;
-using System.Collections;
 using UnityEngine;
 using IA.FSM;
 using System;
-using Random = UnityEngine.Random;
 
-namespace TOM.Enemy.CR
+namespace TOM.Enemy.TR
 {
-    public class WalkingState : State
+    public class WalkingStateTR : State
     {
         private Rigidbody rb;
         private Vector3 targetPosition;
@@ -27,7 +26,7 @@ namespace TOM.Enemy.CR
                     direction.y = 0;
                     if (Vector3.Distance(rb.position, firstPoint) < 1f)
                     {
-                        Transition((int)Flags.OnArenaArrived);
+                        Transition((int)TOM.Enemy.Flags.OnArenaArrived);
                     }
                     direction.Normalize();
                     rb.MovePosition(rb.position + direction * speed * Time.fixedDeltaTime);
@@ -64,7 +63,7 @@ namespace TOM.Enemy.CR
             behabiours.Add(() =>
                 {
                     (go).layer = 8;//Esta dentro
-                    box.size = new Vector3(box.size.x,1,box.size.z);
+                    box.size = new Vector3(box.size.x, 1, box.size.z);
                     box.center = new Vector3(box.center.x, 0.48f, box.center.z);
                 }
             );

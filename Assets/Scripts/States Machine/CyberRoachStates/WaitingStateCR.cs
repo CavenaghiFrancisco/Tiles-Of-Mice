@@ -1,12 +1,13 @@
 using System.Collections.Generic;
 using System.Collections;
 using UnityEngine;
+using TOM.Enemy.CR;
 using IA.FSM;
 using System;
 
-namespace TOM.Enemy.CR
+namespace TOM.Enemy
 {
-    public class WaitingState : State
+    public class WaitingStateCR : State
     {
         bool hasStarted = false;
         public override List<Action> GetBehaviours(StateParameters parameters)

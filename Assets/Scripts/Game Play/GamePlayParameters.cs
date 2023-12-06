@@ -10,9 +10,8 @@ namespace TOM
         [Header("Level ID")]
         public int levelID;
 
-        [Header("CyberRoach")]
-        public EnemyBasicParameters CRBasicParams;
-        public EnemyGrowParameters CRGrowParams;
+        [Header("Enemies")] 
+        public EnemySpecs enemySpecs;
 
         [Header("Waves")]
         public int levelAugmentAmount;
