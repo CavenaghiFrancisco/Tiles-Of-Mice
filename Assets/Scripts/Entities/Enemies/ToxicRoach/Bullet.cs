@@ -3,18 +3,17 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    [SerializeField] private float bulletSpeed = 100;
-
     private MeshRenderer[] meshArray;
     private TrailRenderer trail;
     private BoxCollider col;
 
     private int damage = 10;
-
     public int Damage => damage;
 
     private bool flying = false;
     public bool Flying => flying;
+
+    private float bulletSpeed;
 
     private void Awake()
     {
@@ -23,15 +22,17 @@ public class Bullet : MonoBehaviour
         col = GetComponent<BoxCollider>();
     }
 
-    public void StartFlying(int shotDamage)
+    public void StartFlying(int shotDamage, int speed)
     {
         flying = true;
+
         foreach (MeshRenderer mesh in meshArray)
         {
             mesh.enabled = true;
         }
 
         damage = shotDamage;
+        bulletSpeed = speed;
     }
 
     public void StopFlying()

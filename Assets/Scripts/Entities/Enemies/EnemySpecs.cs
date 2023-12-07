@@ -15,6 +15,7 @@ namespace TOM
         [Header("ToxicRoach")]
         public GameObject TRPrefab;
         public GameObject bulletPrefab;
+        public int toxicBulletSpeed;
         public EnemyBasicParameters TRBasicParams;
         public EnemyGrowParameters  TRGrowParams;
 

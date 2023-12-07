@@ -310,7 +310,7 @@ namespace TOM.Enemy
 
             ToxicBulletList.Add(bullet);
 
-            bullet.StartFlying(shotDamage);
+            bullet.StartFlying(shotDamage, enemySpecs.toxicBulletSpeed);
 
             bullet.transform.rotation = rotation;
             bullet.transform.position = position;

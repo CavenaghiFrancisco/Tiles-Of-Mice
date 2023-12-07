@@ -88,13 +88,13 @@ namespace TOM.Enemy.TR
 
 
             fsm.SetRelation((int)TRStates.Attack, (int)Flags.OnBasicAttack, (int)TRStates.WaitingForBasicAttack);
-            waitForBasicParameters.Parameters = new object[2] { toxicRoach.GetBasicHitCD(), this };
+            waitForBasicParameters.Parameters = new object[4] { toxicRoach.GetBasicHitCD(), this, target, rb };
             fsm.AddState<WaitingStateTR>((int)TRStates.WaitingForBasicAttack, waitForBasicParameters, new StateParameters());
 
 
 
             fsm.SetRelation((int)TRStates.Attack, (int)Flags.OnPowerAttack, (int)TRStates.WaitingForPowerAttack);
-            waitForPowerParameters.Parameters = new object[2] { toxicRoach.GetPowerHitCD(), this };
+            waitForPowerParameters.Parameters = new object[4] { toxicRoach.GetPowerHitCD(), this, target, rb };
             fsm.AddState<WaitingStateTR>((int)TRStates.WaitingForPowerAttack, waitForPowerParameters);
 
 

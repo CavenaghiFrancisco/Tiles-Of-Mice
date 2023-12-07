@@ -8,14 +8,20 @@ namespace TOM.Enemy
     public class WaitingStateTR : State
     {
         bool hasStarted = false;
+        float timer;
+        ToxicRoachBehavior trBehavior;
+        UnityEngine.Transform target;
+        UnityEngine.Rigidbody rb;
         public override List<Action> GetBehaviours(StateParameters parameters)
         {
-            float timer = (float)parameters.Parameters[0];
-            ToxicRoachBehavior trBehavior = parameters.Parameters[1] as ToxicRoachBehavior;
             List<Action> behabiours = new List<Action>();
+            SetParameters(parameters);
 
             behabiours.Add(() =>
             {
+
+                rb.transform.LookAt(new UnityEngine.Vector3(target.position.x, rb.transform.position.y, target.position.z));
+                
                 if (!hasStarted)
                 {
                     trBehavior.WaitForTime(timer);
@@ -50,6 +56,10 @@ namespace TOM.Enemy
 
         public override void SetParameters(StateParameters parameters)
         {
+            timer = (float)parameters.Parameters[0];
+            trBehavior = parameters.Parameters[1] as ToxicRoachBehavior;
+            target = (parameters.Parameters[2] as UnityEngine.GameObject).transform;
+            rb = parameters.Parameters[3] as UnityEngine.Rigidbody;
         }
 
         public override void Transition(int flag)
