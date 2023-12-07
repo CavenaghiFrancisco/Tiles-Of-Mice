@@ -89,7 +89,7 @@ namespace TOM.Enemy.TR
 
             fsm.SetRelation((int)TRStates.Attack, (int)Flags.OnBasicAttack, (int)TRStates.WaitingForBasicAttack);
             waitForBasicParameters.Parameters = new object[2] { toxicRoach.GetBasicHitCD(), this };
-            fsm.AddState<WaitingStateTR>((int)TRStates.WaitingForBasicAttack, waitForBasicParameters);
+            fsm.AddState<WaitingStateTR>((int)TRStates.WaitingForBasicAttack, waitForBasicParameters, new StateParameters());
 
 
 
@@ -147,6 +147,7 @@ namespace TOM.Enemy.TR
         public void ResetBehaviour()
         {
             fsm.SetCurrentStateForced((int)TRStates.Spawning);
+            isAlreadyWaiting = false;
         }
 
         private void OnDestroy()
@@ -172,6 +173,7 @@ namespace TOM.Enemy.TR
             }
             fsm.SetCurrentStateForced((int)TRStates.Pursuit);
             isAlreadyWaiting = false;
+            Debug.Log(name + " deja de esperar!");
         }
 
     }

@@ -6,7 +6,8 @@ namespace TOM.Utilities
     public enum OPType
     {
         CyberRoach,
-        ToxicRoach
+        ToxicRoach,
+        Bullet
     }
     public class ObjectPool<T> where T : new()
     {
@@ -54,6 +55,14 @@ namespace TOM.Utilities
                         lastObjectIndex = objectList.IndexOf(obj);
                         return obj;
 
+                    }
+                }
+                if (selector == OPType.Bullet)
+                {
+                    if (!((obj as UnityEngine.GameObject).GetComponent<Bullet>().Flying))
+                    {
+                        lastObjectIndex = objectList.IndexOf(obj);
+                        return obj;
                     }
                 }
             }

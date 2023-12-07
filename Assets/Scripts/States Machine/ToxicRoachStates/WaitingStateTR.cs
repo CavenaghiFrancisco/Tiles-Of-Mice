@@ -11,15 +11,14 @@ namespace TOM.Enemy
         public override List<Action> GetBehaviours(StateParameters parameters)
         {
             float timer = (float)parameters.Parameters[0];
-            ToxicRoachBehavior crBehavior = parameters.Parameters[1] as ToxicRoachBehavior;
-            hasStarted = false;
+            ToxicRoachBehavior trBehavior = parameters.Parameters[1] as ToxicRoachBehavior;
             List<Action> behabiours = new List<Action>();
 
             behabiours.Add(() =>
             {
                 if (!hasStarted)
                 {
-                    crBehavior.WaitForTime(timer);
+                    trBehavior.WaitForTime(timer);
                     hasStarted = true;
                 }
             }
@@ -30,7 +29,13 @@ namespace TOM.Enemy
 
         public override List<Action> GetOnEnterBehaviours(StateParameters parameters)
         {
-            return null;
+            List<Action> behabiours = new List<Action>();
+            behabiours.Add(() =>
+            {
+                hasStarted = false;
+            }
+            );
+            return behabiours;
         }
 
         public override List<Action> GetOnExitBehaviours(StateParameters parameters)

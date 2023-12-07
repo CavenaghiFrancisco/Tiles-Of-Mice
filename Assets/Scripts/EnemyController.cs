@@ -15,8 +15,6 @@ namespace TOM.Enemy
 
         [SerializeField] private Transform spawnTransform = null;
 
-        [SerializeField] private Transform bulletFolder = null;
-
         [SerializeField] private EnemySpecs enemySpecs = default;
 
         private int actualLevelID = 0;
@@ -34,11 +32,10 @@ namespace TOM.Enemy
 
         private Transform CRFolder;
         private Transform TRFolder;
+        private Transform ToxicBulletFolder;
 
         private bool everyCRCreated = false;
         private bool everyTRCreated = false;
-
-        //private Transform GregorioFolder;
 
         private List<CyberRoach> CyberRoachList = new List<CyberRoach>();
         private List<CyberRoachBehavior> CyberRoachBehaviorList = new List<CyberRoachBehavior>();
@@ -46,11 +43,14 @@ namespace TOM.Enemy
         private List<ToxicRoach> ToxicRoachList = new List<ToxicRoach>();
         private List<ToxicRoachBehavior> ToxicRoachBehaviorList = new List<ToxicRoachBehavior>();
 
+        private List<Bullet> ToxicBulletList = new List<Bullet>();
+
         public static System.Action OnAllEnemiesCreated;
         public System.Action OnAllEnemiesKilled;
 
         private ObjectPool<GameObject> crPool;
         private ObjectPool<GameObject> trPool;
+        private ObjectPool<GameObject> toxicBulletPool;
 
         private void Awake()
         {
@@ -59,9 +59,11 @@ namespace TOM.Enemy
             //levelList = levelList.OrderBy(x => x.levelID).ToList();//Ordeno la lista por IDs
 
             CyberRoachBehavior.SetArenaCenter(arenaCenter.position);//Setteo el centro de la arena al cual las cyberroachs van a ir cuando spawneen.
+            ToxicRoachBehavior.SetArenaCenter(arenaCenter.position);//Setteo el centro de la arena al cual las cyberroachs van a ir cuando spawneen.
 
             crPool = new ObjectPool<GameObject>(enemySpecs.CRPrefab);
             trPool = new ObjectPool<GameObject>(enemySpecs.TRPrefab);
+            toxicBulletPool = new ObjectPool<GameObject>(enemySpecs.bulletPrefab);
 
             CreateFolders();
 
@@ -101,6 +103,10 @@ namespace TOM.Enemy
             auxGo = new GameObject("ToxicRoach List");
             auxGo.transform.SetParent(this.transform);
             TRFolder = auxGo.transform;
+
+            auxGo = new GameObject("ToxicBullet List");
+            auxGo.transform.SetParent(this.transform);
+            ToxicBulletFolder = auxGo.transform;
         }
 
         private void CreateEnemies(int waveLevel, int crAmount, int trAmount, float delayInSeconds)
@@ -176,7 +182,7 @@ namespace TOM.Enemy
                 ToxicRoachList.Add(tr);
                 ToxicRoachBehaviorList.Add(trb);
 
-                tr.Initialize(enemySpecs.TRBasicParams, enemySpecs.TRGrowParams, enemySpecs.bulletPrefab, bulletFolder);
+                tr.Initialize(enemySpecs.TRBasicParams, enemySpecs.TRGrowParams, this);
                 tr.OnDeath += TRKillCounter;
 
                 trb.Initialize(player);
@@ -188,9 +194,9 @@ namespace TOM.Enemy
                 tr = thisTR.GetComponent<ToxicRoach>();
 
                 trb = thisTR.GetComponent<ToxicRoachBehavior>();
-                trb.ResetBehaviour();
-
                 tr.gameObject.SetActive(true);
+
+                trb.ResetBehaviour();
 
                 //Debug.Log("Actualice a " + thisCR.name);
             }
@@ -290,5 +296,31 @@ namespace TOM.Enemy
                 //fameManager.GetFame();
             }
         }
+
+        public Bullet GetAvaliableBullet(Quaternion rotation, Vector3 position, int shotDamage)
+        {
+            GameObject thisBullet = toxicBulletPool.GetAbleObject(OPType.Bullet);
+
+            Bullet bullet;
+
+            thisBullet = Instantiate(toxicBulletPool.GetT(), ToxicBulletFolder);
+            thisBullet.name = "Toxic Bullet - " + createdTRs.ToString();
+
+            bullet = thisBullet.AddComponent<Bullet>();
+
+            ToxicBulletList.Add(bullet);
+
+            bullet.StartFlying(shotDamage);
+
+            bullet.transform.rotation = rotation;
+            bullet.transform.position = position;
+
+            StartCoroutine(WaitFrame(thisBullet));
+
+            toxicBulletPool.UpdateLastGivenObject(thisBullet);
+
+            return bullet;
+        }
+
     }
 }

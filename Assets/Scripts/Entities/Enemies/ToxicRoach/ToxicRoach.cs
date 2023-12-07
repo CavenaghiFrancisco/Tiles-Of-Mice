@@ -5,13 +5,12 @@ namespace TOM.Enemy
 {
     public class ToxicRoach : Enemy
     {
-        private GameObject bulletPrefab = null;
-        private Transform bulletFolder = null;
-
         private EnemyGrowParameters selfGrowParameters = null;
         private EnemyBasicParameters selfBasicParameters = null;
+
+        private EnemyController enemyController = null;
         
-        public void Initialize(EnemyBasicParameters basicParameters, EnemyGrowParameters growParameters, GameObject projectile, Transform projFolder)
+        public void Initialize(EnemyBasicParameters basicParameters, EnemyGrowParameters growParameters, EnemyController eController)
         {
             hp = basicParameters.healthPoints;
             type = EnemyType.Normal;
@@ -30,9 +29,7 @@ namespace TOM.Enemy
             selfBasicParameters = basicParameters;
             selfGrowParameters = growParameters;
 
-            bulletPrefab = projectile;
-            bulletFolder = projFolder;
-
+            enemyController = eController;
         }
         private void Awake()
         {
@@ -42,9 +39,7 @@ namespace TOM.Enemy
         {
             if (isAlive)
             {
-                GameObject bulletObj = Instantiate(bulletPrefab, transform.position, Quaternion.LookRotation(transform.forward, transform.up), bulletFolder.transform);
-                Bullet bullet = bulletObj.GetComponent<Bullet>();
-                bullet.StartFlying(basicAtk);
+                enemyController.GetAvaliableBullet(Quaternion.LookRotation(transform.forward, transform.up), transform.position, basicAtk);
             }
         }
 

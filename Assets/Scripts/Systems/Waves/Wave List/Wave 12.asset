@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Wave 12
   m_EditorClassIdentifier: 
   waveID: 12
-  waveThreshold: 0
   waveLevel: 3
-  enemyAmount: 2
+  CRAmount: 3
+  TRAmount: 1
   enemyDelay: 0

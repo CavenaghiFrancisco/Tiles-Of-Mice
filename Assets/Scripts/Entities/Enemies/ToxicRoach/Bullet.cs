@@ -14,6 +14,7 @@ public class Bullet : MonoBehaviour
     public int Damage => damage;
 
     private bool flying = false;
+    public bool Flying => flying;
 
     private void Awake()
     {
