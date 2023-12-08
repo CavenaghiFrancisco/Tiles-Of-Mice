@@ -2,16 +2,32 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class MainMenuManager : MonoBehaviour
 {
     [SerializeField] private List<GameObject> panels;
     [SerializeField] private List<GameObject> cams;
+    [SerializeField] private GameObject panel; 
 
     private IEnumerator Fade(int index)
     {
         yield return new WaitForSeconds(1.8f);
         panels[index].SetActive(true);
+        yield return null;
+    }
+
+    private IEnumerator FadeGameplay()
+    {
+        panel.SetActive(true);
+        Image img = panel.GetComponent<Image>();
+        while(img.color.a < 0.98f)
+        {
+            img.color += new Color(0, 0, 0, Time.deltaTime);
+            yield return null;
+        }
+        yield return null;
+        SceneManager.LoadScene(1);
         yield return null;
     }
 
@@ -31,7 +47,7 @@ public class MainMenuManager : MonoBehaviour
 
     public void StartGame()
     {
-        SceneManager.LoadScene(1);
+        StartCoroutine(FadeGameplay());
     }
 
     public void QuitGame()
