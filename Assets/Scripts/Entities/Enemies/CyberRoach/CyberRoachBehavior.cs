@@ -1,12 +1,11 @@
-using System;
-using UnityEngine;
 using IA.FSM;
+using System;
 using System.Collections;
-using System.Collections.Generic;
+using UnityEngine;
 
 namespace TOM.Enemy.CR
 {
-    enum States
+    enum CRStates
     {
         Spawning,                   // Unitl every enemy is spawned will be idle (on development)
         Walking,
@@ -17,20 +16,6 @@ namespace TOM.Enemy.CR
         WaitingForPowerAttack,      // Waiting for power CoolDown
         Dying,                      // Is starting its death
         Dead                        // Is Death
-    }
-
-    enum Flags
-    {
-        OnEveryEnemySpawned,        // Reach the max number of enemies
-        OnArenaArrived,             // Reach the arena after spawning
-        OnReachedTarget,            // Reach the target position
-        OnBasicAttack,              // Has attacked
-        OnPowerAttack,              // Has attacked
-        OnGettingDamage,            // Is being damaged
-        OnStunFinish,               // Finish stun time
-        OnHurtFinish,               // Finish waiting time
-        OnGettingFatalDamage,       // Is near to death...
-        OnDie                       // Died
     }
 
     [RequireComponent(typeof(CyberRoach))]
@@ -44,15 +29,13 @@ namespace TOM.Enemy.CR
 
         private static Vector3 arenaCenter;
 
-        //private System.Action OnTimerEnd;
-
         private bool isAlreadyWaiting = false;
 
         private bool isTargetAlive = false;
 
         private FSM fsm = null;
 
-        [field: SerializeField] private States state { set; get; } //Esta magia negra no se lo que hace, preguntar a fede
+        [field: SerializeField] private CRStates CRState { set; get; } //Esta magia negra no se lo que hace, preguntar a fede
 
         private StateParameters pursuitParameters;
         private StateParameters walkingParameters;
@@ -66,7 +49,7 @@ namespace TOM.Enemy.CR
 
         private void Awake()
         {
-            fsm = new FSM(Enum.GetValues(typeof(States)).Length, Enum.GetValues(typeof(Flags)).Length);
+            fsm = new FSM(Enum.GetValues(typeof(CRStates)).Length, Enum.GetValues(typeof(Flags)).Length);
         }
         private void SetUp()
         {
@@ -86,55 +69,55 @@ namespace TOM.Enemy.CR
             thisGO.Parameters = new object[1] { gameObject };
 
 
-            fsm.SetRelation((int)States.Spawning, (int)Flags.OnEveryEnemySpawned, (int)States.Walking);
+            fsm.SetRelation((int)CRStates.Spawning, (int)Flags.OnEveryEnemySpawned, (int)CRStates.Walking);
             walkingParameters.Parameters = new object[3] { rb, arenaCenter, cyberRoach.GetMovementSpeed() };
-            fsm.AddState<WalkingState>((int)States.Walking, walkingParameters, thisGO, thisGO);
+            fsm.AddState<WalkingStateCR>((int)CRStates.Walking, walkingParameters, thisGO, thisGO);
 
 
 
-            fsm.SetRelation((int)States.Walking, (int)Flags.OnArenaArrived, (int)States.Pursuit);
+            fsm.SetRelation((int)CRStates.Walking, (int)Flags.OnArenaArrived, (int)CRStates.Pursuit);
             pursuitParameters.Parameters = new object[5] { rb, target.transform, cyberRoach.GetMovementSpeed(), cyberRoach.GetAttackRadius(), isTargetAlive };
-            fsm.AddState<PursuitState>((int)States.Pursuit, pursuitParameters);
+            fsm.AddState<PursuitState>((int)CRStates.Pursuit, pursuitParameters);
 
 
 
-            fsm.SetRelation((int)States.Pursuit, (int)Flags.OnReachedTarget, (int)States.Attack);
+            fsm.SetRelation((int)CRStates.Pursuit, (int)Flags.OnReachedTarget, (int)CRStates.Attack);
             attackParameters.Parameters = new object[3] { target.GetComponent<Player>(), cyberRoach, cyberRoach.GetType() };
-            fsm.AddState<AttackState>((int)States.Attack, attackParameters);
+            fsm.AddState<AttackState>((int)CRStates.Attack, attackParameters);
 
 
 
-            fsm.SetRelation((int)States.Attack, (int)Flags.OnBasicAttack, (int)States.WaitingForBasicAttack);
+            fsm.SetRelation((int)CRStates.Attack, (int)Flags.OnBasicAttack, (int)CRStates.WaitingForBasicAttack);
             waitForBasicParameters.Parameters = new object[2] { cyberRoach.GetBasicHitCD(), this };
-            fsm.AddState<WaitingState>((int)States.WaitingForBasicAttack, waitForBasicParameters);
+            fsm.AddState<WaitingStateCR>((int)CRStates.WaitingForBasicAttack, waitForBasicParameters);
 
 
 
-            fsm.SetRelation((int)States.Attack, (int)Flags.OnPowerAttack, (int)States.WaitingForPowerAttack);
+            fsm.SetRelation((int)CRStates.Attack, (int)Flags.OnPowerAttack, (int)CRStates.WaitingForPowerAttack);
             waitForPowerParameters.Parameters = new object[2] { cyberRoach.GetPowerHitCD(), this };
-            fsm.AddState<WaitingState>((int)States.WaitingForPowerAttack, waitForPowerParameters);
+            fsm.AddState<WaitingStateCR>((int)CRStates.WaitingForPowerAttack, waitForPowerParameters);
 
 
 
-            fsm.SetRelation((int)States.Attack, (int)Flags.OnGettingDamage, (int)States.Hurting);
+            fsm.SetRelation((int)CRStates.Attack, (int)Flags.OnGettingDamage, (int)CRStates.Hurting);
             hurtParameters.Parameters = new object[1] { cyberRoach.GetStunTime() };
-            fsm.AddState<HurtingState>((int)States.Hurting, hurtParameters);
+            fsm.AddState<HurtingState>((int)CRStates.Hurting, hurtParameters);
 
 
 
-            fsm.SetRelation((int)States.Pursuit, (int)Flags.OnGettingFatalDamage, (int)States.Dying);
+            fsm.SetRelation((int)CRStates.Pursuit, (int)Flags.OnGettingFatalDamage, (int)CRStates.Dying);
             dyingParameters.Parameters = new object[1] { cyberRoach };
-            fsm.AddState<DyingState>((int)States.Dying, dyingParameters);
+            fsm.AddState<DyingState>((int)CRStates.Dying, dyingParameters);
 
 
 
-            fsm.SetRelation((int)States.Attack, (int)Flags.OnGettingFatalDamage, (int)States.Dying);
-            fsm.SetRelation((int)States.Pursuit, (int)Flags.OnGettingDamage, (int)States.Hurting);
-            fsm.SetRelation((int)States.Hurting, (int)Flags.OnHurtFinish, (int)States.Pursuit);
+            fsm.SetRelation((int)CRStates.Attack, (int)Flags.OnGettingFatalDamage, (int)CRStates.Dying);
+            fsm.SetRelation((int)CRStates.Pursuit, (int)Flags.OnGettingDamage, (int)CRStates.Hurting);
+            fsm.SetRelation((int)CRStates.Hurting, (int)Flags.OnHurtFinish, (int)CRStates.Pursuit);
 
 
 
-            fsm.SetCurrentStateForced((int)States.Spawning);
+            fsm.SetCurrentStateForced((int)CRStates.Spawning);
         }
         private void FixedUpdate()
         {
@@ -142,7 +125,7 @@ namespace TOM.Enemy.CR
             {
                 fsm.Update();
             }
-            //Debug.Log("Estado actual de " + rb.gameObject.name + " es " + ((States)fsm.currentStateIndex).ToString());
+            //Debug.Log("Estado actual de " + rb.gameObject.name + " es " + ((CRStates)fsm.currentStateIndex).ToString());
             //Debug.Log("Posicion actual de " + rb.gameObject.name + " es " + transform.position);
         }
 
@@ -170,7 +153,7 @@ namespace TOM.Enemy.CR
 
         public void ResetBehaviour()
         {
-            fsm.SetCurrentStateForced((int)States.Spawning);
+            fsm.SetCurrentStateForced((int)CRStates.Spawning);
         }
 
         private void OnDestroy()
@@ -194,7 +177,7 @@ namespace TOM.Enemy.CR
                 t += Time.deltaTime;
                 yield return null;
             }
-            fsm.SetCurrentStateForced((int)States.Pursuit);
+            fsm.SetCurrentStateForced((int)CRStates.Pursuit);
             isAlreadyWaiting = false;
         }
 

@@ -3,6 +3,12 @@ using TOM.Enemy;
 
 namespace TOM.Utilities
 {
+    public enum OPType
+    {
+        CyberRoach,
+        ToxicRoach,
+        Bullet
+    }
     public class ObjectPool<T> where T : new()
     {
         private List<T> objectList;
@@ -29,15 +35,35 @@ namespace TOM.Utilities
             _example = example;
         }
 
-        public T GetAbleObject()
+        public T GetAbleObject(OPType selector)
         {
             foreach (T obj in objectList)
             {
-                if (!((obj as UnityEngine.GameObject).GetComponent<CyberRoach>().IsAlive()))
+                if (selector == OPType.CyberRoach)
                 {
-                    lastObjectIndex = objectList.IndexOf(obj);
-                    return obj;
-                    
+                    if (!((obj as UnityEngine.GameObject).GetComponent<CyberRoach>().IsAlive()))
+                    {
+                        lastObjectIndex = objectList.IndexOf(obj);
+                        return obj;
+
+                    }
+                }
+                if (selector == OPType.ToxicRoach)
+                {
+                    if (!((obj as UnityEngine.GameObject).GetComponent<ToxicRoach>().IsAlive()))
+                    {
+                        lastObjectIndex = objectList.IndexOf(obj);
+                        return obj;
+
+                    }
+                }
+                if (selector == OPType.Bullet)
+                {
+                    if (!((obj as UnityEngine.GameObject).GetComponent<Bullet>().Flying))
+                    {
+                        lastObjectIndex = objectList.IndexOf(obj);
+                        return obj;
+                    }
                 }
             }
 

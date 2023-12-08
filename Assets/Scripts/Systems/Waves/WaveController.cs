@@ -52,13 +52,15 @@ namespace TOM
             enemyController.TurnOnEnemiesOnLevel
             (
                 wave.waveLevel + parameters.levelAugmentAmount * (rotations - 1),
-                wave.enemyAmount,
+                wave.CRAmount,
+                wave.TRAmount,
                 wave.enemyDelay
             );
             waveCount++;
             wavesElapsed++;
             Debug.Log("Empezando el nivel " + wavesElapsed + "!");
-            Debug.Log("CR Spawneadas: " + wave.enemyAmount);
+            Debug.Log("CR Spawneadas: " + wave.CRAmount);
+            Debug.Log("TR Spawneadas: " + wave.TRAmount);
         }
 
         private void EndWave()

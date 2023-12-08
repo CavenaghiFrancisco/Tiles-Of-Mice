@@ -56,7 +56,6 @@ namespace TOM
         {
             if (other.CompareTag("Enemy"))
             {
-
                 TOM.Enemy.Enemy hittedEnemy = other.gameObject.GetComponent<TOM.Enemy.Enemy>();
                 foreach (TOM.Enemy.Enemy enemy in hittedEnemyList)
                 {

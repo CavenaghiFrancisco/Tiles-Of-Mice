@@ -1,10 +1,9 @@
 using System.Collections.Generic;
-using System.Collections;
 using UnityEngine;
 using IA.FSM;
 using System;
 
-namespace TOM.Enemy.CR
+namespace TOM.Enemy
 {
     public class PursuitState : State
     {
@@ -18,7 +17,7 @@ namespace TOM.Enemy.CR
             SetParameters(parameters);
 
             List<Action> behabiours = new List<Action>();
-            
+
             behabiours.Add(() =>
             {
                 Vector3 direction = (br1eTransform.position - thisRB.position).normalized;

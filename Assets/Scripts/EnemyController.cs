@@ -1,10 +1,9 @@
-using System.Collections;
 using System.Collections.Generic;
-using System.Configuration.Assemblies;
-using UnityEngine;
-using System.Linq;
-using TOM.Enemy.CR;
+using System.Collections;
 using TOM.Utilities;
+using TOM.Enemy.CR;
+using TOM.Enemy.TR;
+using UnityEngine;
 
 namespace TOM.Enemy
 {
@@ -12,33 +11,46 @@ namespace TOM.Enemy
     {
         [SerializeField] private GameObject player = null;
 
-        [SerializeField] private EnemySpecs enemySpecifications = null;
-
         [SerializeField] private Transform arenaCenter = null;
 
         [SerializeField] private Transform spawnTransform = null;
 
+        [SerializeField] private EnemySpecs enemySpecs = default;
+
         private int actualLevelID = 0;
         private int maxCRCount = 0;
-        private int maxSVCount = 0;
+        private int maxTRCount = 0;
 
-        private int enemySpawnAmount = 0;
-        private int killedEnemies = 0;
+        private int CRSpawnAmount = 0;
+        private int TRSpawnAmount = 0;
 
-        private int createdEnemies = 1;
+        private int killedCRs = 0;
+        private int killedTRs = 0;
+
+        private int createdCRs = 1;
+        private int createdTRs = 1;
 
         private Transform CRFolder;
-        private Transform SVFolder;
-        private Transform GregorioFolder;
+        private Transform TRFolder;
+        private Transform ToxicBulletFolder;
+
+        private bool everyCRCreated = false;
+        private bool everyTRCreated = false;
 
         private List<CyberRoach> CyberRoachList = new List<CyberRoach>();
         private List<CyberRoachBehavior> CyberRoachBehaviorList = new List<CyberRoachBehavior>();
-        //private List<CyberRoach> CyberRoachList = new List<CyberRoach>();
+
+        private List<ToxicRoach> ToxicRoachList = new List<ToxicRoach>();
+        private List<ToxicRoachBehavior> ToxicRoachBehaviorList = new List<ToxicRoachBehavior>();
+
+        private List<Bullet> ToxicBulletList = new List<Bullet>();
 
         public static System.Action OnAllEnemiesCreated;
         public System.Action OnAllEnemiesKilled;
 
         private ObjectPool<GameObject> crPool;
+        private ObjectPool<GameObject> trPool;
+        private ObjectPool<GameObject> toxicBulletPool;
 
         private void Awake()
         {
@@ -47,8 +59,11 @@ namespace TOM.Enemy
             //levelList = levelList.OrderBy(x => x.levelID).ToList();//Ordeno la lista por IDs
 
             CyberRoachBehavior.SetArenaCenter(arenaCenter.position);//Setteo el centro de la arena al cual las cyberroachs van a ir cuando spawneen.
+            ToxicRoachBehavior.SetArenaCenter(arenaCenter.position);//Setteo el centro de la arena al cual las cyberroachs van a ir cuando spawneen.
 
-            crPool = new ObjectPool<GameObject>(enemySpecifications.CRPrefab);
+            crPool = new ObjectPool<GameObject>(enemySpecs.CRPrefab);
+            trPool = new ObjectPool<GameObject>(enemySpecs.TRPrefab);
+            toxicBulletPool = new ObjectPool<GameObject>(enemySpecs.bulletPrefab);
 
             CreateFolders();
 
@@ -58,15 +73,25 @@ namespace TOM.Enemy
         {
             foreach (CyberRoach cr in CyberRoachList)
             {
-                cr.OnDeath -= EnemyKillCounter;
+                cr.OnDeath -= CRKillCounter;
+            }
+            foreach (ToxicRoach tr in ToxicRoachList)
+            {
+                tr.OnDeath -= TRKillCounter;
             }
         }
 
-        public void TurnOnEnemiesOnLevel(int enemyLevel, int amount, float delay)
+        public void TurnOnEnemiesOnLevel(int enemyLevel, int CRamount, int TRamount, float delay)
         {
-            enemySpawnAmount = amount;
-            killedEnemies = 0;
-            CreateEnemies(enemyLevel, amount, delay);
+            this.enemySpecs = enemySpecs;
+
+            CRSpawnAmount = CRamount;
+            killedCRs = 0;
+
+            TRSpawnAmount = TRamount;
+            killedTRs = 0;
+
+            CreateEnemies(enemyLevel, CRamount, TRamount, delay);
         }
         private void CreateFolders()
         {
@@ -75,27 +100,32 @@ namespace TOM.Enemy
             auxGo.transform.position = spawnTransform.position;
             CRFolder = auxGo.transform;
 
-            auxGo = new GameObject("SV-23 List");
+            auxGo = new GameObject("ToxicRoach List");
             auxGo.transform.SetParent(this.transform);
-            SVFolder = auxGo.transform;
+            TRFolder = auxGo.transform;
+
+            auxGo = new GameObject("ToxicBullet List");
+            auxGo.transform.SetParent(this.transform);
+            ToxicBulletFolder = auxGo.transform;
         }
 
-        private void CreateEnemies(int waveLevel, int crAmount, float delayInSeconds)
+        private void CreateEnemies(int waveLevel, int crAmount, int trAmount, float delayInSeconds)
         {
             StartCoroutine(CreateCyberRoachs(waveLevel, crAmount, delayInSeconds));
+            StartCoroutine(CreateToxicRoachs(waveLevel, trAmount, delayInSeconds));
         }
 
         private void EnableCyberRoach(int waveLevel)
         {
-            GameObject thisCR = crPool.GetAbleObject();
+            GameObject thisCR = crPool.GetAbleObject(OPType.CyberRoach);
 
             CyberRoach cr;
             CyberRoachBehavior crb;
-            
+
             if (thisCR.name.Length == 4)
             {
                 thisCR = Instantiate(crPool.GetT(), CRFolder);
-                thisCR.name = "CR - " + createdEnemies.ToString();
+                thisCR.name = "CR - " + createdCRs.ToString();
                 //Debug.Log("Cree a "+thisCR.name);
 
                 cr = thisCR.AddComponent<CyberRoach>();
@@ -104,12 +134,12 @@ namespace TOM.Enemy
                 CyberRoachList.Add(cr);
                 CyberRoachBehaviorList.Add(crb);
 
-                cr.Initialize(enemySpecifications.CRBasicParams, enemySpecifications.CRGrowParams);
-                cr.OnDeath += EnemyKillCounter;
+                cr.Initialize(enemySpecs.CRBasicParams, enemySpecs.CRGrowParams);
+                cr.OnDeath += CRKillCounter;
 
                 crb.Initialize(player);
 
-                createdEnemies++;
+                createdCRs++;
             }
             else
             {
@@ -133,10 +163,58 @@ namespace TOM.Enemy
             crPool.UpdateLastGivenObject(thisCR);
         }
 
-        private IEnumerator WaitFrame(GameObject thisCR)
+        private void EnableToxicRoach(int waveLevel)
+        {
+            GameObject thisTR = trPool.GetAbleObject(OPType.ToxicRoach);
+
+            ToxicRoach tr;
+            ToxicRoachBehavior trb;
+
+            if (thisTR.name.Length == 4)
+            {
+                thisTR = Instantiate(trPool.GetT(), TRFolder);
+                thisTR.name = "TR - " + createdTRs.ToString();
+                //Debug.Log("Cree a "+thisCR.name);
+
+                tr = thisTR.AddComponent<ToxicRoach>();
+                trb = thisTR.AddComponent<ToxicRoachBehavior>();
+
+                ToxicRoachList.Add(tr);
+                ToxicRoachBehaviorList.Add(trb);
+
+                tr.Initialize(enemySpecs.TRBasicParams, enemySpecs.TRGrowParams, this);
+                tr.OnDeath += TRKillCounter;
+
+                trb.Initialize(player);
+
+                createdTRs++;
+            }
+            else
+            {
+                tr = thisTR.GetComponent<ToxicRoach>();
+
+                trb = thisTR.GetComponent<ToxicRoachBehavior>();
+                tr.gameObject.SetActive(true);
+
+                trb.ResetBehaviour();
+
+                //Debug.Log("Actualice a " + thisCR.name);
+            }
+
+            tr.Grow(waveLevel);
+
+            tr.gameObject.transform.position = GetRandomPosition(spawnTransform.position);
+            tr.gameObject.GetComponent<Rigidbody>().position = thisTR.transform.position;
+
+            StartCoroutine(WaitFrame(thisTR));
+
+            trPool.UpdateLastGivenObject(thisTR);
+        }
+
+        private IEnumerator WaitFrame(GameObject enemy)
         {
             yield return new WaitForEndOfFrame();
-            thisCR.SetActive(true);
+            enemy.SetActive(true);
         }
 
         private IEnumerator CreateCyberRoachs(int waveLevel, int amount, float delayInSeconds)
@@ -149,8 +227,32 @@ namespace TOM.Enemy
                 yield return new WaitForSeconds(delayInSeconds);
             }
 
-            OnAllEnemiesCreated?.Invoke();
+            everyCRCreated = true;
+            CheckEveryEnemyCreated();
         }
+
+        private IEnumerator CreateToxicRoachs(int waveLevel, int amount, float delayInSeconds)
+        {
+            int createdAmount = 0;
+            while (createdAmount < amount)
+            {
+                EnableToxicRoach(waveLevel);
+                createdAmount++;
+                yield return new WaitForSeconds(delayInSeconds);
+            }
+
+            everyTRCreated = true;
+
+            CheckEveryEnemyCreated();
+
+        }
+
+        private void CheckEveryEnemyCreated()
+        {
+            if (everyCRCreated && everyTRCreated)
+                OnAllEnemiesCreated?.Invoke();
+        }
+
 
         private Vector3 GetRandomPosition(Vector3 center)
         {
@@ -161,29 +263,63 @@ namespace TOM.Enemy
             return center + offset;
         }
 
-        private void CreateSV23(int wave, int amount)
-        {
-            /*Si es que hay, lo dejo para despues*/
-        }
-
         public void KillEnemies()
         {
             foreach (CyberRoach enemy in CyberRoachList)
             {
                 enemy.Die();
             }
+            foreach (ToxicRoach enemy in ToxicRoachList)
+            {
+                enemy.Die();
+            }
+        }
+        private void CRKillCounter()
+        {
+            killedCRs++;
+            Debug.Log("Kill Counter: " + killedCRs + "/" + CRSpawnAmount);
+            CheckKillCounter();
+        }
+        private void TRKillCounter()
+        {
+            killedTRs++;
+            Debug.Log("Kill Counter: " + killedTRs + "/" + TRSpawnAmount);
+            CheckKillCounter();
         }
 
-        private void EnemyKillCounter()
+        private void CheckKillCounter()
         {
-            killedEnemies++;
-            Debug.Log("Kill Counter: " + killedEnemies + "/" + enemySpawnAmount);
-            if (killedEnemies == enemySpawnAmount)
+            if (killedCRs + killedTRs == CRSpawnAmount + TRSpawnAmount)
             {
                 Debug.Log("Suficiente para pasar de nivel...");
                 OnAllEnemiesKilled?.Invoke();
                 //fameManager.GetFame();
             }
+        }
+
+        public Bullet GetAvaliableBullet(Quaternion rotation, Vector3 position, int shotDamage)
+        {
+            GameObject thisBullet = toxicBulletPool.GetAbleObject(OPType.Bullet);
+
+            Bullet bullet;
+
+            thisBullet = Instantiate(toxicBulletPool.GetT(), ToxicBulletFolder);
+            thisBullet.name = "Toxic Bullet - " + createdTRs.ToString();
+
+            bullet = thisBullet.AddComponent<Bullet>();
+
+            ToxicBulletList.Add(bullet);
+
+            bullet.StartFlying(shotDamage, enemySpecs.toxicBulletSpeed);
+
+            bullet.transform.rotation = rotation;
+            bullet.transform.position = position;
+
+            StartCoroutine(WaitFrame(thisBullet));
+
+            toxicBulletPool.UpdateLastGivenObject(thisBullet);
+
+            return bullet;
         }
 
     }

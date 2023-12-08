@@ -1,9 +1,8 @@
-using System.Collections;
 using System.Collections.Generic;
-using TOM;
-using UnityEngine;
-using UnityEngine.UI;
 using Debug = UnityEngine.Debug;
+using UnityEngine.UI;
+using UnityEngine;
+using TOM;
 
 public class FameManager : MonoBehaviour
 {
@@ -71,6 +70,7 @@ public class FameManager : MonoBehaviour
     {
         Rank++;
         Fame = 0;
+        SetSliderValue(Fame);
         //Animacion de pasar de rango
         //Sonido de pasar de rango
         TurnOnStar();
@@ -109,7 +109,7 @@ public class FameManager : MonoBehaviour
         testingWave = 0;
         TurnOffStars();
         SetFameMaxValue();
-        SetSliderValue(0);
+        SetSliderValue(Fame);
 
         Debug.Log("Reseteo el sistema de Fama!");
     }

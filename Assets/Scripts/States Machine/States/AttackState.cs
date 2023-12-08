@@ -1,23 +1,27 @@
 using System.Collections.Generic;
-using System.Collections;
-using UnityEngine;
 using IA.FSM;
 using System;
 
-namespace TOM.Enemy.CR
+namespace TOM.Enemy
 {
-    public class DyingState : State
+    public class AttackState : State
     {
+        bool wasPoweredAttack = false;
+
+        Player target = null;
+        Enemy enemy = null;
+        Type enemyType = null;
         public override List<Action> GetBehaviours(StateParameters parameters)
         {
-            CyberRoach cr = parameters.Parameters[0] as CyberRoach;
+
+            SetParameters(parameters);
 
             List<Action> behabiours = new List<Action>();
 
             behabiours.Add(() =>
             {
-                cr.Die();
-                Transition((int)Flags.OnDie);
+                enemy.Attack(target);
+                Transition((int)Flags.OnBasicAttack);
             }
             );
 
@@ -36,12 +40,16 @@ namespace TOM.Enemy.CR
 
         public override object[] GetOutputs()
         {
-            return null;
+            object[] output = new object[1] { wasPoweredAttack };
+            return output;
         }
 
         public override void SetParameters(StateParameters parameters)
         {
-
+            wasPoweredAttack = false;
+            target = parameters.Parameters[0] as Player;
+            enemyType = parameters.Parameters[2] as Type;
+            enemy = Convert.ChangeType(parameters.Parameters[1], enemyType) as Enemy;
         }
 
         public override void Transition(int flag)

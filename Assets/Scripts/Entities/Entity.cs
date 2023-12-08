@@ -1,4 +1,5 @@
 using UnityEngine;
+
 namespace TOM
 {
     public abstract class Entity : MonoBehaviour

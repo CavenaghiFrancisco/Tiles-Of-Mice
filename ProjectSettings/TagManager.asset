@@ -7,6 +7,7 @@ TagManager:
   - Damager
   - DeathZone
   - Enemy
+  - Bullet
   layers:
   - Default
   - TransparentFX
@@ -19,7 +20,7 @@ TagManager:
   - EnemyInside
   - EnemyOutside
   - Door
-  - 
+  - Bullet
   - 
   - 
   - 
