@@ -1344,6 +1344,7 @@ GameObject:
   m_Component:
   - component: {fileID: 372372674}
   - component: {fileID: 372372675}
+  - component: {fileID: 372372676}
   m_Layer: 5
   m_Name: Enemies
   m_TagString: Untagged
@@ -1387,6 +1388,28 @@ MonoBehaviour:
   scoreText: {fileID: 1880315758}
   totalScore: 100
   durationInSeconds: 5
+--- !u!114 &372372676
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 372372673}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b72f939fea17b5e49bc7462bc4d14eb8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_listeners:
+    initialListenerList: []
+    useDefaultListeners: 1
+  isEnvironmentAware: 1
+  isStaticObject: 0
+  m_positionOffsetData:
+    KeepMe: 0
+    positionOffset: {x: 0, y: 0, z: 0}
+  m_posOffsetData: {fileID: 0}
+  listenerMask: 1
 --- !u!1001 &456979394
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3070,6 +3093,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1165714082}
   - component: {fileID: 1165714083}
+  - component: {fileID: 1165714084}
   m_Layer: 5
   m_Name: Time
   m_TagString: Untagged
@@ -3113,6 +3137,28 @@ MonoBehaviour:
   scoreText: {fileID: 2030721783}
   totalScore: 100
   durationInSeconds: 3
+--- !u!114 &1165714084
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1165714081}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b72f939fea17b5e49bc7462bc4d14eb8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_listeners:
+    initialListenerList: []
+    useDefaultListeners: 1
+  isEnvironmentAware: 1
+  isStaticObject: 0
+  m_positionOffsetData:
+    KeepMe: 0
+    positionOffset: {x: 0, y: 0, z: 0}
+  m_posOffsetData: {fileID: 0}
+  listenerMask: 1
 --- !u!1 &1218432208
 GameObject:
   m_ObjectHideFlags: 0
@@ -3205,6 +3251,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1219470976}
   - component: {fileID: 1219470977}
+  - component: {fileID: 1219470978}
   m_Layer: 5
   m_Name: Waves
   m_TagString: Untagged
@@ -3248,6 +3295,28 @@ MonoBehaviour:
   scoreText: {fileID: 143494010}
   totalScore: 100
   durationInSeconds: 6
+--- !u!114 &1219470978
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1219470975}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b72f939fea17b5e49bc7462bc4d14eb8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_listeners:
+    initialListenerList: []
+    useDefaultListeners: 1
+  isEnvironmentAware: 1
+  isStaticObject: 0
+  m_positionOffsetData:
+    KeepMe: 0
+    positionOffset: {x: 0, y: 0, z: 0}
+  m_posOffsetData: {fileID: 0}
+  listenerMask: 1
 --- !u!1001 &1244528629
 PrefabInstance:
   m_ObjectHideFlags: 0

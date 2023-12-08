@@ -345,7 +345,7 @@ MonoBehaviour:
     ParentPath: SoundBanks\Default Work Unit
     guid: 57e2afdabaaad34aaee37bbf3f7576fb
     GuidInternal: 
-    m_lastTime: -8584995463407465951
+    m_lastTime: -8584995379155916858
     List:
     - name: Music
       guid: 001bd738f360f643bc56c48991a2625d
@@ -373,7 +373,7 @@ MonoBehaviour:
     ParentPath: Events\Default Work Unit
     guid: 8851e7b97f6e3d4aa9189023925d9661
     GuidInternal: 
-    m_lastTime: -8584995463407615950
+    m_lastTime: -8584995379156076861
     List:
     - name: Play_br1e_attack_hit
       guid: bf5b9f984efe26408426ded412a1af63
@@ -664,6 +664,40 @@ MonoBehaviour:
       maxAttenuation: 0
       maxDuration: 0.640604
       minDuration: 0.382792
+    - name: Play_score_end
+      guid: 9d0808178d079d47b4eb5f28d69d57fd
+      id: 2707536130
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 8851e7b97f6e3d4aa9189023925d9661
+      - ElementName: Play_score_end
+        ObjectType: 3
+        guid: 9d0808178d079d47b4eb5f28d69d57fd
+      Path: Events\Default Work Unit\Play_score_end
+      maxAttenuation: 0
+      maxDuration: 0.873651
+      minDuration: 0.873651
+    - name: Play_score_loop
+      guid: b3427f4e77c2624599ca79de86c799c2
+      id: 3916431925
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 8851e7b97f6e3d4aa9189023925d9661
+      - ElementName: Play_score_loop
+        ObjectType: 3
+        guid: b3427f4e77c2624599ca79de86c799c2
+      Path: Events\Default Work Unit\Play_score_loop
+      maxAttenuation: 0
+      maxDuration: -1
+      minDuration: -1
     - name: Play_step
       guid: 16aa5799262df64caa530c7fb669ee79
       id: 99206220
@@ -715,6 +749,23 @@ MonoBehaviour:
       maxAttenuation: 0
       maxDuration: 2.898904
       minDuration: 2.898904
+    - name: Stop_score_loop
+      guid: 906d0eb1d3bef94f8a19e063be183639
+      id: 2412668695
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 8851e7b97f6e3d4aa9189023925d9661
+      - ElementName: Stop_score_loop
+        ObjectType: 3
+        guid: 906d0eb1d3bef94f8a19e063be183639
+      Path: Events\Default Work Unit\Stop_score_loop
+      maxAttenuation: 0
+      maxDuration: 0
+      minDuration: 0
   - PhysicalPath: Events\Factory Tencent GME.wwu
     PathAndIcons:
     - ElementName: Events

@@ -27,6 +27,8 @@ public class LeaderboardCalculator : MonoBehaviour
 
     IEnumerator AnimateScore()
     {
+        AkSoundEngine.PostEvent("Play_score_loop", gameObject);
+        yield return null;
         while (currentScore < totalScore)
         {
             elapsedTime += Time.deltaTime;
@@ -37,6 +39,8 @@ public class LeaderboardCalculator : MonoBehaviour
 
             yield return null;
         }
+        AkSoundEngine.PostEvent("Play_score_end", gameObject);
+        yield return null;
 
         currentScore = totalScore;
         UpdateScoreText();
