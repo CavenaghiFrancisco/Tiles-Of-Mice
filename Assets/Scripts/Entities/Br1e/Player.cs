@@ -57,6 +57,7 @@ namespace TOM
                             int aux = UnityEngine.Random.Range(0, 10);
                             animator.Play(aux >= 5 ? attack1.name : attack2.name);
                             float attackTime = aux >= 5 ? attack1.length : attack2.length;
+                            attackTime /= 2;
                             attackArea.GenerateAttackArea(attackTime, attackPosition.position);
                             StartCoroutine(RunVFX(attackTime));
                         }
@@ -94,6 +95,7 @@ namespace TOM
             {
                 hp = 0;
                 OnLifeModified?.Invoke(maxHP, hp);
+                AkSoundEngine.PostEvent("Play_dead", gameObject);
                 //animacion de muerte
                 //sfx de muerte
                 Debug.Log("Br1e ha muerto");
@@ -115,7 +117,7 @@ namespace TOM
                 else
                 {
                     GetHurt(hurtTime);
-                    //animacion de recibir damage
+                    AkSoundEngine.PostEvent("Play_br1e_receive_damage", gameObject);
                     //sfx de recibir damage
                 }
                 OnLifeModified?.Invoke(maxHP, hp);

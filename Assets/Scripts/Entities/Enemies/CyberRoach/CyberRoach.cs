@@ -63,11 +63,14 @@ namespace TOM.Enemy
                 hp -= damage;
                 if (hp <= 0)
                 {
+                    AkSoundEngine.PostEvent("Play_roach_dead", gameObject);
                     Die();
                 }
                 else
                 {
                     GetHurt(hurtTime);
+                    AkSoundEngine.PostEvent("Play_br1e_attack_hit", gameObject);
+                    AkSoundEngine.PostEvent("Play_roach_receive", gameObject);
                     //animacion de recibir damage
                     //sfx de recibir damage
                 }

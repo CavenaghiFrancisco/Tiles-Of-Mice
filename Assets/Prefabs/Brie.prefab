@@ -229,6 +229,8 @@ GameObject:
   - component: {fileID: 736584989617426642}
   - component: {fileID: 1048393918}
   - component: {fileID: 1048393917}
+  - component: {fileID: 1231716819520646861}
+  - component: {fileID: 5551925571985245250}
   m_Layer: 0
   m_Name: Brie
   m_TagString: Untagged
@@ -376,6 +378,40 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6a2774393d441b942a97caad533c41b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1231716819520646861
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 502584518425689218}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b72f939fea17b5e49bc7462bc4d14eb8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_listeners:
+    initialListenerList: []
+    useDefaultListeners: 1
+  isEnvironmentAware: 1
+  isStaticObject: 0
+  m_positionOffsetData:
+    KeepMe: 0
+    positionOffset: {x: 0, y: 0, z: 0}
+  m_posOffsetData: {fileID: 0}
+  listenerMask: 1
+--- !u!114 &5551925571985245250
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 502584518425689218}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 608109229025516458da543007757adc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &536129940008962656
@@ -6513,6 +6549,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a86625ce75e144844a2d0f3728c9e465, type: 3}
+--- !u!96 &5609449466132670567 stripped
+TrailRenderer:
+  m_CorrespondingSourceObject: {fileID: 3836789138757880843, guid: a86625ce75e144844a2d0f3728c9e465, type: 3}
+  m_PrefabInstance: {fileID: 8712151859318105196}
+  m_PrefabAsset: {fileID: 0}
 --- !u!96 &4295353303003252966 stripped
 TrailRenderer:
   m_CorrespondingSourceObject: {fileID: 4862742899682798730, guid: a86625ce75e144844a2d0f3728c9e465, type: 3}
@@ -6521,10 +6562,5 @@ TrailRenderer:
 --- !u!4 &6635519165075077780 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2662153441017765624, guid: a86625ce75e144844a2d0f3728c9e465, type: 3}
-  m_PrefabInstance: {fileID: 8712151859318105196}
-  m_PrefabAsset: {fileID: 0}
---- !u!96 &5609449466132670567 stripped
-TrailRenderer:
-  m_CorrespondingSourceObject: {fileID: 3836789138757880843, guid: a86625ce75e144844a2d0f3728c9e465, type: 3}
   m_PrefabInstance: {fileID: 8712151859318105196}
   m_PrefabAsset: {fileID: 0}

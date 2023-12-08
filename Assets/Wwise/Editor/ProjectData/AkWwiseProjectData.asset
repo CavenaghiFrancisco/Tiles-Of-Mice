@@ -345,7 +345,7 @@ MonoBehaviour:
     ParentPath: SoundBanks\Default Work Unit
     guid: 57e2afdabaaad34aaee37bbf3f7576fb
     GuidInternal: 
-    m_lastTime: -8584996084373165905
+    m_lastTime: -8584995463407465951
     List:
     - name: Music
       guid: 001bd738f360f643bc56c48991a2625d
@@ -373,7 +373,7 @@ MonoBehaviour:
     ParentPath: Events\Default Work Unit
     guid: 8851e7b97f6e3d4aa9189023925d9661
     GuidInternal: 
-    m_lastTime: -8584996085765503982
+    m_lastTime: -8584995463407615950
     List:
     - name: Play_br1e_attack_hit
       guid: bf5b9f984efe26408426ded412a1af63
@@ -426,6 +426,23 @@ MonoBehaviour:
       maxAttenuation: 0
       maxDuration: 0.305465
       minDuration: 0.246689
+    - name: Play_crowd
+      guid: 3392cf3fdbe03d42ae4008854a29b9f7
+      id: 639442169
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 8851e7b97f6e3d4aa9189023925d9661
+      - ElementName: Play_crowd
+        ObjectType: 3
+        guid: 3392cf3fdbe03d42ae4008854a29b9f7
+      Path: Events\Default Work Unit\Play_crowd
+      maxAttenuation: 0
+      maxDuration: -1
+      minDuration: -1
     - name: Play_crowd_high
       guid: 2a4547d024299848b712171341762430
       id: 2383965472
@@ -441,8 +458,8 @@ MonoBehaviour:
         guid: 2a4547d024299848b712171341762430
       Path: Events\Default Work Unit\Play_crowd_high
       maxAttenuation: 0
-      maxDuration: 41.79916
-      minDuration: 41.79916
+      maxDuration: -1
+      minDuration: -1
     - name: Play_crowd_low
       guid: f2052f3f33a1bc43b076217388e0708a
       id: 61258250
@@ -458,8 +475,8 @@ MonoBehaviour:
         guid: f2052f3f33a1bc43b076217388e0708a
       Path: Events\Default Work Unit\Play_crowd_low
       maxAttenuation: 0
-      maxDuration: 47.048344
-      minDuration: 47.048344
+      maxDuration: -1
+      minDuration: -1
     - name: Play_crowd_medium
       guid: d3b28c3b91984a4187fd4d4a7cb2390b
       id: 1497557841
@@ -475,8 +492,25 @@ MonoBehaviour:
         guid: d3b28c3b91984a4187fd4d4a7cb2390b
       Path: Events\Default Work Unit\Play_crowd_medium
       maxAttenuation: 0
-      maxDuration: 39.790203
-      minDuration: 39.790203
+      maxDuration: -1
+      minDuration: -1
+    - name: Play_Dash
+      guid: 9e60def994cdac498897a20c95e0dfea
+      id: 2211787386
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 8851e7b97f6e3d4aa9189023925d9661
+      - ElementName: Play_Dash
+        ObjectType: 3
+        guid: 9e60def994cdac498897a20c95e0dfea
+      Path: Events\Default Work Unit\Play_Dash
+      maxAttenuation: 0
+      maxDuration: 2.678571
+      minDuration: 2.678571
     - name: Play_dead
       guid: 37f09ce326aaa4449c7f925b83c1e4bc
       id: 2043319452
@@ -492,8 +526,8 @@ MonoBehaviour:
         guid: 37f09ce326aaa4449c7f925b83c1e4bc
       Path: Events\Default Work Unit\Play_dead
       maxAttenuation: 0
-      maxDuration: 4.852585
-      minDuration: 4.852585
+      maxDuration: 1.585944
+      minDuration: 1.585944
     - name: Play_Musica_Arena
       guid: cf709bd4311cb44e93c3fe19e2788a03
       id: 3639395332
@@ -545,6 +579,23 @@ MonoBehaviour:
       maxAttenuation: 0
       maxDuration: -1
       minDuration: -1
+    - name: Play_neon_sign
+      guid: ac11488d48e0c244b45d0e21d2d00ea8
+      id: 4181243206
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 8851e7b97f6e3d4aa9189023925d9661
+      - ElementName: Play_neon_sign
+        ObjectType: 3
+        guid: ac11488d48e0c244b45d0e21d2d00ea8
+      Path: Events\Default Work Unit\Play_neon_sign
+      maxAttenuation: 0
+      maxDuration: 0.985102
+      minDuration: 0.985102
     - name: Play_roach_attack
       guid: 6d35a2489d3df849a0e10b6a4a3488cd
       id: 2323152504
@@ -562,6 +613,23 @@ MonoBehaviour:
       maxAttenuation: 0
       maxDuration: 1.058345
       minDuration: 0.668775
+    - name: Play_roach_dead
+      guid: 7da99b7473f55f419c816e0df074bfed
+      id: 2190621366
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 8851e7b97f6e3d4aa9189023925d9661
+      - ElementName: Play_roach_dead
+        ObjectType: 3
+        guid: 7da99b7473f55f419c816e0df074bfed
+      Path: Events\Default Work Unit\Play_roach_dead
+      maxAttenuation: 0
+      maxDuration: 1.374979
+      minDuration: 1.374979
     - name: Play_roach_move
       guid: 3e529d85cc37fb4397ef3ca1712ee0dd
       id: 2437777155
@@ -577,8 +645,59 @@ MonoBehaviour:
         guid: 3e529d85cc37fb4397ef3ca1712ee0dd
       Path: Events\Default Work Unit\Play_roach_move
       maxAttenuation: 0
-      maxDuration: 5.336961
-      minDuration: 5.336961
+      maxDuration: -1
+      minDuration: -1
+    - name: Play_roach_receive
+      guid: 34dd1a61aae3d24189269c33021f3749
+      id: 3214899067
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 8851e7b97f6e3d4aa9189023925d9661
+      - ElementName: Play_roach_receive
+        ObjectType: 3
+        guid: 34dd1a61aae3d24189269c33021f3749
+      Path: Events\Default Work Unit\Play_roach_receive
+      maxAttenuation: 0
+      maxDuration: 0.640604
+      minDuration: 0.382792
+    - name: Play_step
+      guid: 16aa5799262df64caa530c7fb669ee79
+      id: 99206220
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 8851e7b97f6e3d4aa9189023925d9661
+      - ElementName: Play_step
+        ObjectType: 3
+        guid: 16aa5799262df64caa530c7fb669ee79
+      Path: Events\Default Work Unit\Play_step
+      maxAttenuation: 0
+      maxDuration: 0.319342
+      minDuration: 0.217959
+    - name: Play_ui
+      guid: 47f05cac8d66fb46a199904d1c578d3e
+      id: 2044747472
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 8851e7b97f6e3d4aa9189023925d9661
+      - ElementName: Play_ui
+        ObjectType: 3
+        guid: 47f05cac8d66fb46a199904d1c578d3e
+      Path: Events\Default Work Unit\Play_ui
+      maxAttenuation: 0
+      maxDuration: 0.779025
+      minDuration: 0.685601
     - name: Play_wave_over
       guid: ad577af9d6e5db4b92d23feb5dd5a475
       id: 4195661966
@@ -957,7 +1076,7 @@ MonoBehaviour:
     m_lastTime: -8585029224514775808
     List: []
   ExpandedFileSystemItemIds: 
-  ExpandedWaapiItemIds: 060000000700000008000000190000001a000000
+  ExpandedWaapiItemIds: 060000000700000008000000190000001a0000001d0000001e0000003200000033000000
   AutoSyncSelection: 0
   autoPopulateEnabled: 1
   currentDataSource: 0
