@@ -20,7 +20,7 @@ public class FameManager : MonoBehaviour
 
     private int actualWave = 0;
 
-    private int totalFameGained = 0;//Sumatoria de fama del player
+    private int totalFameGained = 0; //Sumatoria de fama del player
 
     private bool isSafeTime = true;
     private bool isfirstTime = true;
