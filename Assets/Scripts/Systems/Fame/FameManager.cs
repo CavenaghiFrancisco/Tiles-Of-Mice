@@ -23,6 +23,7 @@ public class FameManager : MonoBehaviour
     private int totalFameGained = 0;//Sumatoria de fama del player
 
     private bool isSafeTime = true;
+    private bool isfirstTime = true;
 
     private float timer = 0.0f;
 
@@ -57,7 +58,14 @@ public class FameManager : MonoBehaviour
         SetUpNextFameLevel();
         textTotalFame.text = totalFameGained.ToString();
         textAditionalFame.text = "+" + gainAmount.ToString();
-        panelAditionalFame.alpha = 1;
+        if (isfirstTime)
+        {
+            isfirstTime = false;
+        }
+        else
+        {
+            panelAditionalFame.alpha = 1;
+        }
 
         Debug.Log("Fama> Antes tenia " + prevFameAmount + " y ahora tengo " + totalFameGained);
     }

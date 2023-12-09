@@ -13,6 +13,7 @@ namespace TOM
         [SerializeField] private int startingWave = 0;
 
         [SerializeField] private bool isTestingBuild = false;
+        [SerializeField] private TMPro.TextMeshProUGUI waveText;
 
         private WaveParameters actualWave;//Muestra la proxima wave
         private WaveParameters nextWave;//Muestra la que va a remplazar a la proxima wave
@@ -39,6 +40,7 @@ namespace TOM
 
         private void Start()
         {
+            waveText.text = "Wave\n" + wavesElapsed.ToString();
             differentWaveCount = parameters.waveList.Count;
             rotations = 0;
             SetNextWave();
@@ -58,6 +60,7 @@ namespace TOM
             );
             waveCount++;
             wavesElapsed++;
+            waveText.text = "Wave\n" + wavesElapsed.ToString();
             Debug.Log("Empezando el nivel " + wavesElapsed + "!");
             Debug.Log("CR Spawneadas: " + wave.CRAmount);
             Debug.Log("TR Spawneadas: " + wave.TRAmount);
@@ -65,6 +68,7 @@ namespace TOM
 
         private void EndWave()
         {
+            AkSoundEngine.PostEvent("Play_wave_over", gameObject);
             fameManager.GetFame();
         }
 
