@@ -14,22 +14,21 @@ namespace TOM.Enemy.TR
         private Vector3 firstPoint;
         public override List<Action> GetBehaviours(StateParameters parameters)
         {
-
             SetParameters(parameters);
 
             List<Action> behabiours = new List<Action>();
 
-
             behabiours.Add(() =>
                 {
-                    Vector3 direction = firstPoint - rb.position;
-                    direction.y = 0;
+                    Vector3 targetDir = targetPosition;
+                    targetDir.y = rb.transform.position.y;
+                    rb.transform.LookAt(targetDir);
+
                     if (Vector3.Distance(rb.position, firstPoint) < 1f)
                     {
                         Transition((int)TOM.Enemy.Flags.OnArenaArrived);
                     }
-                    direction.Normalize();
-                    rb.MovePosition(rb.position + direction * speed * Time.fixedDeltaTime);
+                    rb.MovePosition(rb.position + rb.transform.forward * speed * Time.fixedDeltaTime);
                 }
             );
 
