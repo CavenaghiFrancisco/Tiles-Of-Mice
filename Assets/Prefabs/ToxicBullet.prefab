@@ -201,7 +201,7 @@ GameObject:
   - component: {fileID: 1102610930650246161}
   - component: {fileID: 7003509523229919269}
   - component: {fileID: 9124957198120418921}
-  - component: {fileID: 7185685360611999753}
+  - component: {fileID: -8257388135681088718}
   m_Layer: 0
   m_Name: ToxicBullet
   m_TagString: Bullet
@@ -259,7 +259,7 @@ MonoBehaviour:
     positionOffset: {x: 0, y: 0, z: 0}
   m_posOffsetData: {fileID: 0}
   listenerMask: 1
---- !u!114 &7185685360611999753
+--- !u!114 &-8257388135681088718
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -268,26 +268,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 3664892745289926177}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c0fc715b912feba4d9095e7776dc06e9, type: 3}
+  m_Script: {fileID: 11500000, guid: 79f3bfee25ac7b9488980e0543180fdc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  triggerList: f7e1664c
-  useOtherObject: 0
-  actionOnEventType: 0
-  curveInterpolation: 4
-  enableActionOnEvent: 0
-  data:
-    idInternal: 0
-    valueGuidInternal: 
-    WwiseObjectReference: {fileID: 11400000, guid: 3c1c30c14f6dc3f498d726c958506432, type: 2}
-  useCallbacks: 0
-  Callbacks: []
-  playingId: 0
-  soundEmitterObject: {fileID: 0}
-  transitionDuration: 0
-  eventIdInternal: 0
-  valueGuidInternal: 
-  m_callbackDataInternal: {fileID: 0}
+  eventName: Play_spit
+  playOnEnable: 1
+  playOnStart: 0
 --- !u!1 &5048704088726616664
 GameObject:
   m_ObjectHideFlags: 0

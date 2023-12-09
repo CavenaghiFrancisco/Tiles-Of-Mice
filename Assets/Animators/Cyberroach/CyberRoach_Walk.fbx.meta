@@ -59,9 +59,37 @@ ModelImporter:
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events:
-      - time: 0
+      - time: 0.14054054
         functionName: PostAudio
-        data: 
+        data: Play_roach_step
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.34054053
+        functionName: PostAudio
+        data: Play_roach_step
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.5513513
+        functionName: PostAudio
+        data: Play_roach_step
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.75405407
+        functionName: PostAudio
+        data: Play_roach_step
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.9432432
+        functionName: PostAudio
+        data: Play_roach_step
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
         intParameter: 0

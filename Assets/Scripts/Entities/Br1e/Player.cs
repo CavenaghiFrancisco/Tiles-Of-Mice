@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using System;
+using TOM.Enemy;
 
 namespace TOM.ATTACK
 {
@@ -19,9 +20,13 @@ namespace TOM
         [SerializeField] private Transform attackPosition = null;
         [SerializeField] private AttackArea attackArea = null;
         [SerializeField] private TrailRenderer attackVFX = null;
+        [SerializeField] private GameObject normalAttackVFX = null;
+        [SerializeField] private GameObject toxicAttackVFX = null;
 
         [SerializeField] private AnimationClip attack1 = null;
         [SerializeField] private AnimationClip attack2 = null;
+
+        public static Action OnDeadPlayer;
 
         private Controls controls;
         private Movement movement;
@@ -101,7 +106,8 @@ namespace TOM
                 Debug.Log("Br1e ha muerto");
                 isAlive = false;
                 gameObject.SetActive(false); //Hacer esto una vez que se ejecuta la animacion de muerte
-                OnDeath?.Invoke();
+                OnDeadPlayer();
+                GameManager.PauseGame();
             }
         }
 
@@ -109,6 +115,10 @@ namespace TOM
         {
             if (isAlive)
             {
+                if (!toxicAttackVFX.activeSelf)
+                {
+                    normalAttackVFX.SetActive(true);
+                }
                 hp -= damage;
                 if (hp <= 0)
                 {
@@ -162,6 +172,8 @@ namespace TOM
                 yield return null;
             }
             playerMat.color = defaultColor;
+            normalAttackVFX.SetActive(false);
+            toxicAttackVFX.SetActive(false);
         }
 
         private void OnEnable()
@@ -178,6 +190,7 @@ namespace TOM
         {
             if (other.CompareTag("Bullet"))
             {
+                toxicAttackVFX.SetActive(true);
                 Bullet bullet = other.GetComponent<Bullet>();
                 GetDamage(bullet.Damage);
                 bullet.StopFlying();

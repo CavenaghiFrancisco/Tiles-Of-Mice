@@ -5,7 +5,8 @@ using UnityEngine;
 public class LeaderboardCalculator : MonoBehaviour
 {
     public TMPro.TextMeshProUGUI scoreText;
-    public int totalScore = 100;
+    public int totalScore;
+    public string keyName;
     public float durationInSeconds = 5f;
 
     private int currentScore = 0;
@@ -13,6 +14,7 @@ public class LeaderboardCalculator : MonoBehaviour
 
     void Start()
     {
+        totalScore = PlayerPrefs.GetInt(keyName);
         currentScore = 0;
         UpdateScoreText();
 

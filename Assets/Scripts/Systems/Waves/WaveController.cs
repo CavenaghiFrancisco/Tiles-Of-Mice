@@ -31,11 +31,13 @@ namespace TOM
             actualWave = parameters.waveList[startingWave];
             nextWave = parameters.waveList[startingWave + 1];
             enemyController.OnAllEnemiesKilled += SetNextWave;
+            PlayerPrefs.SetInt("Waves", 0);
         }
 
         private void OnDestroy()
         {
             enemyController.OnAllEnemiesKilled -= SetNextWave;
+            PlayerPrefs.SetInt("Waves", wavesElapsed);
         }
 
         private void Start()

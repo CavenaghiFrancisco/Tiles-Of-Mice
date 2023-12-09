@@ -1,5 +1,8 @@
 using UnityEngine.UI;
 using UnityEngine;
+using System.Collections;
+using UnityEngine.SceneManagement;
+using System;
 
 namespace TOM
 {
@@ -10,6 +13,7 @@ namespace TOM
         [SerializeField] private CanvasGroup panelGameplay = null;
         [SerializeField] private CanvasGroup panelPause = null;
         [SerializeField] private CanvasGroup panelGameOver = null;
+        [SerializeField] private GameObject panel = null;
 
         [Header("Buttons")]
         [SerializeField] private Button buttonStart = null;
@@ -19,6 +23,7 @@ namespace TOM
 
         [Header("In Game UI")]
         [SerializeField] private Image healthBar = null;
+
 
         private void Awake()
         {
@@ -37,6 +42,13 @@ namespace TOM
 
             buttonResume.onClick.AddListener(HidePausePanel);
             buttonStart.onClick.AddListener(StartGame);
+
+            Player.OnDeadPlayer += GoToLeaderboard;
+        }
+
+        private void GoToLeaderboard()
+        {
+            StartCoroutine(FadeGameplay());
         }
 
         private void Start()
@@ -52,6 +64,8 @@ namespace TOM
 
             GameManager.OnPause  -= ShowPausePanel;
             GameManager.OnResume -= HidePausePanel;
+            Player.OnDeadPlayer -= GoToLeaderboard;
+
 
             buttonRestart.onClick.RemoveAllListeners();
             buttonEndGame.onClick.RemoveAllListeners();
@@ -115,5 +129,19 @@ namespace TOM
             TurnOnPanel(panelGameplay);
         }
 
+
+        private IEnumerator FadeGameplay()
+        {
+            panel.SetActive(true);
+            Image img = panel.GetComponent<Image>();
+            while (img.color.a < 0.98f)
+            {
+                img.color += new Color(0, 0, 0, Time.deltaTime);
+                yield return null;
+            }
+            yield return null;
+            SceneManager.LoadScene(2);
+            yield return null;
+        }
     }
 }

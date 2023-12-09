@@ -1387,6 +1387,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scoreText: {fileID: 1880315758}
   totalScore: 100
+  keyName: Enemies
   durationInSeconds: 5
 --- !u!114 &372372676
 MonoBehaviour:
@@ -3136,6 +3137,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scoreText: {fileID: 2030721783}
   totalScore: 100
+  keyName: Time
   durationInSeconds: 3
 --- !u!114 &1165714084
 MonoBehaviour:
@@ -3294,6 +3296,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scoreText: {fileID: 143494010}
   totalScore: 100
+  keyName: Waves
   durationInSeconds: 6
 --- !u!114 &1219470978
 MonoBehaviour:

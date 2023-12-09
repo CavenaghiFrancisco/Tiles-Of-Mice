@@ -27,6 +27,8 @@ namespace TOM.Enemy.TR
 
         private Rigidbody rb;
 
+        private Animator anim;
+
         private static Vector3 arenaCenter;
 
         private bool isAlreadyWaiting = false;
@@ -53,6 +55,7 @@ namespace TOM.Enemy.TR
         }
         private void SetUp()
         {
+            anim = GetComponent<Animator>();
             rb = GetComponent<Rigidbody>();
             toxicRoach = gameObject.GetComponent<ToxicRoach>();
             isTargetAlive = target.GetComponent<Player>().IsAlive();
@@ -163,6 +166,7 @@ namespace TOM.Enemy.TR
         }
         IEnumerator WaitForSeconds(float waitingSeconds)
         {
+            anim.Play("CyberRoach_Idle");
             Debug.Log(name + " va a esperar " + waitingSeconds + " segundos!");
             isAlreadyWaiting = true;
             float t = 0;
@@ -174,6 +178,7 @@ namespace TOM.Enemy.TR
             fsm.SetCurrentStateForced((int)TRStates.Pursuit);
             isAlreadyWaiting = false;
             Debug.Log(name + " deja de esperar!");
+            anim.Play("CyberRoach_Walk");
         }
 
     }

@@ -27,6 +27,9 @@ namespace TOM.Enemy
         private int killedCRs = 0;
         private int killedTRs = 0;
 
+        private int totalKilledCRs = 0;
+        private int totalKilledTRs = 0;
+
         private int createdCRs = 1;
         private int createdTRs = 1;
 
@@ -67,6 +70,7 @@ namespace TOM.Enemy
 
             CreateFolders();
 
+            PlayerPrefs.SetInt("Enemies", 0);
         }
 
         private void OnDestroy()
@@ -79,6 +83,7 @@ namespace TOM.Enemy
             {
                 tr.OnDeath -= TRKillCounter;
             }
+            PlayerPrefs.SetInt("Enemies", totalKilledCRs + totalKilledTRs);
         }
 
         public void TurnOnEnemiesOnLevel(int enemyLevel, int CRamount, int TRamount, float delay)
@@ -277,12 +282,14 @@ namespace TOM.Enemy
         private void CRKillCounter()
         {
             killedCRs++;
+            totalKilledCRs = PlayerPrefs.GetInt("Enemies") + 1;
             Debug.Log("Kill Counter: " + killedCRs + "/" + CRSpawnAmount);
             CheckKillCounter();
         }
         private void TRKillCounter()
         {
             killedTRs++;
+            totalKilledTRs = PlayerPrefs.GetInt("Enemies") + 1;
             Debug.Log("Kill Counter: " + killedTRs + "/" + TRSpawnAmount);
             CheckKillCounter();
         }

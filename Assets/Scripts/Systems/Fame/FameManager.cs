@@ -14,6 +14,8 @@ public class FameManager : MonoBehaviour
     [SerializeField] private TMP_Text textAditionalFame;
     [SerializeField] private CanvasGroup panelAditionalFame;
 
+    public float seconds = 0;
+
     public int Fame { private set; get; }
 
     private int lvlFame = 0; //cantidad total de fama de la wave
@@ -31,6 +33,13 @@ public class FameManager : MonoBehaviour
     {
         //FillStarList();
         ResetSystem();
+        seconds = 0;
+        PlayerPrefs.SetInt("Time", 0);
+    }
+
+    private void OnDestroy()
+    {
+        PlayerPrefs.SetInt("Time", Mathf.RoundToInt(seconds));
     }
 
     private void Update()
@@ -41,6 +50,7 @@ public class FameManager : MonoBehaviour
         }
         if (!GameManager.IsPaused)
         {
+            seconds += Time.deltaTime;
             timer += Time.deltaTime;
             if (CheckSafeTime())
             {
