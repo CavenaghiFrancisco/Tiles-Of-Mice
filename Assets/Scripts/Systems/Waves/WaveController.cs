@@ -65,7 +65,7 @@ namespace TOM
 
         private void EndWave()
         {
-            fameManager.GetFame(wavesElapsed);
+            fameManager.GetFame();
         }
 
         private void ForceWave(int wave)
