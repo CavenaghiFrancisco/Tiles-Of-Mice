@@ -373,7 +373,7 @@ MonoBehaviour:
     ParentPath: Events\Default Work Unit
     guid: 8851e7b97f6e3d4aa9189023925d9661
     GuidInternal: 
-    m_lastTime: -8584994440225517933
+    m_lastTime: -8584994418934120309
     List:
     - name: Play_br1e_attack_hit
       guid: bf5b9f984efe26408426ded412a1af63
@@ -766,6 +766,57 @@ MonoBehaviour:
       maxAttenuation: 0
       maxDuration: 2.898904
       minDuration: 2.898904
+    - name: Stop_Musica_Arena
+      guid: f09eb7a052719f45a5fb97e2bac741bd
+      id: 2697875214
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 8851e7b97f6e3d4aa9189023925d9661
+      - ElementName: Stop_Musica_Arena
+        ObjectType: 3
+        guid: f09eb7a052719f45a5fb97e2bac741bd
+      Path: Events\Default Work Unit\Stop_Musica_Arena
+      maxAttenuation: 0
+      maxDuration: 0
+      minDuration: 0
+    - name: Stop_Musica_Gana
+      guid: 902d8eef075b314b8e025f6de0c2186b
+      id: 1664206874
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 8851e7b97f6e3d4aa9189023925d9661
+      - ElementName: Stop_Musica_Gana
+        ObjectType: 3
+        guid: 902d8eef075b314b8e025f6de0c2186b
+      Path: Events\Default Work Unit\Stop_Musica_Gana
+      maxAttenuation: 0
+      maxDuration: 0
+      minDuration: 0
+    - name: Stop_Musica_Intr_Stop
+      guid: fa42edce4e1d134e946b0d2653abe0cc
+      id: 2340010781
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 8851e7b97f6e3d4aa9189023925d9661
+      - ElementName: Stop_Musica_Intr_Stop
+        ObjectType: 3
+        guid: fa42edce4e1d134e946b0d2653abe0cc
+      Path: Events\Default Work Unit\Stop_Musica_Intr_Stop
+      maxAttenuation: 0
+      maxDuration: 0
+      minDuration: 0
     - name: Stop_score_loop
       guid: 906d0eb1d3bef94f8a19e063be183639
       id: 2412668695

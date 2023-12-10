@@ -9,25 +9,20 @@ public class Leaderboard : MonoBehaviour
     public TextMeshProUGUI playerNames;
     public TextMeshProUGUI playerScores;
 
-    public TMP_InputField playerNameInputfield;
-    // Start is called before the first frame update
+    private int totalScore = 0;
+
     void Start()
     {
         StartCoroutine(SetupRoutine());
     }
 
-    public void TurnOffInput()
+    public static void SetPlayerName(string name)
     {
-        playerNameInputfield.gameObject.SetActive(false);
-    }
-
-    public void SetPlayerName()
-    {
-        LootLockerSDKManager.SetPlayerName(playerNameInputfield.text, (response) =>
+        LootLockerSDKManager.SetPlayerName(name, (response) =>
         {
             if (response.success)
             {
-                StartCoroutine(SubmitScoreRoutine(66666, playerNameInputfield.text));
+                Debug.Log("Could set player name");
             }
             else
             {
@@ -39,10 +34,11 @@ public class Leaderboard : MonoBehaviour
     IEnumerator SetupRoutine()
     {
         yield return LoginRoutine();
+        yield return SubmitScoreRoutine(totalScore, PlayerPrefs.GetString("Player"));
         yield return FetchTopHighscoresRoutine();
     }
 
-    IEnumerator LoginRoutine()
+    public static IEnumerator LoginRoutine()
     {
         bool done = false;
         LootLockerSDKManager.StartGuestSession((response) =>
