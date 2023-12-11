@@ -12,13 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3917cd0cc24e5b4296cb788ee06108a, type: 3}
   m_Name: CyberRoach Fixed Basic Parameters
   m_EditorClassIdentifier: 
-  healthPoints: 75
-  basicAttack: 15
-  basicAttackCoolDown: 1
-  powerAttack: 30
+  healthPoints: 35
+  basicAttack: 7
+  basicAttackCoolDown: 2
+  powerAttack: 14
   powerAttackCoolDown: 2
   powerAttackChance: 50
-  attackRadius: 1.8
+  attackRadius: 2
   stunTimeInms: 250
-  movementSpeed: 5
+  movementSpeed: 8
   hurtTime: 1

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b4cda00f28cd8443a21db40cfffe384, type: 3}
   m_Name: CyberRoach Grow Parameters
   m_EditorClassIdentifier: 
-  growingHealthPoints: 5
+  growingHealthPoints: 35
   growingBasicAttack: 2
   growingPowerAttack: 2
   growingMovementSpeed: 0.1

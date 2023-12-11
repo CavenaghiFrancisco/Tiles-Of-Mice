@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Wave 20
   m_EditorClassIdentifier: 
   waveID: 20
-  waveLevel: 2
-  CRAmount: 0
-  TRAmount: 1
-  enemyDelay: 0
+  waveLevel: 4
+  CRAmount: 3
+  TRAmount: 4
+  enemyDelay: 1.4

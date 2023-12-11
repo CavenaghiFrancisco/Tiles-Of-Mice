@@ -15,5 +15,5 @@ MonoBehaviour:
   waveID: 4
   waveLevel: 1
   CRAmount: 0
-  TRAmount: 1
+  TRAmount: 2
   enemyDelay: 1
