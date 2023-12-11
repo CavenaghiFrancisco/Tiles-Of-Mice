@@ -345,7 +345,7 @@ MonoBehaviour:
     ParentPath: SoundBanks\Default Work Unit
     guid: 57e2afdabaaad34aaee37bbf3f7576fb
     GuidInternal: 
-    m_lastTime: -8584992928634962072
+    m_lastTime: -8584992897475168619
     List:
     - name: Music
       guid: 001bd738f360f643bc56c48991a2625d
@@ -373,7 +373,7 @@ MonoBehaviour:
     ParentPath: Events\Default Work Unit
     guid: 8851e7b97f6e3d4aa9189023925d9661
     GuidInternal: 
-    m_lastTime: -8584992928634832076
+    m_lastTime: -8584992897475288615
     List:
     - name: Play_br1e_attack_hit
       guid: bf5b9f984efe26408426ded412a1af63
@@ -732,6 +732,23 @@ MonoBehaviour:
       maxAttenuation: 0
       maxDuration: 0.355479
       minDuration: 0.268583
+    - name: Play_spray
+      guid: 4e25921b9975414c9a094497c8f8f25a
+      id: 1580464077
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 8851e7b97f6e3d4aa9189023925d9661
+      - ElementName: Play_spray
+        ObjectType: 3
+        guid: 4e25921b9975414c9a094497c8f8f25a
+      Path: Events\Default Work Unit\Play_spray
+      maxAttenuation: 0
+      maxDuration: 1.422562
+      minDuration: 1.422562
     - name: Play_step
       guid: 16aa5799262df64caa530c7fb669ee79
       id: 99206220
