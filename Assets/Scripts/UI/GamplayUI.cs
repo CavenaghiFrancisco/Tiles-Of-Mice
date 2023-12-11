@@ -3,6 +3,7 @@ using UnityEngine;
 using System.Collections;
 using UnityEngine.SceneManagement;
 using System;
+using UnityEngine.EventSystems;
 
 namespace TOM
 {
@@ -19,11 +20,11 @@ namespace TOM
         [SerializeField] private Button buttonStart = null;
         [SerializeField] private Button buttonRestart = null;
         [SerializeField] private Button buttonResume = null;
-        [SerializeField] private Button buttonEndGame = null;
 
         [Header("In Game UI")]
         [SerializeField] private Image healthBar = null;
 
+        [SerializeField] private OptionsManager wise;
 
         private void Awake()
         {
@@ -38,7 +39,6 @@ namespace TOM
             GameManager.OnResume += HidePausePanel;
 
             buttonRestart.onClick.AddListener(RestartGame);
-            buttonEndGame.onClick.AddListener(RestartGame);
 
             buttonResume.onClick.AddListener(HidePausePanel);
             buttonStart.onClick.AddListener(StartGame);
@@ -66,9 +66,7 @@ namespace TOM
             GameManager.OnResume -= HidePausePanel;
             Player.OnDeadPlayer -= GoToLeaderboard;
 
-
             buttonRestart.onClick.RemoveAllListeners();
-            buttonEndGame.onClick.RemoveAllListeners();
             buttonStart.onClick.RemoveAllListeners();
             buttonResume.onClick.RemoveAllListeners();
         }
@@ -114,6 +112,7 @@ namespace TOM
 
         private void ShowPausePanel()
         {
+            wise.LoadPlayerPrefs();
             TurnOffPanel(panelGameplay);
             TurnOffPanel(panelInitial);
             TurnOffPanel(panelGameOver);
@@ -122,6 +121,7 @@ namespace TOM
 
         private void HidePausePanel()
         {
+            EventSystem.current.SetSelectedGameObject(null);
             TurnOffPanel(panelPause);
             TurnOffPanel(panelInitial);
             TurnOffPanel(panelGameOver);

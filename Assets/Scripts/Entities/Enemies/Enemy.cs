@@ -1,4 +1,5 @@
 using IA.FSM;
+using UnityEngine;
 
 namespace TOM.Enemy
 {
@@ -23,5 +24,22 @@ namespace TOM.Enemy
         public bool IsVulnerable() => vulnerable;
         public void SetVulnerable(bool vul) => vulnerable = vul;
         public abstract void Grow(int wave);
+
+        private float distance;
+        private GameObject player;
+
+        private void Update()
+        {
+            if(player == null)
+            {
+                player = GameObject.FindGameObjectWithTag("Player");
+            }
+            if (player != null)
+            {
+                distance = Vector3.Distance(this.gameObject.transform.position,player.transform.position);
+                AkSoundEngine.SetRTPCValue("Distance", distance, this.gameObject);
+            }
+            
+        }
     }
 }

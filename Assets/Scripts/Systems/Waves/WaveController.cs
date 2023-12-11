@@ -71,6 +71,9 @@ namespace TOM
         private void EndWave()
         {
             AkSoundEngine.PostEvent("Play_wave_over", gameObject);
+            AkSoundEngine.PostEvent("Play_random_crowd", gameObject);
+            AkSoundEngine.PostEvent("Play_random_crowd", gameObject);
+            AkSoundEngine.PostEvent("Play_random_crowd", gameObject);
             fameManager.GetFame();
         }
 

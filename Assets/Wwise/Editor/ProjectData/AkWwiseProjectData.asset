@@ -345,7 +345,7 @@ MonoBehaviour:
     ParentPath: SoundBanks\Default Work Unit
     guid: 57e2afdabaaad34aaee37bbf3f7576fb
     GuidInternal: 
-    m_lastTime: -8584994491008677767
+    m_lastTime: -8584992928634962072
     List:
     - name: Music
       guid: 001bd738f360f643bc56c48991a2625d
@@ -373,7 +373,7 @@ MonoBehaviour:
     ParentPath: Events\Default Work Unit
     guid: 8851e7b97f6e3d4aa9189023925d9661
     GuidInternal: 
-    m_lastTime: -8584994418934120309
+    m_lastTime: -8584992928634832076
     List:
     - name: Play_br1e_attack_hit
       guid: bf5b9f984efe26408426ded412a1af63
@@ -596,6 +596,23 @@ MonoBehaviour:
       maxAttenuation: 0
       maxDuration: 0.985102
       minDuration: 0.985102
+    - name: Play_random_crowd
+      guid: 2f508048eb0dd04a989c99e15d9d99e7
+      id: 3784488405
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 8851e7b97f6e3d4aa9189023925d9661
+      - ElementName: Play_random_crowd
+        ObjectType: 3
+        guid: 2f508048eb0dd04a989c99e15d9d99e7
+      Path: Events\Default Work Unit\Play_random_crowd
+      maxAttenuation: 0
+      maxDuration: 2.355733
+      minDuration: 2.3339
     - name: Play_roach_attack
       guid: 6d35a2489d3df849a0e10b6a4a3488cd
       id: 2323152504
@@ -859,7 +876,7 @@ MonoBehaviour:
     ParentPath: Game Parameters\Default Work Unit
     guid: c478080c005b0d48b1c3b563974d167c
     GuidInternal: 
-    m_lastTime: -8584994440225387933
+    m_lastTime: -8584992938944846784
     List:
     - name: DIstance
       guid: 5c24bc557afd0b4f805fb7da908e6f29
