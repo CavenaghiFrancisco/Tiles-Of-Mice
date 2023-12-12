@@ -282,14 +282,14 @@ namespace TOM.Enemy
         private void CRKillCounter()
         {
             killedCRs++;
-            totalKilledCRs = PlayerPrefs.GetInt("Enemies") + 1;
+            totalKilledCRs++;
             Debug.Log("Kill Counter: " + killedCRs + "/" + CRSpawnAmount);
             CheckKillCounter();
         }
         private void TRKillCounter()
         {
             killedTRs++;
-            totalKilledTRs = PlayerPrefs.GetInt("Enemies") + 1;
+            totalKilledTRs++;
             Debug.Log("Kill Counter: " + killedTRs + "/" + TRSpawnAmount);
             CheckKillCounter();
         }
@@ -328,6 +328,5 @@ namespace TOM.Enemy
 
             return bullet;
         }
-
     }
 }
