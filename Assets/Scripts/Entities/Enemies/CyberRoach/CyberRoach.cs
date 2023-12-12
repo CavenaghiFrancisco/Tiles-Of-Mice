@@ -51,9 +51,18 @@ namespace TOM.Enemy
                 //Vfx de morir
                 animator.SetTrigger("Death");
                 //Debug.Log("Un CyberRoach ha muerto!");
-                OnDeath?.Invoke();
-                gameObject.SetActive(false); //Hacer esto al final de la animacion de muerte
+                StartCoroutine(StartDeath(1.3f));
+                 //Hacer esto al final de la animacion de muerte
             }
+        }
+
+        private IEnumerator StartDeath(float seconds)
+        {
+            animator.Play("CyberRoach_Death");
+            yield return new WaitForSeconds(seconds);
+            gameObject.SetActive(false);
+            OnDeath?.Invoke();
+            yield return null;
         }
 
         public override void GetDamage(int damage)
