@@ -28,7 +28,7 @@ namespace TOM.Enemy.TR
                     {
                         Transition((int)TOM.Enemy.Flags.OnArenaArrived);
                     }
-                    rb.MovePosition(rb.position + rb.transform.forward * speed * Time.fixedDeltaTime);
+                    rb.MovePosition(rb.position + rb.transform.forward * speed * 2.0f * Time.fixedDeltaTime);
                 }
             );
 
