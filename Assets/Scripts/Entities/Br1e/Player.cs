@@ -105,7 +105,7 @@ namespace TOM
                 //sfx de muerte
                 Debug.Log("Br1e ha muerto");
                 isAlive = false;
-                //gameObject.SetActive(false); //Hacer esto una vez que se ejecuta la animacion de muerte
+                gameObject.SetActive(false); //Hacer esto una vez que se ejecuta la animacion de muerte
                 OnDeadPlayer();
                 GameManager.PauseGame();
             }
