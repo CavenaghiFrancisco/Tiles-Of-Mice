@@ -8,7 +8,12 @@ public class MainMenuManager : MonoBehaviour
 {
     [SerializeField] private List<GameObject> panels;
     [SerializeField] private List<GameObject> cams;
-    [SerializeField] private GameObject panel; 
+    [SerializeField] private GameObject panel;
+
+    private void Start()
+    {
+        OptionsManager.SetVolumes();
+    }
 
     private IEnumerator Fade(int index)
     {

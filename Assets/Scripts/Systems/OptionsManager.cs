@@ -43,4 +43,10 @@ public class OptionsManager : MonoBehaviour
         AkSoundEngine.SetRTPCValue("MUSIC", sliderMUSIC.value * 100);
         AkSoundEngine.SetRTPCValue("SFX", sliderSFX.value * 100);
     }
+
+    public static void SetVolumes()
+    {
+        AkSoundEngine.SetRTPCValue("MUSIC", PlayerPrefs.GetFloat("SliderMusicValue", 0.5f) * 100);
+        AkSoundEngine.SetRTPCValue("SFX", PlayerPrefs.GetFloat("SliderSFXValue", 0.5f) * 100);
+    }
 }

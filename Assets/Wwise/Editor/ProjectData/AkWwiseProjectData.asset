@@ -345,7 +345,7 @@ MonoBehaviour:
     ParentPath: SoundBanks\Default Work Unit
     guid: 57e2afdabaaad34aaee37bbf3f7576fb
     GuidInternal: 
-    m_lastTime: -8584992897475168619
+    m_lastTime: -8584992476806487658
     List:
     - name: Music
       guid: 001bd738f360f643bc56c48991a2625d
@@ -373,7 +373,7 @@ MonoBehaviour:
     ParentPath: Events\Default Work Unit
     guid: 8851e7b97f6e3d4aa9189023925d9661
     GuidInternal: 
-    m_lastTime: -8584992897475288615
+    m_lastTime: -8584992476806637659
     List:
     - name: Play_br1e_attack_hit
       guid: bf5b9f984efe26408426ded412a1af63
@@ -426,6 +426,23 @@ MonoBehaviour:
       maxAttenuation: 0
       maxDuration: 0.305465
       minDuration: 0.246689
+    - name: Play_cough
+      guid: 416344369e24b942af145916b3cc8c10
+      id: 3234553616
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 8851e7b97f6e3d4aa9189023925d9661
+      - ElementName: Play_cough
+        ObjectType: 3
+        guid: 416344369e24b942af145916b3cc8c10
+      Path: Events\Default Work Unit\Play_cough
+      maxAttenuation: 0
+      maxDuration: 0.959104
+      minDuration: 0.959104
     - name: Play_crowd
       guid: 3392cf3fdbe03d42ae4008854a29b9f7
       id: 639442169
