@@ -105,7 +105,7 @@ namespace TOM
                 //sfx de muerte
                 Debug.Log("Br1e ha muerto");
                 isAlive = false;
-                gameObject.SetActive(false); //Hacer esto una vez que se ejecuta la animacion de muerte
+                //gameObject.SetActive(false); //Hacer esto una vez que se ejecuta la animacion de muerte
                 OnDeadPlayer();
                 GameManager.PauseGame();
             }
@@ -197,7 +197,20 @@ namespace TOM
             }
             if (other.CompareTag("ToxicGas"))
             {
+                AkSoundEngine.PostEvent("Play_cough", gameObject);
                 Die();
+            }
+        }
+
+        protected new void OnTriggerExit(Collider other)
+        {
+            if (isAlive)
+            {
+                if (other.tag == "DeathZone")
+                {
+                    AkSoundEngine.PostEvent("Play_cough", gameObject);
+                    Die();
+                }
             }
         }
     }
