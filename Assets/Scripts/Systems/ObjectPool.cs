@@ -41,7 +41,7 @@ namespace TOM.Utilities
             {
                 if (selector == OPType.CyberRoach)
                 {
-                    if (!((obj as UnityEngine.GameObject).GetComponent<CyberRoach>().IsAlive()))
+                    if (!((obj as UnityEngine.GameObject).GetComponent<CyberRoach>().IsAlive))
                     {
                         lastObjectIndex = objectList.IndexOf(obj);
                         return obj;
@@ -50,7 +50,7 @@ namespace TOM.Utilities
                 }
                 if (selector == OPType.ToxicRoach)
                 {
-                    if (!((obj as UnityEngine.GameObject).GetComponent<ToxicRoach>().IsAlive()))
+                    if (!((obj as UnityEngine.GameObject).GetComponent<ToxicRoach>().IsAlive))
                     {
                         lastObjectIndex = objectList.IndexOf(obj);
                         return obj;

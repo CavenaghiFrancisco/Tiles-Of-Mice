@@ -58,7 +58,7 @@ namespace TOM.Enemy.TR
             anim = GetComponent<Animator>();
             rb = GetComponent<Rigidbody>();
             toxicRoach = gameObject.GetComponent<ToxicRoach>();
-            isTargetAlive = target.GetComponent<Player>().IsAlive();
+            isTargetAlive = target.GetComponent<Player>().IsAlive;
 
             pursuitParameters = new StateParameters();
             walkingParameters = new StateParameters();
@@ -126,7 +126,10 @@ namespace TOM.Enemy.TR
         {
             if (!GameManager.IsPaused)
             {
-                fsm.Update();
+                if (toxicRoach.IsAlive)
+                {
+                    fsm.Update();
+                }
             }
         }
 

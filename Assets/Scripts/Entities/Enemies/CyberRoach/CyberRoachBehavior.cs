@@ -55,7 +55,7 @@ namespace TOM.Enemy.CR
         {
             rb = GetComponent<Rigidbody>();
             cyberRoach = gameObject.GetComponent<CyberRoach>();
-            isTargetAlive = target.GetComponent<Player>().IsAlive();
+            isTargetAlive = target.GetComponent<Player>().IsAlive;
 
             pursuitParameters = new StateParameters();
             walkingParameters = new StateParameters();
@@ -123,7 +123,10 @@ namespace TOM.Enemy.CR
         {
             if (!GameManager.IsPaused)
             {
-                fsm.Update();
+                if (cyberRoach.IsAlive)
+                {
+                    fsm.Update();
+                }
             }
             //Debug.Log("Estado actual de " + rb.gameObject.name + " es " + ((CRStates)fsm.currentStateIndex).ToString());
             //Debug.Log("Posicion actual de " + rb.gameObject.name + " es " + transform.position);

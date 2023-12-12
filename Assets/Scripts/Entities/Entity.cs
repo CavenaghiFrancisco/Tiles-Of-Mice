@@ -14,6 +14,7 @@ namespace TOM
         protected bool isAlive;
         protected float hurtTime;
         protected Animator animator;
+        public bool IsAlive => isAlive;
 
 
         public System.Action OnDeath;
@@ -34,7 +35,6 @@ namespace TOM
         }
         public int GetMovementSpeed() => moveSpeed;
         public int GetMaxLife() => maxHP;
-        public bool IsAlive() => isAlive;
         public float GetBasicHitCD() => basicHitCD;
         public float GetPowerHitCD() => powerHitCD;
     }
