@@ -9989,7 +9989,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 183149934}
         m_TargetAssemblyTypeName: OptionsManager, Assembly-CSharp
-        m_MethodName: SaveMusicPlayerPrefs
+        m_MethodName: SaveSFXPlayerPrefs
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
