@@ -195,6 +195,10 @@ namespace TOM
                 GetDamage(bullet.Damage);
                 bullet.StopFlying();
             }
+            if (other.CompareTag("ToxicGas"))
+            {
+                Die();
+            }
         }
     }
 }
