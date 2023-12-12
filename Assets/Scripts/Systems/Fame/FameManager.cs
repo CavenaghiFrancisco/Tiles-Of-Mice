@@ -3,6 +3,7 @@ using UnityEngine.UI;
 using UnityEngine;
 using TMPro;
 using TOM;
+using System;
 
 public class FameManager : MonoBehaviour
 {
@@ -37,9 +38,20 @@ public class FameManager : MonoBehaviour
         PlayerPrefs.SetInt("Time", 0);
     }
 
+    private void Start()
+    {
+        Player.OnDeadPlayer += SaveFame;
+    }
+
+    private void SaveFame()
+    {
+        PlayerPrefs.SetInt("Fame", totalFameGained);
+    }
+
     private void OnDestroy()
     {
         PlayerPrefs.SetInt("Time", Mathf.RoundToInt(seconds));
+        Player.OnDeadPlayer -= SaveFame;
     }
 
     private void Update()

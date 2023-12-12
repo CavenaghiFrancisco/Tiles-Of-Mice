@@ -4766,25 +4766,9 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1147534869}
     m_Modifications:
-    - target: {fileID: 3342275530823115298, guid: 8ec67acc160267c4ca2ce97b7ad0627b, type: 3}
-      propertyPath: m_Size.y
-      value: 29.78
-      objectReference: {fileID: 0}
-    - target: {fileID: 3342275530823115298, guid: 8ec67acc160267c4ca2ce97b7ad0627b, type: 3}
-      propertyPath: m_Size.z
-      value: 1.9999996
-      objectReference: {fileID: 0}
-    - target: {fileID: 3342275530823115298, guid: 8ec67acc160267c4ca2ce97b7ad0627b, type: 3}
-      propertyPath: m_Center.y
-      value: 14.086
-      objectReference: {fileID: 0}
     - target: {fileID: 5049920242864180268, guid: 8ec67acc160267c4ca2ce97b7ad0627b, type: 3}
       propertyPath: m_Name
       value: Arena
-      objectReference: {fileID: 0}
-    - target: {fileID: 5430507500659507904, guid: 8ec67acc160267c4ca2ce97b7ad0627b, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -0.6
       objectReference: {fileID: 0}
     - target: {fileID: 5575239838263219862, guid: 8ec67acc160267c4ca2ce97b7ad0627b, type: 3}
       propertyPath: m_RootOrder
@@ -4829,18 +4813,6 @@ PrefabInstance:
     - target: {fileID: 5575239838263219862, guid: 8ec67acc160267c4ca2ce97b7ad0627b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7242678523857660969, guid: 8ec67acc160267c4ca2ce97b7ad0627b, type: 3}
-      propertyPath: m_Size.x
-      value: 5.24
-      objectReference: {fileID: 0}
-    - target: {fileID: 7764053315825570670, guid: 8ec67acc160267c4ca2ce97b7ad0627b, type: 3}
-      propertyPath: m_Layer
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 9070624002961675890, guid: 8ec67acc160267c4ca2ce97b7ad0627b, type: 3}
-      propertyPath: m_Size.x
-      value: 6.34
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8ec67acc160267c4ca2ce97b7ad0627b, type: 3}
@@ -7040,8 +7012,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: cc1997795f7d7dd409c027da5a00d3c9, type: 2}
-  m_sharedMaterial: {fileID: -7743362649446195220, guid: cc1997795f7d7dd409c027da5a00d3c9, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 3ad48fea7e1186341b36044be5d272e8, type: 2}
+  m_sharedMaterial: {fileID: -5730523717530824839, guid: 3ad48fea7e1186341b36044be5d272e8, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -8513,8 +8485,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: New Text
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: cc1997795f7d7dd409c027da5a00d3c9, type: 2}
-  m_sharedMaterial: {fileID: -7743362649446195220, guid: cc1997795f7d7dd409c027da5a00d3c9, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 3ad48fea7e1186341b36044be5d272e8, type: 2}
+  m_sharedMaterial: {fileID: -5730523717530824839, guid: 3ad48fea7e1186341b36044be5d272e8, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -8538,15 +8510,15 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 52.85
+  m_fontSize: 70.2
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
   m_fontSizeMin: 0.45
   m_fontSizeMax: 193.8
   m_fontStyle: 0
-  m_HorizontalAlignment: 1
-  m_VerticalAlignment: 256
+  m_HorizontalAlignment: 2
+  m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0

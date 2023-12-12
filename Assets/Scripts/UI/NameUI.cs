@@ -25,7 +25,14 @@ public class NameUI : MonoBehaviour
         {
             bttn.interactable = true;
         }
+        if (inputField.text.Length > 12)
+        {
+            string name = inputField.text.Substring(0, 12);
+            inputField.text = name;
+        }
     }
+
+    
 
     public void ChangeName()
     {

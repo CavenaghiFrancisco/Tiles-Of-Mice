@@ -9,8 +9,6 @@ public class Leaderboard : MonoBehaviour
     public TextMeshProUGUI playerNames;
     public TextMeshProUGUI playerScores;
 
-    private int totalScore = 0;
-
     void Start()
     {
         StartCoroutine(SetupRoutine());
@@ -34,7 +32,7 @@ public class Leaderboard : MonoBehaviour
     IEnumerator SetupRoutine()
     {
         yield return LoginRoutine();
-        yield return SubmitScoreRoutine(totalScore, PlayerPrefs.GetString("Player"));
+        yield return SubmitScoreRoutine(PlayerPrefs.GetInt("Fame"), PlayerPrefs.GetString("Player"));
         yield return FetchTopHighscoresRoutine();
     }
 
