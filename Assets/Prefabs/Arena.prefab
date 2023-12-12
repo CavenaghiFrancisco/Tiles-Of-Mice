@@ -860,6 +860,50 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.0000002, y: 1, z: 1.0000002}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!1 &2518173073250357462
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6480306675335885126}
+  - component: {fileID: 554479633947807562}
+  m_Layer: 6
+  m_Name: Collider
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6480306675335885126
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2518173073250357462}
+  m_LocalRotation: {x: -0, y: 0.51985025, z: -0, w: 0.8542574}
+  m_LocalPosition: {x: 9.82, y: 0, z: 5.42}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 6910737591940714640}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 62.644, z: 0}
+--- !u!65 &554479633947807562
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2518173073250357462}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 3.823957, y: 4.3244576, z: 1.330453}
+  m_Center: {x: -0.20601174, y: 1.6622275, z: -0.16523169}
 --- !u!1 &2734112123677677437
 GameObject:
   m_ObjectHideFlags: 0
@@ -950,6 +994,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6910737591940714640}
+  - component: {fileID: 5514698327025341036}
   m_Layer: 0
   m_Name: Toxic Gas
   m_TagString: Untagged
@@ -971,9 +1016,23 @@ Transform:
   - {fileID: 431745296859462355}
   - {fileID: 767882570181523044}
   - {fileID: 1606746558796840925}
+  - {fileID: 6480306675335885126}
   m_Father: {fileID: 855012508524040272}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &5514698327025341036
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3000700509311889682}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &3391716106358952835
 GameObject:
   m_ObjectHideFlags: 0
