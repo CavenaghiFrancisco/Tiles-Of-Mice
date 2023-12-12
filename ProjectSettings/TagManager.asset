@@ -3,7 +3,11 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Damager
+  - DeathZone
+  - Enemy
+  - Bullet
   layers:
   - Default
   - TransparentFX
@@ -11,12 +15,12 @@ TagManager:
   - 
   - Water
   - UI
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Death Zone
+  - Enemies
+  - EnemyInside
+  - EnemyOutside
+  - Door
+  - Bullet
   - 
   - 
   - 

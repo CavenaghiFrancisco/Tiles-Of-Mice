@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f3ce61a3a375c6418e408a65749a227, type: 3}
+  m_Name: Enemy Specifications
+  m_EditorClassIdentifier: 
+  CRPrefab: {fileID: 771391038792114883, guid: 0aec57e8674c01c47a024e5aa4084de4, type: 3}
+  CRBasicParams: {fileID: 11400000, guid: 983fd15c16b69d847aeb6963fa24db65, type: 2}
+  CRGrowParams: {fileID: 11400000, guid: f23899349e21ed141994dd4a8b3fa441, type: 2}
+  TRPrefab: {fileID: 771391038792114883, guid: 560dea7727409ac4ca6502daae76805e, type: 3}
+  bulletPrefab: {fileID: 3664892745289926177, guid: c774df770d0bfe643bf978a8b4b6bf71, type: 3}
+  toxicBulletSpeed: 18
+  TRBasicParams: {fileID: 11400000, guid: 2600b9f116f3b47459ed8b880994753c, type: 2}
+  TRGrowParams: {fileID: 11400000, guid: 462c7d73b9748b34098e1e83328aa76c, type: 2}
